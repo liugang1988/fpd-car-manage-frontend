@@ -1,0 +1,6 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+span.disabled {
+  color: #ccc !important;
+  cursor: not-allowed !important;
+}

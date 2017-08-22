@@ -1,0 +1,107 @@
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <div class="row">
+      <div class="col-8">
+        <h4 *ngIf="ModelData">{{ModelData.ModelName}}</h4>
+      </div>
+      <div class="col-4">
+        <button type="button" (click)="back()" class="btn btn-return float-right btn-outline-primary"><i class="fpd fpd-fanhui"></i> 返回</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="!ModelData"></app-mit-loading>
+    <div class="model-card" *ngIf="ModelData">
+      <h4>1.模型参考值、车险项目对比</h4>
+      <h5 class="model-card-title">模型参考值</h5>
+      <div class="row">
+        <div class="col-4 col-sm-4">年行驶里程数：{{ModelData.MileagePerYear}} km/年</div>
+        <div class="col-4 col-sm-4">日静止时间：{{ModelData.StaticHourPerDay}} 小时</div>
+        <div class="col-4 col-sm-4">UBI保险折扣率：{{ModelData.DiscountRate}}%</div>
+      </div>
+      <h5 class="model-card-title">静动态保险项目占比设置</h5>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th rowspan="2">项目</th>
+            <th colspan="3">UBI车险静、动态计费占比</th>
+          </tr>
+          <tr>
+            <th>静态项计费占比（%）</th>
+            <th>动态里程计费（%）</th>
+            <th>动态时间计费（%）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of ModelData.Content">
+            <td>{{item.Name}}</td>
+            <td>{{item.StaticProportion}}</td>
+            <td>{{item.MoveMileageProportion}}</td>
+            <td>{{item.MoveTimeProportion}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="model-card" *ngIf="ModelData">
+      <h4>2.驾驶行为、超速设置</h4>
+      <div class="row">
+        <div class="col-6">
+          <h5 class="model-card-title">驾驶行为计费规则</h5>
+          <span>状态：{{ModelData.BehaviorEnable ? '启动' : '不启动'}}</span>
+          <table class="table table-bordered">
+            <thead>
+              <th>驾驶行为</th>
+              <th>单价（元/次）</th>
+              <th>是否启用收费</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of ModelData.BehaviorContent">
+                <th scope="row">{{item.Name}}</th>
+                <td>{{item.Price}}</td>
+                <td>{{item.Enabled ? '启动' : '不启动' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-6">
+          <h5 class="model-card-title">超速里程保费系数（最高车速）</h5>
+          <span>状态：{{ModelData.SpeedEnable ? '启动' : '不启动'}}</span>
+          <table class="table table-bordered">
+            <thead>
+              <th>超速车速（最高速度）</th>
+              <th>系数</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of ModelData.SpeedContent">
+                <th scope="row">{{item.Name}}</th>
+                <td>{{item.Coefficient}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="model-card" *ngIf="ModelData">
+      <h4>3.当前保单出险计费系数设置</h4>
+      <div class="row">
+        <div class="col-6">
+          <h5 class="model-card-title">当前保单出险计费系数</h5>
+          <p>状态：{{ModelData.AccidentEnable ? '启动' : '不启动'}}</p>
+          <table class="table table-bordered">
+            <thead>
+              <th>出险次数</th>
+              <th>系数</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of ModelData.AccidentContent">
+                <th scope="row">{{item.Name}}</th>
+                <td>{{item.Coefficient}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+.btn-add-or-public {
+  padding: 0.5rem 1rem;
+  color: #fff !important;
+  background-color: #37c2dd;
+  border-color: #37c2dd;
+  text-align: center;
+  text-decoration: none !important;
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  border-radius: 3px;
+  display: inline-block;
+  font-weight: normal;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: 14px;
+  border-radius: 0.25rem;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  @include remove-a-default-behavior;
+}
+
+.save-area {
+  button {
+    margin: 3rem 1rem 1rem 0;
+  }
+}

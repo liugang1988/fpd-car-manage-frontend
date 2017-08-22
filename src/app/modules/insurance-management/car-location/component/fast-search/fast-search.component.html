@@ -1,0 +1,16 @@
+<div class="fast-search">
+  <div class="item">
+    <input type="text" placeholder="车牌号码" [(ngModel)]="searcVal" (ngModelChange)="inputEvt($event)" (keyup.enter)="submit(searcVal)">
+    <button (click)="submit(searcVal)"><i class="fpd fpd-sousuo"></i></button>
+  </div>
+  <div class="result-panel" *ngIf="searcVal && tmpSearchVal">
+    <ul>
+      <li *ngFor="let item of searchArr" (click)="selected(item)">
+        {{item.Plate}}
+      </li>
+    </ul>
+  </div>
+</div>
+<app-mit-alert [title]="'操作提示'" [saveName]="'确认'" (close)="closeAlert($event)" (submit)="closeAlert($event)" *ngIf="showAlert">
+  {{alertMessage}}
+</app-mit-alert>

@@ -1,0 +1,34 @@
+@charset 'UTF-8';
+
+// 侧边栏大小
+$sidebar-expand-width:228px !default; //侧边栏宽度（展开）
+$sidebar-collapse-width:50px !default; //侧边栏宽度 （收缩）
+$sidebar-expand-offset-width:228px !default; //内容偏移宽度
+$sidebar-collapse-offset-width:50px !default; //内容偏移宽度
+
+
+
+// 侧边栏
+$sidebar-bg-color:#333a3d; //侧边栏底色
+$sidebar-active-hover-color:#293033; //激活及悬浮颜色
+$sidebar-child-active-hover-color:rgba(59, 66, 71, 0.6); //子类悬浮颜色
+$sidebar-border-color:#40474c; //侧边栏边框颜色
+$sidebar-font-color:#b9c0c3; //侧边栏字体颜色
+$sidebar-border-left-color:#32aec6; //高亮色块
+
+
+html,
+body {
+    min-height: 100% !important;
+    height: 100% !important;
+    @include improve-text-rendering;
+}
+
+
+.page-wrapper {
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+

@@ -1,0 +1,53 @@
+<div class="custom-card" *ngIf="carinfo" [@fadeIn]="true">
+  <div class="custom-card-header">
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th class="text-center">车牌</th>
+          <th class="text-center">品牌车系</th>
+          <th class="text-center">排量</th>
+          <th class="text-center">设备IMEI号</th>
+          <th class="text-center">支持项目</th>
+          <th class="text-center">操作人</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{carinfo.Plate || '' }}</td>
+          <td>{{carinfo.BrandLineName || '' }}</td>
+          <td>{{carinfo.Displacement + carinfo.Unit || '' }}</td>
+          <td>{{carinfo.IMEI || '' }}</td>
+          <td>{{carinfo.MonitorCount || '' }}</td>
+          <td>{{carinfo.AccountName || '' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load3'" *ngIf="!carinfo || carinfo.length === 0"></app-mit-loading>
+    <app-mit-data-table>
+      <table *ngIf="carinfo.OBDEngineDTOs">
+        <thead>
+          <tr>
+            <th>项目(共{{carinfo.OBDEngineDTOs.length }}项)</th>
+            <th>单位</th>
+            <th>当前值</th>
+            <th>最小值(参考值)</th>
+            <th>最大值(参考值)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of carinfo.OBDEngineDTOs">
+            <td>{{item.Name || ''}}</td>
+            <td>{{item.Unit || ''}}</td>
+            <td>{{item.CurValue || ''}}</td>
+            <td>{{item.MinValue || ''}}</td>
+            <td>{{item.MaxValue || ''}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount " (pageChange)="pageChange($event) " [maxSize]="5" [rotate]="true "></app-mit-data-table-pagination>
+    <h3 *ngIf="carinfo.OBDEngineDTOs && carinfo.OBDEngineDTOs.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="custom-card">
+  <div class="custom-card-body">
+    <div class="vehicle-basic">
+      <h5>车辆档案信息</h5>
+      <app-mit-loading [option]="'load7'" *ngIf="!detail"></app-mit-loading>
+      <div class="row" *ngIf="detail">
+        <div class="col-md-12 col-lg-6" >
+          <div class="show-item">
+            <label>车牌号:</label>
+            <span>{{detail.VehicleContent.Plate}}</span>
+          </div>
+          <div class="show-item">
+            <label>发动机号:</label>
+            <span>{{detail.VehicleContent.EngineNumber}}</span>
+          </div>
+          <div class="show-item">
+            <label>品牌车系:</label>
+            <span>{{detail.VehicleContent.VehicleModelName}}</span>
+          </div>
+          <div class="show-item">
+            <label>注册登记日期:</label>
+            <span>{{detail.VehicleContent.RegistrationTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>新车购置价:</label>
+            <span>{{detail.VehicleContent.PurchaseAmount}}元</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>车架号:</label>
+            <span>{{detail.VehicleContent.VIN}}</span>
+          </div>
+          <div class="show-item">
+            <label>车辆所属:</label>
+            <span>{{detail.VehicleContent.CompanyName}}</span>
+          </div>
+          <div class="show-item">
+            <label>排量:</label>
+            <span>{{detail.VehicleContent.Displacement}}</span>
+          </div>
+          <div class="show-item">
+            <label>荷载人数:</label>
+            <span>{{detail.VehicleContent.OverloadPerson}}人</span>
+          </div>
+          <div class="show-item">
+            <label>购车日期:</label>
+            <span>{{detail.VehicleContent.PurchaseDate | splitTime}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="vehicle-basic">
+      <h5>投保项目</h5>
+      <app-mit-loading [option]="'load7'" *ngIf="!detail"></app-mit-loading>
+      <div class="row" *ngIf="detail">
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>既往一年是否理赔:</label>
+            <span>{{detail.IsCompensate ? '是' : '否'}}</span>
+          </div>
+          <div class="show-item">
+            <label>保单号:</label>
+            <span>{{detail.CINo}}</span>
+          </div>
+          <div class="show-item">
+            <label>保险公司:</label>
+            <span>{{detail.InsuranceCompanyName}}</span>
+          </div>
+          <div class="show-item">
+            <label>商业险保费:</label>
+            <span>{{detail.CommercialPremium}}元</span>
+          </div>
+          <div class="show-item">
+            <label>车船险保费:</label>
+            <span>{{detail.VehicleVesselPremium}}元</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item" *ngIf="detail && detail.CompensateCount">
+            <label>近一年出险次数:</label>
+            <span>{{detail.CompensateCount}}次</span>
+          </div>
+          <div class="show-item" *ngIf="detail && detail.NoAccidentYears">
+            <label>连续未出险年数:</label>
+            <span>{{detail.NoAccidentYears}}年</span>
+          </div>
+          <div class="show-item">
+            <label>生效日期:</label>
+            <span>{{detail.StartTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>到期日期:</label>
+            <span>{{detail.EndTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>交强险保费:</label>
+            <span>{{detail.CompulsoryPremium}}元</span>
+          </div>
+          <div class="show-item">
+            <label>总保费:</label>
+            <span>{{detail.Premium}}元</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="custom-card guarantee" *ngIf="detail">
+  <div class="custom-card-header">
+    <h4>投保项目明细</h4>
+  </div>
+  <div class="custom-card-body" >
+    <table class="table table-bordered my-table">
+      <thead>
+        <tr>
+          <th>类型</th>
+          <th>项目</th>
+          <th>投保状态</th>
+          <th>保费(元)</th>
+          <th>不计免赔险</th>
+          <th>保费(元)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of detail.InsuranceContent">
+          <td>{{item.InsuranceTypeName}}</td>
+          <td>{{item.Name}}</td>
+          <td>
+            {{item.IntenanceName}}
+          </td>
+          <td>{{item.Amount}}元</td>
+          <td>
+            <span *ngIf="item.NoDeductible">投保</span>
+            <span *ngIf="!item.NoDeductible">不投保</span>
+          </td>
+          <td>{{item.NoDeductibleAmount}}元</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$show-item-content-fontSize:14px !default;
+.custom-card-header,
+.custom-card-body {
+  padding: 20px 40px !important;
+}
+
+.more {
+  color: #3598dc;
+  text-decoration: underline;
+  float: right;
+  font-size: $fs14;
+  padding: 0 3rem;
+}
+
+.more-carinfo {
+  margin: 20px auto;
+  padding-bottom: 15px;
+  background-color: #f1f4f7;
+  >h4 {
+    width: 100%;
+    margin: 0;
+    font-size: $fs16;
+    border-bottom: 1px solid #eaeef1;
+    padding: 15px;
+  }
+}
+
+.upload-file-tooltip {
+  font-size: 12px;
+  color: #727374;
+}
+
+.driver-img,
+.citizen-img,
+.driver-license {
+  margin: 20px 0;
+}
+
+.more-detail {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 20px 15px;
+}

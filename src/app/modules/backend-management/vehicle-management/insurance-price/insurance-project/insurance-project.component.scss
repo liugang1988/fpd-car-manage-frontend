@@ -1,0 +1,25 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.insurance-project{
+    table{
+        font-size: 0.875rem;
+        color: #6b6e70;
+        text-align: center;
+        th{
+            text-align: center;
+            font-size: 0.875rem;
+        }
+        th,td{
+            vertical-align: middle;
+        }
+    }
+}
+app-select{
+    text-align: left;
+}
+.disabled{
+    cursor: not-allowed;
+    .custom-control-indicator{
+        background: #ddd;
+    }
+}

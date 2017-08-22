@@ -1,0 +1,5 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.flex-align-center {
+  @include flex(flex-start, center);
+}

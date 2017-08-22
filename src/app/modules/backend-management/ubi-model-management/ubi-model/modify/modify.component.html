@@ -1,0 +1,22 @@
+<div class="custom-card separation">
+  <div class="custom-card-body">
+    <!--面包屑-->
+    <div class="top">
+      <div class="item" [ngClass]="{'active' : step ===1 || step ===2 || step ===3}"><span>1</span>模型参考值、项占比</div>
+      <div class="line" [ngClass]="{'active' : step ===1 || step ===2 || step ===3}">
+        <div class="border"></div>
+      </div>
+      <div class="item" [ngClass]="{'active' : step ===2 || step ===3}"><span>2</span>驾驶行为、超速设置</div>
+      <div class="line" [ngClass]="{'active' : step ===2 || step ===3}">
+        <div class="border"></div>
+      </div>
+      <div class="item" [ngClass]="{'active' : step ===3}"><span>3</span>出险系数</div>
+    </div>
+    <!--模型创建-->
+    <app-step-one *ngIf="step === 1" [stepOneData]="modelData" (result)="setStepShow($event)" (transmisstion)="setStepOneData($event)"></app-step-one>
+    <!--行为设置-->
+    <app-step-two *ngIf="step === 2" [stepTwoData]="modelData" (result)="setStepShow($event)" (transmisstion)="setStepTwoData($event)"></app-step-two>
+    <!--出险系数-->
+    <app-step-three *ngIf="step === 3" [stepData]="modelData" (result)="setStepShow($event)" (transmisstion)="setStepThreeData($event)"></app-step-three>
+  </div>
+</div>

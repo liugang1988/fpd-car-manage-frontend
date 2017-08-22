@@ -1,0 +1,7 @@
+<app-mit-alert [title]="'分配角色'" [saveName]="'确认'" [disabled]="!RoleID" [closeName]="'取消'" (close)="closeHandler($event)" (submit)="saveHandler(item)">
+  <form>
+    <div class="form-group condition-wrapper">
+      <app-role-select class="form-control" (result)="selectRole($event)"></app-role-select>
+    </div>
+  </form>
+</app-mit-alert>

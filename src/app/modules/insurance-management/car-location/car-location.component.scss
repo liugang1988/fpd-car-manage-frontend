@@ -1,0 +1,17 @@
+@charset 'UTF-8';
+@import '../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+app-mit-baidu-map {
+  width: 100%;
+  height: toRem(800px);
+  display: block;
+  overflow: hidden;
+  margin: 0;
+}
+
+.car-location {
+  position: relative;
+}
+
+.custom-card-body {
+  overflow: hidden;
+}

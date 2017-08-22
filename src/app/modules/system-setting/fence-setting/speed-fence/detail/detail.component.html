@@ -1,0 +1,86 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4 class="space-between">
+      <span>速度栅栏</span>
+      <button type="button" class="btn btn-primary" (click)="back()">返回</button>
+    </h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="row" *ngIf="SpeedRenderInfo" [@fadeIn]="true">
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="simple-info flex-center">
+          <label class="title">栅栏名称：</label>
+          <span class="content">{{SpeedRenderInfo.RuleContent.FenceName || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="simple-info flex-center">
+          <label class="title">创建时间：</label>
+          <span class="content">{{SpeedRenderInfo.CreateTime || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="simple-info flex-center">
+          <label class="title">创建人：</label>
+          <span class="content">{{SpeedRenderInfo.AccountName || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="simple-info flex-center">
+          <label class="title">速度阈值：</label>
+          <span class="content">{{SpeedRenderInfo.RuleContent.MaxSpeed || ''}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom:-45px" *ngIf="list">
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="simple-info flex-center">
+          <label class="title">监控车辆：</label>
+          <span class="content red">{{list.length}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 offset-lg-6">
+        <div class="simple-info flex-center-r">
+          <button type="button" class="btn btn-sm btn-success " (click)="addcar()">添加车辆</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-footer">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list" [@fadeIn]="true">
+        <thead>
+          <tr>
+            <th>车牌</th>
+            <th>部门</th>
+            <th>品牌车系</th>
+            <th>添加时间</th>
+            <th>添加人</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.Plate || ''}}</td>
+            <td>{{item.DepartmentName || ''}}</td>
+            <td>{{item.BrandLineName || ''}}</td>
+            <td>{{item.CreateTime || ''}}</td>
+            <td>{{item.AccountName || ''}}</td>
+            <td>{{item.DeviceStatusDesc || ''}}</td>
+            <td>
+              <span class="operator-span" (click)="delete(item)"><i class="fpd fpd-jinyong red"></i></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [listCount]="listCount" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="10"
+      [rotate]="true"></app-mit-data-table-pagination>
+  </div>
+</div>
+<app-detect-car *ngIf="showDetectAlert" [item]="id" (close)="closeAlert($event)"></app-detect-car>
+<app-delete *ngIf="showDeleteAlert" [item]="deleteItem" (close)="closeDeleteAlert($event)"></app-delete>

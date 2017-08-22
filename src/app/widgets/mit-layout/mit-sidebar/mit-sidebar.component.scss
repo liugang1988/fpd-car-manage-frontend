@@ -1,0 +1,215 @@
+@charset 'utf-8';
+@import '../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+//侧边栏区域(左边菜单栏)
+.mit-sidebar {
+  position: absolute;
+  z-index: $zindex-md;
+  top: 0;
+  left: 0;
+  width: $sidebar-collapse-width;
+  min-height: 100%;
+  max-height:100%;
+  overflow-y:auto;
+  padding-top: 94px;
+  transition: transform .3s ease-in-out, width .3s ease-in-out;
+  background: $sidebar-bg-color;
+  a {
+    &:link,
+    &:active,
+    &:hover,
+    &:visited {
+      text-decoration: none;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+  .sidebar-menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+    >li {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      a {
+        position: relative;
+        display: block;
+        padding: 12px 5px 12px 12px;
+        color: $sidebar-font-color;
+        border-left: 4px solid transparent;
+        .icon {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          margin-top: -15px;
+          i {
+            color: $sidebar-font-color;
+            font-size: $fs12;
+          }
+        }
+        span {
+          padding: 0 0 0 1rem;
+        }
+      }
+    }
+  }
+  .sidebar-menu>li.active>a,
+  .sidebar-menu>li:hover>a {
+    color: $sidebar-font-color;
+    border-left-color: $sidebar-border-left-color;
+    background: $sidebar-active-hover-color;
+  }
+  .sidebar-menu>li>.treeview-menu,
+  {
+    overflow: hidden;
+    padding: 0;
+    margin: 0 1px;
+    background: $sidebar-bg-color;
+  }
+  .sidebar-menu>li>.treeview-menu .treeview-menu {
+    overflow: hidden;
+    padding: 0;
+    margin: 0 1px;
+    background: $sidebar-bg-color;
+    & a {
+      padding: 12px 5px 12px 35px;
+    }
+  }
+  .treeview-menu>li>a {
+    display: block;
+    padding: 12px 5px 12px 25px;
+    color: $sidebar-font-color;
+    font-size: $fs14;
+  }
+  .treeview-menu>li>a:hover,
+  .treeview-menu>li.active>a {
+    color: $sidebar-font-color;
+    background-color: $sidebar-child-active-hover-color;
+  }
+  .mit-sidebar {
+    .sidebar-menu {
+      >li {
+        .treeview-menu {
+          display: none;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-bottom-right-radius: 4px;
+        }
+        &:hover {
+          >a {
+            color: $sidebar-font-color;
+            >span {
+              top: 0;
+              margin-left: -3px;
+              padding: 12px 5px 12px 25px;
+              background-color: inherit;
+            }
+            >span:not(.pull-right) {
+              display: block !important;
+              position: absolute;
+              width: 180px;
+              left: 49px;
+            }
+          }
+          .treeview-menu {
+            display: block !important;
+            position: absolute;
+            width: 180px;
+            left: 50px;
+            top: 47px;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width:768px) {
+  .mit-sidebar {
+    &.expand {
+      width: $sidebar-expand-width;
+      transform: translate(0, 0);
+    }
+    &:not(.expand) {
+      width: $sidebar-collapse-width;
+      transform: translate(0, 0);
+      .sidebar-menu {
+        >li {
+          >a {
+            >span {
+              display: none;
+            }
+          }
+          .treeview-menu {
+            display: none;
+          }
+          &:hover {
+            >a {
+              color: $sidebar-font-color;
+              >span {
+                top: 0;
+                margin-left: -3px;
+                padding: 12px 5px 12px 25px;
+                background-color: inherit;
+              }
+              >span:not(.pull-right) {
+                display: block !important;
+                position: absolute;
+                width: 180px;
+                left: 49px;
+                top: 0;
+              }
+            }
+            // 二级导航
+            .treeview-menu {
+              display: block !important;
+              position: absolute;
+              width: 180px;
+              left: 50px;
+              top: 47px;
+              margin-left: 0;
+              // 三级导航
+              .treeview-menu {
+                position: relative;
+                top: 0;
+                left: 0;
+                li {
+                  padding: 10px 0 0 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width:1199px) {}
+
+@media (max-width:991px) {}
+
+@media (max-width:767px) {
+  .mit-sidebar:not(.expand) {
+    overflow: hidden;
+    padding-top: 140px;
+    transform: translate(-$sidebar-collapse-width, 0);
+  }
+  .mit-sidebar.expand {
+    padding-top: 140px;
+    width: $sidebar-expand-width !important;
+    transform: translate(0, 0);
+  }
+}
+
+@media (max-width:479px) {}
+
+@media (width:768px) {
+  .mit-sidebar {
+    &.expand {
+      width: 208px;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.col-12,
+.col-md-6,
+.col-xl-4 {
+  margin: 0.5rem 0;
+}
+
+.custom-card-body {
+  @include flex(flex-start,center,row,flex,wrap);
+}
+
+.form-custom-area {
+  padding: 5px;
+  @include flex(flex-start);
+  width:33.333%;
+}
+
+
+@media (max-width:1120px){
+  .form-custom-area{
+    width:50%;
+  }
+}
+
+@media (max-width:768px){
+  .form-custom-area{
+    width:100%;
+  }
+}
+
+.control-wrap {
+  @include flex(flex-start);
+}
+
+label {
+  display: inline-block;
+  width: 80px;
+  text-align: right;
+  padding: 0 0.5rem 0 0;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.c-static-text {
+  font-size: 14px;
+}
+
+.form-control {
+  width: 70%;
+}
+
+.operator-button {
+  width: 100%;
+  @include flex(flex-end);
+  button {
+    margin: 0.5rem;
+  }
+}
+
+.import-desrc {
+  padding: 0 0 1rem 0;
+  ol {
+    li {
+      font-size: 12px;
+    }
+  }
+}

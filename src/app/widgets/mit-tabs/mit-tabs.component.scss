@@ -1,0 +1,145 @@
+  @charset 'utf-8';
+  @import '../../../assets/scss_styles/custom_scss/_custom-export.scss';
+  $ct-tab-color:#333;
+  $ct-tab-active-hover-fontcolor:#31c5d1;
+  $ct-tab-active-hover-bgcolor:#31c5d1;
+  $ct-tab-bg:#fff; // tab区域颜色
+  $ct-tab-head-bg:#fff; // 头部背景颜色
+  $ct-tab-head-padding:15px !default; // 头部填充
+  $ct-tab-body-bg:#fff; // 内容背景颜色
+  $ct-tab-body-padding:15px !default; // 内容填充
+  $ct-tab-title-padding:10px 15px !default; // 标题的填充
+  .tabs {
+    a {
+      display: inline-block;
+      height: 100%;
+      @include remove-a-default-behavior;
+    }
+    position: relative;
+    @include flex(center, stretch, column); // tab-头部
+    .tab-header {
+      @include flex(flex-start, center, row);
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background-color: #e7e9eb;
+        width: 100%;
+      }
+      background-color: $ct-tab-head-bg;
+      .tab-title {
+        color: $ct-tab-color;
+        padding: $ct-tab-title-padding;
+        font-size: $fs14;
+        a {
+          @include remove-a-default-behavior;
+        }
+      }
+    }
+    // tab内容
+    .tab-body {
+      background-color: $ct-tab-body-bg;
+      padding: $ct-tab-body-padding;
+    }
+  }
+
+  //卡片包裹效果
+  .dashboard {
+    background-color: #fff;
+    position: relative;
+    .tab-header {
+      min-height: 57px;
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background-color: #e7e9eb;
+        width: 100%;
+      }
+      padding:0 30px;
+      .tab-title {
+        color: #333;
+        padding: 10px;
+        border-bottom: 4px solid transparent;
+        font-size: $fs22;
+        &:hover {
+          color: #32aec6;
+          border-bottom: 4px solid #32aec6;
+        }
+        &.active {
+          color: #32aec6;
+          border-bottom: 4px solid #32aec6;
+        }
+      }
+    }
+  }
+
+  // 系统设置-个人中心&系统消息
+  .ucenter {
+    .tab-header {
+      min-height: 42px;
+      background-color: transparent;
+      .tab-title {
+        margin-left: -1px;
+        color: #31c5d1;
+        padding: toRem(10px) toRem(20px);
+        border: 1px solid#e4e4e4;
+        font-weight: 600;
+        border-radius: toRem(3px) toRem(3px) 0 0;
+        margin-right: toRem(5px);
+        font-weight: 6500;
+        text-align: center;
+        background-color: #fff;
+        >i:first-child {
+          font-size: $fs14;
+          margin: 0 0.2rem 0 0;
+        }
+        font-size: $fs14;
+        &:hover {
+          color: #4a4a4a;
+        }
+        &.active {
+          border-bottom: none;
+          color: #4a4a4a;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  // 系统日志管理
+  .logs-tab {
+    .tab-header {
+      @include flex;
+      background-color: transparent;
+      .tab-title {
+        margin-left: -1px;
+        color: #31c5d1;
+        padding: toRem(10px) toRem(20px);
+        border: 1px solid#e4e4e4;
+        font-weight: 600;
+        border-radius: toRem(3px) toRem(3px) 0 0;
+        margin-right: toRem(5px);
+        font-weight: 6500;
+        text-align: center;
+        background-color: #fff;
+        >i:first-child {
+          font-size: $fs14;
+          margin: 0 0.2rem 0 0;
+        }
+        font-size: $fs14;
+        &:hover {
+          color: #4a4a4a;
+        }
+        &.active {
+          border-bottom: none;
+          color: #4a4a4a;
+          background-color: #fff;
+        }
+      }
+    }
+  }

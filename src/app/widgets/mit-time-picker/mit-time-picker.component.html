@@ -1,0 +1,24 @@
+<div class="time-picker">
+  <div class="select" (click)="isExpand = !isExpand">
+    <input type="text" class="setPlaceholder" [(ngModel)]="selected" [disabled]="true" [placeholder]="placeholder">
+    <span *ngIf="!isExpand"><i class="fpd fpd-shijian2"></i></span>
+    <span *ngIf="isExpand"><i class="fpd fpd-guanbi"></i></span>
+  </div>
+  <div class="list-menu" [@fadeIn]="true" *ngIf="isExpand">
+    <div class="sub-list">
+      <ul>
+        <li *ngFor="let item of hourArr | mitTimePicker: minTime" (click)="hour = item;selectedHandle(hour,minute);" [class.active]="item === hour">{{item}}</li>
+      </ul>
+    </div>
+    <div class="sub-list">
+      <ul>
+        <li *ngFor="let item of minuteArr" (click)="minute = item;selectedHandle(hour,minute);" [class.active]="item === minute">{{item}}</li>
+      </ul>
+    </div>
+    <!--<div class="sub-list">
+      <ul>
+        <li *ngFor="let item of minuteArr" (click)="second = item;" [class.active]="item === second">{{item}}</li>
+      </ul>
+    </div>-->
+  </div>
+</div>

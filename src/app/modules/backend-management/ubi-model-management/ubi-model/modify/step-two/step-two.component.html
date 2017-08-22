@@ -1,0 +1,73 @@
+<!--<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">-->
+  <div class="model-box">
+    <div class="row">
+      <h4 class="col-10">驾驶行为计费规则</h4>
+      <div class="beautify-wrap col-2 text-right">
+        <span>是否启用</span>
+        <input type="checkbox" class="beautify-checkbox" [(ngModel)]="BehaviorEnable" >
+        <label for="" (click)="BehaviorEnable = BehaviorEnable ? 0 : 1"></label>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>驾驶行为项目</th>
+          <th>单价（元/次）</th>
+          <th>是否启用计费</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of BehaviorContent; let index = index">
+          <td>{{item.Name || ''}}</td>
+          <td [ngClass]="{ 'has-danger': item.BehaviorinputType && item.BehaviorinputType == 2 ,'has-success': item.BehaviorinputType && item.BehaviorinputType == 1 }">
+            <input type="number" class="form-control" [(ngModel)]="item.Price" [ngModelOptions]="{standalone: true}" min="0" (ngModelChange)="BehaviorContentChange(item.Price,index)">
+          </td>
+          <td class="beautify-wrap">
+            <input type="checkbox" class="beautify-checkbox" [(ngModel)]="item.Enabled" >
+            <label [for]="" (click)="item.Enabled = item.Enabled ? 0 : 1"></label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="model-box model-box-last">
+    <div class="row">
+      <h4 class="col-10">超速行驶里程保费增加费率（按最高车速）</h4>
+      <div class="beautify-wrap col-2 text-right">
+        <span>是否启用</span>
+        <input type="checkbox" class="beautify-checkbox" [(ngModel)]="SpeedEnable" >
+        <label for="" (click)="SpeedEnable = SpeedEnable ? 0 : 1"></label>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <!--<thead>
+        <tr>
+          <th>超速车速（最高速度）</th>
+          <th>系数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of SpeedContent; let index = index">
+          <td>{{ item.Name }}</td>
+          <td [ngClass]="{ 'has-danger': item.SpeedinputType && item.SpeedinputType == 2 ,'has-success': item.SpeedinputType && item.SpeedinputType == 1 }">
+            <input type="number" class="form-control" [(ngModel)]="item.Coefficient" [ngModelOptions]="{standalone: true}" min="0" (ngModelChange)="SpeedContentChange(item.Coefficient,index)">
+          </td>
+        </tr>
+      </tbody>-->
+      <tr>
+        <th>超速车速（最高速度）</th>
+        <td *ngFor="let item of SpeedContent;">{{item.Name}}</td>
+      </tr>
+      <tr>
+        <th>系数</th>
+        <td *ngFor="let item of SpeedContent; let index = index">
+          <div [ngClass]="{ 'has-danger': item.SpeedinputType && item.SpeedinputType == 2 ,'has-success': item.SpeedinputType && item.SpeedinputType == 1 }">
+            <input type="number" class="form-control" [(ngModel)]="item.Coefficient" [ngModelOptions]="{standalone: true}" min="0" (ngModelChange)="SpeedContentChange(item.Coefficient,index)">
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="up()">上一步</button>
+  <button type="button" class="btn btn-primary" [disabled]="BehaviorInputStatus || SpeedInputStatus" (click)="next()" >下一步</button>
+<!--</form>-->

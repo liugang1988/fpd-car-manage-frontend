@@ -1,0 +1,85 @@
+<div class="wrapper">
+
+  <!--搜索区域-->
+  <div class="item-area" [@fadeIn]="true">
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">状态</label>
+          <app-select class="form-control" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="故障码" [(ngModel)]="FaultCode" (keyup.enter)="search(FaultCode)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(FaultCode)">查询</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="item-area" *ngIf="!list && !vehicleItem">
+    <app-mit-loading [option]="'load7'"></app-mit-loading>
+  </div>
+
+  <!--车辆信息-->
+  <div class="item-area" *ngIf="vehicleItem" [@fadeIn]="true">
+    <h6><i class="fpd fpd-car title-icon"></i>车辆信息：</h6>
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th class="text-center">车牌</th>
+          <th class="text-center">品牌车系</th>
+          <th class="text-center">排量</th>
+          <th class="text-center">部门</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{vehicleItem.Plate || '-' }}</td>
+          <td>{{vehicleItem.VehicleModelName || '-' }}</td>
+          <td>{{vehicleItem.Displacement || '-' }}</td>
+          <td>{{vehicleItem.CompanyName || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="item-area">
+    <h6><i class="fpd fpd-guzhang title-icon"></i>故障信息：</h6>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list" [@fadeIn]="true">
+        <thead>
+          <tr>
+            <th>提示时间</th>
+            <th>更新时间</th>
+            <th>故障代码</th>
+            <th>类型</th>
+            <th>故障说明</th>
+            <th>详细描述</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td style="min-width:160px;">{{item.ServerTime}}</td>
+            <td style="min-width:160px;">{{item.ClearTime}}</td>
+            <td style="min-width:80px;">{{item.FaultCode}}</td>
+            <td style="min-width:200px;">{{item.FaultType}}</td>
+            <td>{{item.FaultDesc}}</td>
+            <td [title]="item.FaultDescDetail">{{item.FaultDescDetail | SliceStr:0:160:'...'}}</td>
+            <td class="status">{{item.Status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <!--tips-->
+    <div class="tips text-center" *ngIf="list && !list.length">
+      暂时没有相关的记录
+    </div>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+  </div>
+</div>

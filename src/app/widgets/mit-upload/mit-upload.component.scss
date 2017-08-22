@@ -1,0 +1,85 @@
+@charset 'UTF-8';
+@import '../../../assets/scss_styles/custom_scss/_custom-export.scss';
+
+$iu-border:#e7e7e7 !default; // 边框颜色
+$iu-icon-color:#d5d4d4 !default;
+.upload-fail {
+  .upload-area {
+    border: 2px solid #d9534f !important;
+    .icon-wrap {
+      i {
+        color: #d9534f !important;
+      }
+    }
+    .upload-tips {
+      color: #d9534f;
+    }
+  }
+}
+
+.image-upload {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .upload-area {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid $iu-border;
+    @include flex(center, center);
+    flex-wrap: wrap;
+    .icon-wrap {
+      width: 100%;
+      @include flex(center, center);
+      i {
+        font-size: 64px;
+        color: $iu-icon-color;
+      }
+    }
+    p {
+      margin: 0;
+      padding: 0.5rem;
+      font-size: 14px;
+      color: #808080;
+    }
+    .upload-input {
+      cursor:pointer;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      height: 100%;
+      width: 100%;
+      background: transparent;
+      z-index: $zindex-xs;
+    }
+    .img-preview {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: $zindex-md;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .upload-footer {
+    padding: 0.5rem;
+    @include flex(space-between, center);
+    span {
+      font-size: 14px;
+      color: #313131;
+    }
+    a {
+      font-size: 14px;
+      color: #37c2dd;
+    }
+  }
+}
+
+.res-img {
+  width: 100%;
+}

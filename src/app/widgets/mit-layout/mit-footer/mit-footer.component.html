@@ -1,0 +1,8 @@
+<footer class="mit-footer" [class.expand]="isExpand">
+
+  <span class="copyright" *ngIf="info.copyright">{{info.copyright}}</span>
+  <span class="url" *ngIf="info.url"><a [href]="info.url">{{info.url}}</a></span>
+  <span class="company-name" *ngIf="info.company">&copy;{{info.company}}</span>
+  <!--<span class="version" *ngIf="info.version">{{info.version}} </span>-->
+
+</footer>

@@ -1,0 +1,6 @@
+label.disabled {
+  &::after {
+    background: #eee !important;
+    cursor: not-allowed;
+  }
+}

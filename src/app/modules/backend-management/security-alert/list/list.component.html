@@ -1,0 +1,70 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-tree-select class="form-control" (result)="selectCompany($event)"></app-organization-tree-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌" [(ngModel)]="KeyWords" (keyup.enter)="search(KeyWords,ProcessingStatus,AlertsFilter)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">状态</label>
+          <app-select class="form-control" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="showFilter()">分类筛选</button>
+        <button type="button" class="btn btn-primary" (click)="search(KeyWords,ProcessingStatus,AlertsFilter)">查询</button>
+        <div class="col-12 col-sm-12 col-lg-12" [@flyIn]="true" *ngIf="showFilterItem">
+          <app-alert-record-enum-checkbox (result)="AlertsFilter = $event"></app-alert-record-enum-checkbox>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table *ngIf="list">
+      <table>
+        <thead>
+          <tr>
+            <th>日期</th>
+            <th>车牌</th>
+            <th>驾驶员</th>
+            <th>部门</th>
+            <th>报警类型</th>
+            <th>事件位置</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.StartTime || '-'}}</td>
+            <td>{{item.Plate || '-'}}</td>
+            <td>{{item.DriverName || '-'}}</td>
+            <td>{{(item.OrganizeName) + '/' + (item.DepartmentName || '-')}}</td>
+            <td><a [routerLink]="['./detail',item.ID]">{{item.AlertTypeDesc || '-'}}</a></td>
+            <td [title]="item.StartAddress">{{item.StartAddress | SliceStr:0:25:'...' || '-'}}</td>
+            <td><span class="badge" style="font-weight:normal;" [ngClass]="statusColor(item.ProcessingStatus)">{{item.ProcessingStatusDesc}}</span></td>
+            <td>
+              <button class="operator-span" (click)="record();currentItem = item" [disabled]="item.ProcessingStatus !== 0">处理</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [listCount]="listCount" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5"
+      [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>
+
+
+<app-event-handing *ngIf="showEventHandingAlert" (close)="closeAlert($event)" [item]="currentItem"></app-event-handing>

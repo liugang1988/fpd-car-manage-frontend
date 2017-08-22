@@ -1,0 +1,17 @@
+<div class="upload-area">
+  <!--状态信息-->
+  <h5 class="error_status">{{uploadDesrc}}</h5>
+  <!--选择文件-->
+  <div class="select" *ngIf="!currentFile">
+    <i class="fpd fpd-upload"></i>
+    <input type="file" (change)="selected($event)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+  </div>
+  <!--显示当前文件名-->
+  <div class="await" *ngIf="currentFile">
+    <i class="fpd fpd-excel"></i>{{currentFile.name}}
+  </div>
+  <!--删除-->
+  <div class="delete" *ngIf="currentFile" (click)="delete()">
+    <i class="fpd fpd-shanchu"></i> 删除文件
+  </div>
+</div>

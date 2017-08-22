@@ -1,0 +1,36 @@
+@charset 'UTF-8';
+@import '../../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$padding: 25px 10px;
+.model-box {
+  width: 100%;
+  padding: $padding;
+  border-bottom: 1px solid #dbdbdb;
+  label.custom-form-label {
+    line-height: 38px;
+  }
+  h4 {
+    color: #78c3d6;
+    font-size: 120%;
+    padding: 10px 0;
+  }
+  table {
+    margin: 15px 0;
+    th {
+      color: #6f7072;
+      background-color: #f5f5f5;
+      text-align: center;
+      vertical-align: middle;
+    }
+    td {
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+  .text-right {
+    padding: 10px;
+    text-align: right;
+  }  
+}
+.model-box-last {
+  border-bottom: 0 none;
+}

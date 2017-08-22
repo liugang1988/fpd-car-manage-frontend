@@ -1,0 +1,86 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.flex-wrap {
+  @include flex;
+}
+
+.flex {
+  @include flex(space-between, center);
+  color: #f9f9f9;
+  a {
+    @include remove-a-default-behavior;
+  }
+}
+
+.attent-item {
+  padding: toRem(20px);
+  color: #f9f9f9;
+  h5,
+  ol {
+    color: inherit;
+  }
+  ol {
+    font-size: $fs14;
+    li {
+      padding: 3px 0;
+    }
+  }
+}
+
+.beautify-form {
+  margin-top: -200px;
+  min-width: 25rem;
+  width: 30rem;
+  @include center-block;
+  .page-header {
+    font-weight: 200;
+    font-size: toRem(50px);
+    color: #FFF;
+    padding: 60px 0;
+  }
+  .input-group-addon {
+    background-color: transparent;
+    color: #f9f9f9;
+    border-right: none;
+  }
+  .form-control {
+    background-color: rgba(0, 0, 0, 0.15);
+    color: #f9f9f9;
+    box-shadow: none;
+    @include placeholder-color(#f9f9f9);
+  }
+  .has-success {
+    .input-group-addon,
+    input {
+      border-color: #43bcc5;
+    }
+    .form-control-feedback {
+      color: #43bcc5;
+    }
+  }
+  .btn {
+    color: #43bcc5;
+    border-color: #43bcc5;
+    &:hover,
+    &:active {
+      background-color: #43bcc5;
+      color: #fff;
+    }
+  }
+}
+
+.back {
+  background-color: rgba(111, 111, 119, 0.6);
+  padding: toRem(20px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(111, 111, 119, 0.8);
+  }
+  i {
+    font-size: 24px;
+    color: #FFF;
+  }
+}

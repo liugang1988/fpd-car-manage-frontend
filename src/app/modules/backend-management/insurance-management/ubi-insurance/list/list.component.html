@@ -1,0 +1,74 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-select class="form-control" [showAll]="true" (result)="selectOrganization($event)"></app-organization-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">部门</label>
+          <app-department-select class="form-control" [defaultVal]="defaultValue" [concatCompany]="true" [showAll]="true" [OID]="OID" (result)="selectDept($event)"></app-department-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">保单号</label>
+          <input type="text" class="form-control" placeholder="保单号" [(ngModel)]="CINo" (keyup.enter)="search(KeyValue)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌号" [(ngModel)]="KeyValue" (keyup.enter)="search(KeyValue)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyValue)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>车牌<br>车型</th>
+            <th>车辆所属<br>联系电话</th>
+            <th>UBI保单号</th>
+            <th>生效时间<br>到期时间</th>
+            <th>常规险单号<br>保费(元)</th>
+            <th>参考静态保费(元)<br>动态保费(元)</th>
+            <th>UBI实际静止(元)<br>行驶保费(元 )</th>
+            <th>模型名称</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td><a [routerLink]="['/page/base-data/vehicle-information/detail',item.VID]">{{item.Plate}}</a><br>{{item.VehicleModel || '-'}}</td>
+            <td>{{item.OrganizationName || '-'}}/{{item.DepartMentName || '-'}}<br>{{item.ContactPhone || '-'}}</td>
+            <td><a [routerLink]="['/page/backend-management/insurance-management/ubi-insurance/detail',item.CID]">{{item.UBIInsuranceNo || '-'}}</a></td>
+            <td>{{(item.StartTime | splitTime) || '-'}}<br>{{(item.EndTime | splitTime) || '-'}}</td>
+            <td><a [routerLink]="['/page/backend-management/insurance-management/convention-insurance/detail',item.CINo]">{{item.CINo || '-'}}</a><br>{{ item.Premium}}</td>
+            <td>{{item.UBIInsuranceNo ? item.ReferStaticPremium : '-'}}<br>{{item.UBIInsuranceNo ? item.MovePremium : '-'}}</td>
+            <td>{{item.UBIInsuranceNo ? item.UBIStaticPremium : '-'}}<br>{{item.UBIInsuranceNo ? item.TravelPremium : '-'}}</td>
+            <td>
+              <a *ngIf="item.UBIModelName" [routerLink]="['/page/backend-management/ubi-model-management/ubi-model/detail',item.ModelId]" target="_blank">{{item.UBIModelName}}</a>
+              <span *ngIf="!item.UBIModelName">-</span>
+            </td>
+            <td>
+              <span class="operator-span" *ngIf="item.UBIInsuranceNo" [routerLink]="['/page/backend-management/insurance-management/ubi-insurance/ubi-list',item.VID]">明细</span>
+              <span class="operator-span" *ngIf="!item.UBIInsuranceNo && (item.InsuranceType == 1 || item.InsuranceType == 3)" (click)="showdialog(item.CID, item.CINo, item.VID)">生成UBI保单</span>
+              <span *ngIf="!item.UBIInsuranceNo && item.InsuranceType != 1 && item.InsuranceType != 3">未投保商业险</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+    <app-create-ubi-insurance [CINo]="itemCINo" [CID]="itemCID" [VID]="itemVID" (close)="UpgradeAlert($event)" *ngIf="showUpAlert"></app-create-ubi-insurance>
+  </div>
+</div>

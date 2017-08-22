@@ -1,0 +1,15 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.create-insurance{
+    div{
+        margin: 10px 0;
+    }
+    app-select{
+        display: inline-block;
+        width: 60%;
+    }
+    .errorMsg{
+        color: #f00;
+        text-align: center;
+    }
+}

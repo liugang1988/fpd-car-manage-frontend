@@ -1,0 +1,39 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <a (click)="add()" class="btn-add-or-public">新增产品类型</a>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true" *ngIf="list">
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>类型名称</th>
+            <th>类型简介</th>
+            <th>创建日期</th>
+            <th>创建人</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.ID}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.Description}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.Name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+  </div>
+</div>

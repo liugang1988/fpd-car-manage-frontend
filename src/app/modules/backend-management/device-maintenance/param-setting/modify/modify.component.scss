@@ -1,0 +1,72 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.space-between {
+  @include flex(space-between, center)
+}
+
+.slef-end {
+  align-self: flex-end;
+  padding-right: 30px;
+}
+
+.custom-body {
+  .title {
+    margin-bottom: 0;
+  }
+}
+
+.flex-center-r {
+  @include flex(flex-end, center);
+  margin-right: 30px;
+}
+
+.flex-center {
+  @include flex(flex-start, center);
+  padding: 5px 5px 5px 30px;
+  margin: 0.5rem 0;
+  .title {
+    margin-bottom: 0;
+  }
+}
+
+.custom-card-header {
+  h4 {
+    padding: 30px;
+  }
+}
+
+.red {
+  color: #f00;
+}
+
+.device-operator {
+  padding: 15px;
+  .btn-wrap {
+    padding: 15px 0;
+    button {
+      margin: 0 2rem;
+    }
+  }
+}
+
+h6 {
+  padding: 15px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.submit-area {
+  @include flex(flex-end, center);
+  padding: 30px;
+}
+
+.error {
+  border: 1px solid #f00 !important;
+}
+
+.success {
+  border: 1px solid #70dc82;
+}
+
+.ipport {
+  @include placeholder-color(#ccc);
+}

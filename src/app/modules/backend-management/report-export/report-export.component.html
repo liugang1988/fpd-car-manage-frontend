@@ -1,0 +1,76 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>常规报表</h4>
+  </div>
+  <div class="custom-card-body convention">
+    <div class="convention-report">
+      <label class="custom-control custom-radio" *ngFor="let item of reportList">
+          <input type="radio" class="custom-control-input" name="baobiao" (click)="check(item.ID)">
+          <span class="custom-control-indicator"></span>
+            {{item.name}}
+        </label>
+    </div>
+     <button type="button" class="btn btn-primary" [disabled]="!reportID" (click)="export()">导出</button>
+  </div>
+  <div class="custom-card-header">
+    <h4>临时导出</h4>
+  </div>
+  <div class="custom-card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-2 form-control-label  col-lg-2 star">部门:</label>
+            <div class="col-sm-12 col-md-5 col-lg-5" [ngClass]="{ 'has-danger': form.controls.OID.invalid && form.controls.OID.value ,'has-success': form.controls.OID.valid && form.controls.OID.value }">
+              <app-organization-select class="form-control" [showAll]="true" (result)="selectOrganization($event)"></app-organization-select>
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5" [ngClass]="{ 'has-danger': form.controls.ODID.invalid && form.controls.ODID.value ,'has-success': form.controls.ODID.valid && form.controls.ODID.value }">
+              <app-department-select class="form-control" [concatCompany]="true" [showAll]="true" [OID]="OID" (result)="selectDept($event)"></app-department-select>
+            </div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-sm-12 col-md-2 form-control-label col-lg-2 star">时间:</label>
+            <div class="col-sm-12 col-md-5 col-lg-5" [ngClass]="{ 'has-danger': form.controls.StartTime.invalid && form.controls.StartTime.value ,'has-success': form.controls.StartTime.valid && form.controls.StartTime.value }">
+              <div class="input-group">
+                <input type="text" formControlName="StartTime" ngbDatepicker #StartTime="ngbDatepicker" [maxDate]="currentDate"
+                  class="form-control" placeholder="开始时间" (click)="StartTime.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="StartTime.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5" [ngClass]="{ 'has-danger': form.controls.EndTime.invalid && form.controls.EndTime.value ,'has-success': form.controls.EndTime.valid && form.controls.EndTime.value }">
+              <div class="input-group">
+                <input type="text" formControlName="EndTime" ngbDatepicker #EndTime="ngbDatepicker" [minDate]="minDate" [maxDate]="maxDate" [startDate]="minDate"
+                  class="form-control" placeholder="结束时间" (click)="EndTime.toggle()" >
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="EndTime.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-2 form-control-label col-lg-2 star">类型:</label>
+            <div class="col-sm-12 col-md-10 col-lg-10" [ngClass]="{ 'has-danger': form.controls.type.invalid && form.controls.type.value ,'has-success': form.controls.type.valid && form.controls.type.value }">
+              <select class="form-control" formControlName="type">
+                <option value="">请选择类型</option>
+                <option value="1">租赁企业</option>
+                <option value="2">保险公司</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12 col-md-8 offset-md-2 col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">导出</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>

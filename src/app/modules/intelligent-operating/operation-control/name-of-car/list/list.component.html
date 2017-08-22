@@ -1,0 +1,82 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">开始时间：</label>
+          <input type="text" class="form-control" placeholder="开始时间">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">结束时间：</label>
+          <input type="text" class="form-control" placeholder="结束时间">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">车辆所属：</label>
+          <select class="form-control">
+              <option value="">自有车辆</option>
+              <option value="">企业车辆</option>
+              <option value="">个人车辆</option>
+            </select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">部门：</label>
+          <app-department-select class="form-control" [defaultVal]="" [OID]="OID" (result)="selectDept($event)"></app-department-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">超速时长：</label>
+          <select class="form-control">
+              <option value="">30分钟以下</option>
+              <option value="">30到60分钟</option>
+              <option value="">60分钟以上</option>
+            </select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">里程范围：</label>
+          <select class="form-control">
+              <option value="">10km以下</option>
+              <option value="">10到30km</option>
+              <option value="">30km以上</option>
+            </select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌、驾驶员" [(ngModel)]="OrderNumber" (keyup.enter)="search(OrderNumber)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(OrderNumber)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>车牌</th>
+            <th>品牌车系</th>
+            <th>部门</th>
+            <th>车辆所属</th>
+            <th>栅栏名称</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>违规时长</th>
+            <th>违规里程(km)</th>
+            <th>驻车点</th>
+            <th>驾驶员</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="2" [rotate]="true"></app-mit-data-table-pagination>
+  </div>
+</div>

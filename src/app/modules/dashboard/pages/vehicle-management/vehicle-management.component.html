@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+    <div class="ViolationNotDealtWith">
+      <div class="title">
+        <i class="fpd fpd-weizhang"></i> 违章未处理
+      </div>
+      <div class="chart">
+        <app-mit-echarts [option]="ViolationNotDealtWith" [id]="'ViolationNotDealtWith'" [height]="'180px'"></app-mit-echarts>
+      </div>
+      <div class="foot">
+        <div class="progress-count-wrapper">
+          <div class="progress-count-label">一个月内</div>
+          <progress class="progress progress-striped progress-animated progress-danger" value="0" max="100">0</progress>
+        </div>
+        <div class="progress-count-wrapper">
+          <div class="progress-count-label">超一个月</div>
+          <progress class="progress progress-striped progress-animated progress-danger" value="30" max="100">30</progress>
+        </div>
+        <div class="progress-count-wrapper">
+          <div class="progress-count-label">超两个月</div>
+          <progress class="progress progress-striped progress-animated progress-danger" value="50" max="100">50</progress>
+        </div>
+      </div>
+      <div class="module-dev">
+        <div class="module-dev-content">
+          <div class="icon-wrap">
+            <i class="fpd fpd-banshou"></i>
+          </div>
+          <div class="module-dev-desrc">模块开发中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+    <div class="AnnualInspectionExpire">
+      <div class="title">
+        <i class="fpd fpd-icon-copy"></i> 年检即将到期
+      </div>
+      <div class="chart">
+        <app-mit-echarts [option]="AnnualInspectionExpire" [id]="'AnnualInspectionExpire'" [height]="'180px'"></app-mit-echarts>
+      </div>
+      <div class="foot">
+        <div class="progress-count-wrapper">
+          <div class="progress-count-label">将到期</div>
+          <progress class="progress progress-striped progress-animated progress-warning" value="0" max="100">0</progress>
+        </div>
+        <div class="progress-count-wrapper">
+          <div class="progress-count-label">已过期</div>
+          <progress class="progress progress-striped progress-animated progress-warning" value="30" max="100">30</progress>
+        </div>
+      </div>
+      <div class="module-dev">
+        <div class="module-dev-content">
+          <div class="icon-wrap">
+            <i class="fpd fpd-banshou"></i>
+          </div>
+          <div class="module-dev-desrc">模块开发中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+    <div class="InsuranceExpires">
+      <div class="title">
+        <i class="fpd fpd-baoxian"></i> 保险即将到期
+      </div>
+      <div class="chart">
+        <app-mit-echarts [option]="InsuranceExpires" [id]="'InsuranceExpires'" [height]="'180px'"></app-mit-echarts>
+      </div>
+      <div class="foot">
+        <div class="progress-count-wrapper">
+          <div class="progress-count-label">将到期</div>
+          <progress class="progress progress-striped progress-animated " value="0" max="100">0</progress>
+        </div>
+        <div class="progress-count-wrapper">
+          <div class="progress-count-label">已过期</div>
+          <progress class="progress progress-striped progress-animated " value="30" max="100">30</progress>
+        </div>
+        <div class="module-dev">
+          <div class="module-dev-content">
+            <div class="icon-wrap">
+              <i class="fpd fpd-banshou"></i>
+            </div>
+            <div class="module-dev-desrc">模块开发中</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

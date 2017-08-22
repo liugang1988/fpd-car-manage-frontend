@@ -1,0 +1,83 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4 class="space-between">
+      <span>设置记录</span>
+      <button type="button" class="btn btn-primary" (click)="back()">返回</button>
+    </h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="row" [@fadeIn]="true">
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="simple-info flex-center">
+          <label class="title">车牌：</label>
+          <span class="content">{{'' || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="simple-info flex-center">
+          <label class="title">品牌车型：</label>
+          <span class="content">{{'' || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="simple-info flex-center">
+          <label class="title">客户：</label>
+          <span class="content">{{'' || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="simple-info flex-center">
+          <label class="title">IMEI：</label>
+          <span class="content">{{'' || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="simple-info flex-center">
+          <label class="title">产品信号：</label>
+          <span class="content">{{'' || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="simple-info flex-center">
+          <label class="title">设备状态：</label>
+          <span class="content">{{'' || ''}}</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-6">
+        <div class="simple-info flex-center">
+          <label class="title">软件版本：</label>
+          <span class="content">{{'' || ''}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-footer">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list" [@fadeIn]="true">
+        <thead>
+          <tr>
+            <th>更新时间</th>
+            <th>设置项</th>
+            <th>状态</th>
+            <th>操作人</th>
+            <th>操作日间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.Plate || ''}}</td>
+            <td>{{item.DepartmentName || ''}}</td>
+            <td>{{item.BrandLineName || ''}}</td>
+            <td>{{item.CreateTime || ''}}</td>
+            <td>{{item.AccountName || ''}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [listCount]="listCount" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="10"
+      [rotate]="true"></app-mit-data-table-pagination>
+  </div>
+</div>

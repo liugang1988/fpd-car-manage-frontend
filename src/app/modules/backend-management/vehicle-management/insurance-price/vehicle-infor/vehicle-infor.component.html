@@ -1,0 +1,82 @@
+<div class="custom-card">
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="!vehicleInfor"></app-mit-loading>
+    <div class="vehicle-basic" *ngIf="vehicleInfor">
+      <h5>车辆档案信息</h5>
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>车牌号:</label>
+            <span>{{vehicleInfor.Plate}}</span>
+          </div>
+          <div class="show-item">
+            <label>发动机号:</label>
+            <span>{{vehicleInfor.EngineNumber}}</span>
+          </div>
+          <div class="show-item">
+            <label>品牌车系:</label>
+            <span>{{vehicleInfor.VehicleModelName}}</span>
+          </div>
+          <div class="show-item">
+            <label>注册登记日期:</label>
+            <span>{{vehicleInfor.RegistrationTime}}</span>
+          </div>
+          <div class="show-item">
+            <label><span class="star"></span> 新车购置价:</label>
+            <span><input type="number" placeholder="请输入新车购置价" min="0" class="form-control input" [(ngModel)]="vehicleInfor.PurchaseAmount">元</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>车架号:</label>
+            <span>{{vehicleInfor.VIN}}</span>
+          </div>
+          <div class="show-item">
+            <label>车辆所属:</label>
+            <span>{{vehicleInfor.CompanyName}}</span>
+          </div>
+          <div class="show-item">
+            <label><span class="star"></span> 排量:</label>
+            <span><input type="text" placeholder="请输入排量,带单位(L或T)" min="0" class="form-control input" [(ngModel)]="vehicleInfor.Displacement"></span>
+          </div>
+          <div class="show-item">
+            <label><span class="star"></span> 荷载人数:</label>
+            <span><input type="number" placeholder="请输入荷载人数" min="0" class="form-control input" [(ngModel)]="vehicleInfor.OverloadPerson">人</span>
+          </div>
+          <div class="show-item">
+            <label><span class="star"></span> 购车日期:</label>
+            <span>
+              <div class="input-group">
+                <input type="text" ngbDatepicker #StartDate="ngbDatepicker" class="form-control" placeholder="购车时间" [(ngModel)]="vehicleInfor.PurchaseDate"
+                  [ngModelOptions]="{standalone: true}" (click)="StartDate.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="StartDate.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+          </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="custom-card-body">
+  <div class="row">
+    <div class="col-lg-6 col-sm-12">既往一年是否理赔: 
+      <label class="radio" [class.radio-active]="vehicleInfor.IsCompensate" (click)="check(true)"><span class="radio-icon"></span>是</label>      
+      <label class="radio" [class.radio-active]="!vehicleInfor.IsCompensate" (click)="check(false)"><span class="radio-icon"></span>否</label>
+    </div>
+    <div class="col-lg-6 col-sm-12" *ngIf="vehicleInfor.IsCompensate"><span class="star"></span>近一年出险次数:
+      <app-select class="form-control" [defaultValue]="vehicleInfor.CompensateCount" [placeholder]="CountPlaceholder"
+        [optionName]="CountOptionName" [optionList]="CountOptionList" (result)="getCountID($event)"></app-select>
+    </div>
+    <div class="col-lg-6 col-sm-12" *ngIf="!vehicleInfor.IsCompensate"><span class="star"></span>连续未出险年数：
+      <app-select class="form-control" [defaultValue]="vehicleInfor.NoAccidentYears" [placeholder]="NoAccidentPlaceholder"
+        [optionName]="NoAccidentOptionName" [optionList]="NoAccidentOptionList" (result)="getNoAccidentID($event)"></app-select>
+    </div>
+  </div>
+  <button class="btn btn-primary" [disabled]="!(vehicleInfor.Displacement && vehicleInfor.OverloadPerson && vehicleInfor.PurchaseAmount && vehicleInfor.PurchaseDate && (vehicleInfor.CompensateCount || vehicleInfor.NoAccidentYears))"
+    (click)="next()" type="button">下一步</button>
+</div>
+</div>

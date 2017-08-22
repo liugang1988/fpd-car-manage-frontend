@@ -1,0 +1,227 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$line-left-color:#ea2626;
+$line-right-color:#ffa500;
+// 车辆概况- 里程耗油概况
+.custom-card {
+  padding: toRem(30px);
+  border: 2px solid #e8e9eb;
+  border-radius: toRem(3px);
+  margin: 0 15px;
+  >h4 {
+    padding: 20px 0;
+  }
+  .mt {
+    margin: 15px 0;
+  }
+  .custom-card-header {
+    padding: toRem(20px);
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+    }
+  }
+  .Yesterday-mini-detail {
+    a {
+      color: #333;
+      @include remove-a-default-behavior;
+      div:first-child {
+        word-wrap: break-word;
+        font-size: $fs20;
+      }
+    }
+    .YesterdayTitle {
+      font-size: $fs24;
+      color: #3598dc;
+      cursor: pointer;
+      outline: none;
+    }
+    .alias {
+      font-size: $fs18;
+      color: #838182;
+    }
+  }
+}
+
+.list-group-item {
+  @include flex(center, center, column, wrap);
+  >a {
+    >div {
+      text-align: center;
+    }
+  }
+}
+
+// 车辆概况
+.AssetSecurityProfile,
+.SecurityAlarm,
+.VehicleConditionMonitoring,
+.Maintenance {
+  border: 2px solid #e8e9eb;
+  margin: 15px;
+  >h3 {
+    font-size: 24px;
+    width: 100%;
+    padding: 30px;
+    span{
+      font-size:$fs20; 
+    }
+  }
+  height:auto;
+  .canvas-wrapper {
+    margin: 15px;
+    width: 90%;
+    @include center-block;
+  }
+}
+
+// 资产安全概况
+.AssetSecurityProfile {
+  .wrapper {
+    height: auto;
+    position: relative;
+    i {
+      font-size: 48px;
+      position: absolute;
+      top: 46%;
+      left: 31%;
+      color: #e8e9eb;
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+}
+
+// 车况监控
+.VehicleConditionMonitoring {
+  >h3 {
+    .gzcl {
+      float: right;
+      font-size: $fs20;
+      i,
+      span {
+        font-size: $fs20;
+        padding: 0 1rem;
+        color: #e74f5b;
+      }
+    }
+  }
+}
+
+// 车辆概况 - 维修保养
+.Maintenance {
+  .icon-constrcuct {
+    padding: 100px 30px 0;
+    @include flex(center, center);
+    .icon-wrap {
+      @include flex(center, flex-start);
+      height: 120px;
+      width: 120px;
+      border-radius: 100%;
+      border: 10px solid #e8e9eb;
+      i {
+        font-size: 64px;
+        color: #e8e9eb;
+      }
+    }
+    .color-red {
+      background-color: $line-left-color !important;
+    }
+    .color-orange {
+      background-color: $line-right-color !important;
+    }
+    .counter-wrapper {
+      width: 25%;
+      .counter {
+        h3,
+        p {
+          text-align: center;
+          font-size: 18px;
+        }
+      }
+      margin-top:-100px;
+      margin-left:30px;
+      margin-right:30px;
+    }
+    .reverse {
+      transform: scaleX(-1) !important;
+    }
+    .line-trangle {
+      height: 2px;
+      background-color: #333;
+      min-width: 60px;
+      width: 100%;
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -4px;
+        height: 8px;
+        width: 8px;
+        border-radius: 6px;
+        margin-top: 1px;
+        background-color: inherit;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        right: -27px;
+        top: 6px;
+        height: 2px;
+        width: 30px;
+        background-color: inherit;
+        -webkit-transform: rotate(-330deg);
+        transform: rotate(-336deg);
+      }
+      &.color-red:before {
+        background-color: $line-left-color;
+      }
+      &.color-orange:before {
+        background-color: $line-right-color;
+      }
+      &.color-red:after {
+        background-color: $line-left-color;
+      }
+      &.color-orange:after {
+        background-color: $line-right-color;
+      }
+    }
+  }
+  .icon-count-state {
+    @include flex(space-between, flex-start);
+    padding: 80px 30px 30px;
+    margin-top: -90px;
+    .icon-by,
+    .icon-wx {
+      width: 35%;
+    }
+    .flex-inline {
+      @include flex(flex-start, center);
+      .icon-wrap {
+        @include flex(center, center);
+        i {
+          font-size: 34px;
+          padding: .5rem;
+          &.orange {
+            color: #ffa500;
+          }
+          &.blue {
+            color: #3598dc;
+          }
+        }
+      }
+      .counter {
+        p {
+          margin: 0;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}

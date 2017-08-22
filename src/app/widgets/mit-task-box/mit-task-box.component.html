@@ -1,0 +1,34 @@
+<div class="task-box">
+  <div class="item" (click)="isExpand = !isExpand">
+    <div class="tasklist-counts">
+      <i class="fpd fpd-daiban"></i>
+      <span class="mini-tag badge badge-danger">{{taskAllCount || 0}}</span>
+    </div>
+    待办事项
+  </div>
+  <div class="tasklist-card" *ngIf="isExpand" [@fadeIn]="true">
+    <div class="card-head" *ngIf="taskList">
+      <h5>共<span class="item-count">{{taskAllCount || 0}}</span>条信息<a class="allitem" (click)="isListCollapse = !isListCollapse">{{ isListCollapse ? '收缩':'展开'}}</a></h5>
+    </div>
+    <div class="card-body" *ngIf="taskList">
+      <ul [ngClass]="{'list-all-item':isListCollapse}" [@fadeIn]="true">
+        <li *ngFor="let item of taskList">
+          <a [routerLink]="['/page/intelligent-operating/security-alert']" [queryParams]="{ 'AlertType':item.AlertType}" (click)="isExpand = !isExpand">
+            <div class="left-wrap">
+              <div class="task-icon-wrap"><i class="fpd" [ngClass]="setIconClass(item.AlertType)"></i></div><span class="alert-title">{{item.AlertTypeDesc || ''}}</span>
+            </div>
+            <div class="right-wrap">
+              <span class="custom-label custom-label-danger">{{item.Count || 0}}</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-foot" (click)="isExpand = !isExpand" *ngIf="taskList && taskList.length>5">
+      <span>收起</span><i class="fpd fpd-xiangshangjiantou"></i>
+    </div>
+    <div class="card-foot" (click)="isExpand = !isExpand" *ngIf="taskList && taskList.length === 0">
+      <h6 class="text-center">暂无相关待办事项!</h6>
+    </div>
+  </div>
+</div>

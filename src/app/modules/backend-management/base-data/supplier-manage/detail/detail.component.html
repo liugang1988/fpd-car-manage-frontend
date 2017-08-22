@@ -1,0 +1,75 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>供应商信息详情</h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="loading" *ngIf="!singleSupplierInfo">
+      <app-mit-loading [option]="'load7'"></app-mit-loading>
+    </div>
+    <form *ngIf="singleSupplierInfo">
+      <div class="row">
+        <div class="col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row">
+            <label  class="col-md-3 form-control-label col-3  col-lg-3 ">供应商名称</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <span>{{singleSupplierInfo.SuppliersName}}</span>
+            </div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-3 form-control-label col-3 col-lg-3 ">供应商简称</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <span>{{singleSupplierInfo.Abbreviation}}</span>
+            </div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-3 form-control-label col-3 col-lg-3 ">联系人</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <span>{{singleSupplierInfo.Contacts}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label col-3 col-lg-3 ">联系电话</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <span>{{singleSupplierInfo.SuppliersTelephone}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label col-3 col-lg-3 ">电子邮箱</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <span>{{singleSupplierInfo.SuppliersEmail}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label col-3 col-lg-3 ">手机号</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <span>{{singleSupplierInfo.SuppliersMobilePhone}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label col-3 col-lg-3">公司地址</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <span>{{singleSupplierInfo.SuppliersAddress}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label col-3 col-lg-3">公司简介</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <p>{{singleSupplierInfo.SuppliersIntroduction}}</p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 form-control-label col-3 col-lg-3">资质证书</label>
+            <div class="col-9 col-md-9 col-lg-9">
+              <img src="{{singleSupplierInfo.Certifications}}" alt="">
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-md-8  col-lg-9 ">
+              <button type="button" class="btn btn-secondary" (click)="back()">返回</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

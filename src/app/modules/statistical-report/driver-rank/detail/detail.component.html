@@ -1,0 +1,125 @@
+<!--<div class="custom-card" *ngIf="!TrackData">
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'"></app-mit-loading>
+  </div>
+</div>-->
+
+<div class="custom-card separation">
+
+  <div class="table-search">
+    <form>
+      <div class="form-group condition-wrapper">
+        <label class="form-control-label">月份</label>
+        <app-only-year-month-select class="form-control" [placeholder]="'yyyy-mm'" (result)="Time = $event" [range]="{before:5,after:10}"></app-only-year-month-select>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="search()">查询</button>
+    </form>
+  </div>
+  <div class="custom-card-header">
+    <div class="row">
+      <div class="head">
+        <img src="assets/images/default_img/default_avatar.png" alt="" class="avatar">
+      </div>
+      <div class="score">
+        <h3>周大勇 <span>绑定车辆：粤B123456</span></h3>
+        <ul>
+          <li>
+            <p>考评结果</p>
+            <p><span>90.5</span>分</p>
+          </li>
+          <li>
+            <p>运营管控考评</p>
+            <p><span>89.6</span>分</p>
+          </li>
+          <li>
+            <p>驾驶行为考评</p>
+            <p><span>95.2</span>分</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-body">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-xl-6">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6>运行管控考评</h6>
+          </div>
+          <div class="tiny-card-body">
+            <table class="table table-bordered my-table">
+              <tr>
+                <th>时间栅栏</th>
+                <th>驶入报警</th>
+                <th>驶出报警</th>
+                <th>疲劳报警</th>
+                <th>超速报警</th>
+                <th>怠速报警</th>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-xl-6">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6>油耗里程考评</h6>
+          </div>
+          <div class="tiny-card-body">
+            <table class="table table-bordered my-table">
+              <tr>
+                <th>行驶里程(km)</th>
+                <th>耗油量(L)</th>
+                <th>平均油耗</th>
+                <th>怠速油耗</th>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6>运行管控考评</h6>
+          </div>
+          <div class="tiny-card-body">
+            <table class="table table-bordered my-table">
+              <tr>
+                <th>序号</th>
+                <th>项目名称</th>
+                <th>单位</th>
+                <th>本月累计</th>
+                <th>平均百公里值</th>
+                <th>云样本均值</th>
+                <th>偏离值</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>急加油</td>
+                <td>次</td>
+                <td>2</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

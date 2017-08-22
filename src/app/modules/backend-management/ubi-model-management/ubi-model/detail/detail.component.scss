@@ -1,0 +1,26 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$titleColor: #68c2cd;
+$marginTop: 20px;
+.model-card {
+  padding: 36px 0;
+  border-bottom: 1px solid #dbdbdb;
+  h4 {
+    padding-bottom: 16px;
+  }
+  h5 {
+    color: $titleColor;
+    margin: $marginTop 0;
+  }
+  table {
+    margin: $marginTop 0;
+    text-align: center;
+    color: #6b6e70;
+    thead th {
+      text-align: center;
+      vertical-align: middle;
+      background-color: #f5f5f5;
+    }
+  }
+
+}

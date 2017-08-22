@@ -1,0 +1,49 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>新建年款</h4>
+  </div>
+  <div class="custom-card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.BrandID.invalid && form.controls.BrandID.value ,'has-success': form.controls.BrandID.valid && form.controls.BrandID.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">车牌名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <app-select class="form-control" [showSearch]="true" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getBrandID($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.LineID.invalid && form.controls.LineID.value ,'has-success': form.controls.LineID.valid && form.controls.LineID.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">车系名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <app-select class="form-control" [showSearch]="true" [placeholder]="placeholder1" [optionName]="optionName1" [optionList]="optionList1" (result)="getLineID($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.ModelName.invalid && form.controls.ModelName.value ,'has-success': form.controls.ModelName.valid && form.controls.ModelName.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">车型名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="ModelName" placeholder="例如：朗逸 2016款 1.6L 自动风尚版">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.ModelName.invalid && form.controls.ModelName.value ,'has-success': form.controls.ModelName.valid && form.controls.ModelName.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2"></label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <p class="noticeText">示例：朗逸 2016款 1.6L 自动风尚版</p>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Sort.invalid && form.controls.Sort.value ,'has-success': form.controls.Sort.valid && form.controls.Sort.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2">排序</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="Sort" placeholder="请输入排序">
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="setting">
+  <div class="scope" *ngIf="isExpand" [@bounceIn]="true">
+    <ul>
+      <li class="beautify-wrap"><input type="checkbox" class="beautify-checkbox" name="rememberme" id="realTime" [(ngModel)]="settingData.realTime"
+          (ngModelChange)="updateSetting(settingData)">
+        <label for="realTime"></label> 实时</li>
+      <li class="beautify-wrap"><input type="checkbox" class="beautify-checkbox" name="rememberme" id="autoView" [(ngModel)]="settingData.autoView"
+          (ngModelChange)="updateSetting(settingData)">
+        <label for="autoView"></label> 自动调整视图</li>
+      <!--<li class="">
+        <input type="number">缩放等级</li>-->
+    </ul>
+  </div>
+  <div class="item" (click)="isExpand = !isExpand">
+    <i class="fpd fpd-system-setting"></i>
+  </div>
+
+</div>

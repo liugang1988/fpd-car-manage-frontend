@@ -1,0 +1,15 @@
+@charset 'UTF-8';
+@import '../assets/scss_styles/custom_scss/_custom-export.scss';
+.content-wrapper {
+  padding: 20px;
+  margin-left: 230px;
+  z-index: $zindex-sm;
+}
+
+@media (max-width:1199px) {}
+
+@media (max-width:991px) {}
+
+@media (max-width:767px) {}
+
+@media (max-width:479px) {}

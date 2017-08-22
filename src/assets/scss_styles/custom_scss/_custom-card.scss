@@ -1,0 +1,62 @@
+@charset 'UTF-8';
+// 自定义卡片样式
+$cc-border-color:#e7eaec !default; // 边框颜色
+$cc-header-padding:20px !default; // 头部填充
+$cc-header-bgColor:#fff !default; // 头部颜色
+$cc-body-padding:20px !default; // 内容填充
+$cc-footer-padding:20px !default; // 尾部填充
+$cc-body-bgColor:#fff !default; // 内容背景颜色
+$cc-header-title-text-color:#434950 !default; // 标题颜色
+$cc-footer-bgColor:#fff !default; // 尾部背景颜色
+$cc-card-margin:15px 0 !default; // 卡片之间的间距
+$cc-separation-margin:20px 0 0 0 !default; // 卡片分割间隔
+.custom-card {
+  .red {
+    color: #d9534f;
+  }
+  .green {
+    color: #65ca60;
+  }
+  margin:$cc-card-margin;
+  .custom-card-header {
+    border-top: 2px solid $cc-border-color;
+    border-bottom: 1px solid $cc-border-color;
+    padding: $cc-header-padding;
+    background-color: $cc-header-bgColor;
+    h4 {
+      font-size: $fs18;
+      font-weight: 500;
+      margin: 0;
+      color: $cc-header-title-text-color;
+    }
+  }
+  .custom-card-body {
+    padding: $cc-body-padding;
+    background-color: $cc-body-bgColor;
+  }
+  .custom-card-footer {
+    padding: $cc-footer-padding;
+    background-color: $cc-footer-bgColor;
+  }
+  &.separation {
+    .custom-card-header {
+      margin: $cc-separation-margin;
+      .content {
+        background: #FFF;
+      }
+    }
+    .custom-card-body {
+      margin: $cc-separation-margin;
+      border-top: 2px solid #ebebeb;
+    }
+  }
+}
+
+//Dom 结构
+// <div class="custom-card">
+//   <div class="custom-card-header">
+//     <h4>二、证件上传</h4>
+//   </div>
+//   <div class="custom-card-body"></div>
+//   <div class="custom-footer"></div>
+// </div>

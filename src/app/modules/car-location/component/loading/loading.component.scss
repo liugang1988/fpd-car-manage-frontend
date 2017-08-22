@@ -1,0 +1,16 @@
+.loading {
+    z-index: 5000;
+    width: 100%;
+    margin: 0px -20px;
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.85);
+    height: 100%;
+    text-align: center;
+    line-height: 100%;
+    color: #fff;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: Center;
+}

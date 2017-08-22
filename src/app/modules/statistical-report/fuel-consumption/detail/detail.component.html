@@ -1,0 +1,130 @@
+
+  <div class="custom-card separation">
+    <div class="custom-card-header">
+      <!--搜索区域-->
+      <div class="table-search">
+        <div class="row">
+          <div class="col-6 col-xl-5 col-lg-12 col-md-12 col-sm-12">
+            <div class="date-select">
+              <ul>
+                <li (click)="selectDate(item.ID, item.time)" *ngFor="let item of selectList" [ngClass]="{'active': currentItem == item.ID}">{{item.value}}</li>
+              </ul>
+            </div>
+          </div>
+           <div class="col-5 col-xl-6 col-lg-10 col-md-10 col-sm-10" *ngIf="monthChooseStatus">
+             <div class="row">
+              <div class="col-sm-4 col-lg-4 col-md-4">
+                <app-only-year-month-select class="form-control" [defaultValue]="Time" [placeholder]="'yyyy-mm'" (result)="Time = $event" [range]="{before:5,after:10}"></app-only-year-month-select>  
+              </div>
+              <div class="col-sm-2 col-lg-2 col-md-2">
+                <button type="button" class="btn btn-primary" (click)="monthSearch()">查询</button>
+              </div>
+              <div class="col-sm-6 col-lg-6 col-md-6"></div>
+           </div>
+          </div>
+          <div class="col-5 col-xl-6 col-lg-10 col-md-10 col-sm-10" *ngIf="dateComponentStatus">
+            <div class="form-group row">
+              <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="input-group">
+                  <input type="text" ngbDatepicker #StartDate="ngbDatepicker" [maxDate]="currentDate" class="form-control" placeholder="开始时间" [(ngModel)]="StartTime"
+                    [ngModelOptions]="{standalone: true}" (click)="StartDate.toggle()">
+                  <span class="input-group-btn">
+                      <button  type="button" class="btn btn-primary" (click)="StartDate.toggle()">
+                        <i class="fpd fpd-rili"></i>
+                      </button>
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="input-group">
+                  <input type="text" ngbDatepicker #EndDate="ngbDatepicker" [maxDate]="currentDate" class="form-control" placeholder="结束时间"
+                    [(ngModel)]="EndTime" [ngModelOptions]="{standalone: true}" (click)="EndDate.toggle()">
+                  <span class="input-group-btn">
+                      <button  type="button" class="btn btn-primary" (click)="EndDate.toggle()">
+                        <i class="fpd fpd-rili"></i>
+                      </button>
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-4 col-lg-3 col-md-3">
+                <button type="button" class="btn btn-primary btn-block btn-search" (click)="search(StartTime,EndTime)"><i class="fpd fpd-chaxun"></i> 查询</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-1 col-xl-1 col-lg-2 col-md-2 col-sm-2">
+            <button type="button" class="btn btn-secondary" (click)="download()"><i class="fpd fpd-export"></i>导出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-card" [@fadeIn]="true">
+      <div class="custom-card-body" *ngIf="oilSummaryDetail">
+        <h3 class="activeTime">时间段：（{{StartTimeShow}} - {{EndTimeShow}}）</h3>
+        <table class="table table-bordered my-table">
+          <thead>
+            <tr>
+              <th>车牌</th>
+              <th>排量</th>
+              <th>耗油量(L)</th>
+              <th>行驶耗油量(L)</th>
+              <th>怠速耗油量(L)</th>
+              <th>里程(km)</th>
+              <th>平均油耗(100km/L)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{oilSummaryDetail.Plate || '-'}}</td>
+              <td>{{oilSummaryDetail.Displacement || '-'}}</td>
+              <td>{{oilSummaryDetail.TotalTrackOil || '-'}}</td>
+              <td>{{oilSummaryDetail.TravelOil || '-'}}</td>
+              <td>{{oilSummaryDetail.IdleTrackOil || '-'}}</td>
+              <td>{{oilSummaryDetail.TotalTrackMileage || '-'}}</td>
+              <td>{{oilSummaryDetail.TravelOilForHundred || '-'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="custom-card-body" [ngStyle]="{position: 'relative'}">
+        <app-mit-echarts [option]="oilSummary" [id]="'oilSummary'" [height]="'300px'"></app-mit-echarts>
+        <h3 class="noData" *ngIf="chartNameList && !chartNameList.length">暂无数据！</h3>
+      </div>
+    
+      <div class="custom-card-body">
+        <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+        <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+        <!--表格区域-->
+        <app-mit-data-table>
+          <table *ngIf="list">
+            <thead>
+              <tr>
+                <th>日期</th>
+                <th>耗油量(L)</th>
+                <th>行驶耗油量(L)</th>
+                <th>怠速耗油量(L)</th>
+                <th>里程(km)</th>
+                <th>平均油耗(100km/L)</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of list">
+                <td>{{item.Date || '-'}}</td>
+                <td>{{item.TotalTrackOil || '-'}}</td>
+                <td>{{item.TravelOil || '-'}}</td>
+                <td>{{item.TrackIdleOil || '-'}}</td>
+                <td>{{item.TotalTrackMileage || '-'}}</td>
+                <td>{{item.TravelOilForHundred || '-'}}</td>
+                <td><a [routerLink]="['/page/intelligent-operating/driving-data/detail/'+ this.id , item.Date]" target="_blank">明细</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </app-mit-data-table>
+        <!--分页-->
+        <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+        <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+      </div>
+  </div>
+

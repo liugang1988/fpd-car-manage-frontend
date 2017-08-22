@@ -1,0 +1,57 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>APP版本信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" *ngIf="!showLoading">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">APP名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-9" [ngClass]="{ 'has-danger': form.controls.AppName.invalid && form.controls.AppName.value ,'has-success': form.controls.AppName.valid && form.controls.AppName.value }">
+              <input type="text" class="form-control" formControlName="AppName" placeholder="APP名称">
+            </div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">平台</label>
+            <div class="col-sm-12 col-md-9 col-lg-9"  [ngClass]="{ 'has-danger': form.controls.PlatForm.invalid && form.controls.PlatForm.value ,'has-success': form.controls.PlatForm.valid && form.controls.PlatForm.value }">
+              <app-select class="form-control" [defaultValue]="form.controls.PlatForm.value" [placeholder]="placeholder1" [optionName]="optionName1" [optionList]="optionList1" (result)="getPlat($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">版本号</label>
+            <div class="col-sm-12 col-md-9 col-lg-9" [ngClass]="{ 'has-danger': form.controls.Version.invalid && form.controls.Version.value ,'has-success': form.controls.Version.valid && form.controls.Version.value }">
+              <input type="text" class="form-control" formControlName="Version" placeholder="软件版本号">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">下载地址</label>
+            <div class="col-sm-12 col-md-9 col-lg-9" [ngClass]="{ 'has-danger': form.controls.DownLoadLink.invalid && form.controls.DownLoadLink.value ,'has-success': form.controls.DownLoadLink.valid && form.controls.DownLoadLink.value }">
+              <input type="text" class="form-control" formControlName="DownLoadLink" placeholder="下载地址">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">状态</label>
+            <div class="col-sm-12 col-md-9 col-lg-9" [ngClass]="{ 'has-danger': form.controls.Enabled.invalid && form.controls.Enabled.value != null,'has-success': form.controls.Enabled.valid && form.controls.Enabled.value != null}">
+             <app-select class="form-control" [defaultValue]="form.controls.Enabled.value" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getEnabled($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 ">描述</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <textarea cols="30" rows="10" formControlName="Description" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-9 offset-lg-3">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

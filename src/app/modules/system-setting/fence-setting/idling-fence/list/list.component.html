@@ -1,0 +1,53 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h6 class="title">怠速栅栏设置</h6>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.IdleTime.invalid && form.controls.IdleTime.value ,'has-success': form.controls.IdleTime.valid && form.controls.IdleTime.value }">
+            <label tooltip="" class="col-sm-10 col-md-4 form-control-label col-lg-3 star">怠速时长栅栏</label>
+            <div class="col-sm-10 col-md-6 col-lg-7">
+              <input type="number" class="form-control" min="1" formControlName="IdleTime" placeholder="整数" [readonly]="UserId">
+            </div>
+            <div class="col-2 col-sm-2 col-lg-2 flex-align-center">
+              分钟
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-12 col-sm-10 col-md-6 offset-sm-2 offset-md-4 offset-lg-3">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">修改</button>
+              <button type="button" class="btn btn-secondary" (click)="resetDefault()">恢复默认</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="custom-card-body" *ngIf="list" [@fadeIn]="true">
+    <h6 class="title">操作日志</h6>
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>修改后(怠速时长)</th>
+            <th>原值(怠速时长)</th>
+            <th>时间</th>
+            <th>操作人</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td><span class="red" style="padding-right: 5px">{{item.NewLimitValue.IdleTime || '-'}}</span>分钟</td>
+            <td><span class="green" style="padding-right: 5px">{{item.OldLimitValue.IdleTime || '-'}}</span>分钟</td>
+            <td>{{item.ModifyTime || '-'}}</td>
+            <td>{{item.Modifier || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" [pageSize]="5" (pageChange)="pageChange($event)" [maxSize]="5"
+      [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关设置日志记录</h3>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="operation-dashboard" [@zoomInRight]="true">
+  <div class="operation-dashboard-head">
+    <app-home-overview></app-home-overview>
+  </div>
+  <div class="operation-dashboard-content" [@fadeIn]="true">
+    <app-mit-tabs [tabs]="tabs" [currentUrl]="currentUrl" [styles]="'dashboard'">
+      <router-outlet></router-outlet>
+    </app-mit-tabs>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="vehicle-overview">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="custom-card">
+        <div class="custom-card-header" style="border-top:0;">
+          <h4 class="text-xs-center text-sm-left text-md-left">里程耗油概况</h4>
+        </div>
+        <div class="custom-card-body">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3 mt">
+              <ul class="list-group  Yesterday-mini-detail " *ngIf="StatisticsTrackInfoAndOil">
+                <li class="list-group-item ">
+                  <h4 class="YesterdayTitle" [routerLink]="['/page/statistical-report/dailycar']">昨日汇总</h4>
+                </li>
+                <li class="list-group-item">
+                  <div class="YesterdayMil"><span>{{StatisticsTrackInfoAndOil.TrackInfo || '0'}}</span>KM</div>
+                  <div class="alias">公里数</div>
+                </li>
+                <li class="list-group-item">
+                  <div class="YesterdayOil"><span>{{StatisticsTrackInfoAndOil.TrackOil || '0'}}</span>L</div>
+                  <div class="alias">油耗量</div>
+                </li>
+                <li class="list-group-item" target="_blank">
+                  <div class="YesterdayTravel"><span>{{StatisticsTrackInfoAndOil.VehicleCount || '0'}}</span></div>
+                  <div class="alias">出行车辆</div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-9 mt" *ngIf="MileageFuelConsumption">
+              <a [routerLink]="['/page/statistical-report/fuel-consumption']">
+                <app-mit-echarts [option]="MileageFuelConsumption" [id]="'MileageFuelConsumption'" [height]="'345px'" width="100%"></app-mit-echarts>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="col-12 col-sm-12 col-md-12  col-lg-6">
+      <div class="AssetSecurityProfile">
+        <h3>资产安全概况 <span>(示例数据)</span></h3>
+        <div class="wrapper canvas-wrapper">
+          <app-mit-echarts [option]="AssetSecurityProfile" [id]="'AssetSecurityProfile'" [height]="'400px'"></app-mit-echarts>
+          <i class="fpd fpd-car"></i>
+        </div>
+      </div>
+    </div>-->
+
+    <div class="col-12 col-sm-12 col-md-12  col-lg-6">
+      <div class="SecurityAlarm" *ngIf="SecurityAlarm">
+        <h3>安全报警</h3>
+        <div class="canvas-wrapper" >
+          <a [routerLink]="['/page/intelligent-operating/security-alert']">
+            <app-mit-echarts [option]="SecurityAlarm" [id]="'SecurityAlarm'" [height]="'400px'"></app-mit-echarts>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12  col-lg-6">
+      <div class="VehicleConditionMonitoring" *ngIf="VehicleConditionMonitoring">
+        <h3>车况监控 
+          <div class="gzcl"><i class="fpd fpd-guzhang"></i>故障车辆 <span>{{faultCarNum}}</span>辆</div>
+        </h3>
+        <div class="canvas-wrapper">
+          <a [routerLink]="['/page/intelligent-operating/vehicle-fault']">
+          <app-mit-echarts [option]="VehicleConditionMonitoring" [id]="'VehicleConditionMonitoring'" [height]="'400px'"></app-mit-echarts>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="col-12 col-sm-12 col-md-12  col-lg-6">
+      <div class="Maintenance" style="height:520px;">
+        <h3>维修保养 <span>(示例数据)</span></h3>
+        <div class="icon-constrcuct">
+          <div class="counter-wrapper">
+            <div class="counter">
+              <h3>维修</h3>
+              <p>{{maintainNum}}</p>
+            </div>
+            <div class="line-trangle color-red"></div>
+          </div>
+          <div class="icon-wrap">
+            <i class="fpd fpd-baoyang"></i>
+          </div>
+          <div class="counter-wrapper">
+            <div class="counter">
+              <h3>保养</h3>
+              <p>{{keepNum}}</p>
+            </div>
+            <div class="line-trangle color-orange reverse"></div>
+          </div>
+        </div>
+        <div class="icon-count-state">
+          <div class="icon-wx"></div>
+          <div class="icon-by">
+            <div class="flex-inline overdue">
+              <div class="icon-wrap">
+                <i class="fpd fpd-shalou orange"></i>
+              </div>
+              <div class="counter">
+                <p>已经到期</p>
+                <p>{{expire}}</p>
+              </div>
+            </div>
+            <div class="flex-inline expiring">
+              <div class="icon-wrap">
+                <i class="fpd fpd-shalou"></i>
+              </div>
+              <div class="counter">
+                <p>即将已经到期</p>
+                <p>{{expiring}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+  </div>

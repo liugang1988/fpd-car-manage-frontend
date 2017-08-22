@@ -1,0 +1,50 @@
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}" placeholder="角色名称">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(keyword)">查询</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/page/system-setting/role-manage/add']"><i class="fpd fpd-jiahao"></i>新增角色</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table *ngIf="list">
+      <table>
+        <thead>
+          <tr>
+            <th>角色名称</th>
+            <th>角色说明</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.RoleName}}</td>
+            <td>{{item.RoleDesc}}</td>
+            <td>
+              <span class="operator-span" (click)="modify(item.ID)">修改</span>
+              <span class="operator-span" (click)="delete(item)">删除</span>
+              <span class="operator-span" (click)="allotMenu(item)">分配菜单</span>
+              <!--<span class="operator-span" (click)="allotActions(item)">分配权限</span>-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>
+<!--删除弹窗-->
+<app-delete *ngIf="showDeleteAlert" [item]="currentItem" (close)="closeDeleteAlert($event)"></app-delete>
+<!--分配菜单弹窗-->
+<app-allot-menu *ngIf="showAllotMenuAlert" [item]="currentItem" (close)="closeAllotMenuAlert($event)"></app-allot-menu>

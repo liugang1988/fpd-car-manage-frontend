@@ -1,0 +1,68 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>新增客户</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" *ngIf="!showLoading">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.OrganizationName.invalid && form.controls.OrganizationName.value ,'has-success': form.controls.OrganizationName.valid && form.controls.OrganizationName.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">客户名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="OrganizationName" placeholder="客户名称">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.OrganizationShorterName.invalid && form.controls.OrganizationShorterName.value ,'has-success': form.controls.OrganizationShorterName.valid && form.controls.OrganizationShorterName.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">客户简称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="OrganizationShorterName" placeholder="客户简称">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Contact.invalid && form.controls.Contact.value ,'has-success': form.controls.Contact.valid && form.controls.Contact.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">联系人</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="Contact" placeholder="联系人">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.ContactPhone.invalid && form.controls.ContactPhone.value ,'has-success':  form.controls.ContactPhone.valid && form.controls.ContactPhone.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">手机</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="ContactPhone" placeholder="手机">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.OrganizationEmail.invalid && form.controls.OrganizationEmail.value ,'has-success': form.controls.OrganizationEmail.valid && form.controls.OrganizationEmail.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">电子邮箱</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="OrganizationEmail" placeholder="电子邮箱">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.OrganizationPhone.invalid && form.controls.OrganizationPhone.value ,'has-success': form.controls.OrganizationPhone.valid && form.controls.OrganizationPhone.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 ">联系电话</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="OrganizationPhone" placeholder="联系电话">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2">公司地址</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="OrganizationAddress" placeholder="公司地址">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2">公司简介</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <textarea cols="15" rows="10" class="form-control" formControlName="OrganizationDesc" placeholder="公司简介"></textarea>
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

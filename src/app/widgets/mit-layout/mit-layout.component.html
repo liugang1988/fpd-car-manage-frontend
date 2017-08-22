@@ -1,0 +1,31 @@
+<div class="page-wrapper">
+
+  <!--头部-->
+  <app-mit-header (toggleEvt)="toggleEvt()" [isExpand]="expand"></app-mit-header>
+
+  <!--侧边栏-->
+  <app-mit-sidebar [isExpand]="expand"></app-mit-sidebar>
+
+
+
+  <!--内容区域-->
+  <div class="content-wrapper" [class.expand]="expand">
+
+
+    <!--面包屑-->
+    <app-mit-breadcrumb></app-mit-breadcrumb>
+
+
+    <!--子页面-->
+    <section class="content">
+        <router-outlet></router-outlet>
+
+    </section>
+
+
+  </div>
+
+
+  <!--底部-->
+  <app-mit-footer [isExpand]="expand"></app-mit-footer>
+</div>

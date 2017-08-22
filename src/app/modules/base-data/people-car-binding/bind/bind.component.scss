@@ -1,0 +1,19 @@
+.table-search {
+  padding: 0;
+}
+
+.custom-card .custom-card-body {
+  padding: 0;
+}
+
+.custom-card.separation .custom-card-body {
+  margin: 0;
+}
+
+.icon {
+  display: none;
+  &.active {
+    display: block;
+    color: #37c2dd;
+  }
+}

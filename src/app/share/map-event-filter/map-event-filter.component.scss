@@ -1,0 +1,29 @@
+.event-filter-notice{
+    font-size: 14px;
+    background: #fff;
+    position: absolute;
+    top:40px;
+    left: 40px;
+    padding: 5px;
+    cursor:pointer;
+    box-shadow: 0 0 10px #ccc;
+    span:first-child{
+        margin-right: 5px;
+        padding-right: 5px;
+        border-right: 1px solid #ccc;
+    }
+}
+.event-filter {
+  background: #FFF;
+  opacity: 0.9;
+  position: absolute;
+  top: 75px;
+  left: 55px;
+  .event-filter-box{
+      float: left;
+      padding: 1rem 0 0 1rem;
+  }
+  .gradient-box{
+      width: 100%;
+  }
+}

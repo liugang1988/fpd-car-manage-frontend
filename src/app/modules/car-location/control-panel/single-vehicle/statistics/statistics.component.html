@@ -1,0 +1,19 @@
+<div class="loadings" *ngIf="!panelStatisticsInfo">
+  <div>
+    <app-mit-loading [option]="'load7'"></app-mit-loading>
+  </div>
+</div>
+<div class="wrapper" *ngIf="panelStatisticsInfo">
+  <ul>
+    <li><span class="li-title">车牌</span><span class="li-content">{{panelStatisticsInfo.Plate || ''}}</span></li>
+    <li><span class="li-title">排量</span><span class="li-content">{{panelStatisticsInfo.Displacement || ''}}</span></li>
+    <li><span class="li-title">车架号</span><span class="li-content">{{panelStatisticsInfo.VIN || ''}}</span></li>
+    <li><span class="li-title">发动机号</span><span class="li-content">{{panelStatisticsInfo.EngineNumber || ''}}</span></li>
+    <li><span class="li-title">注册登记</span><span class="li-content">{{panelStatisticsInfo.RegistrationTime || '' | splitTime}}</span></li>
+    <li><span class="li-title">车型</span><span class="li-content spec">{{panelStatisticsInfo.VehicleModelName || ''}}</span></li>
+    <li><span class="li-title">登记车型</span><span class="li-content">{{panelStatisticsInfo.RegistrationModelName || ''}}</span></li>
+    <li><span class="li-title">颜色</span><span class="li-content">{{panelStatisticsInfo.Color || ''}}</span></li>
+    <li><span class="li-title">荷载人数</span><span class="li-content">{{panelStatisticsInfo.OverloadPerson || ''}}</span></li>
+  </ul>
+  <a href="javascript:;" (click)="gotoVehicleDetail(panelStatisticsInfo)" class="more">查看更多</a>
+</div>

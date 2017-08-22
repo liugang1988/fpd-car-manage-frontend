@@ -1,0 +1,41 @@
+@charset 'utf-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+app-mit-baidu-map {
+    width: 100%;
+    height: toRem(400px);
+    display: block;
+    overflow: hidden;
+    margin: 0;
+}
+
+.fast-search {
+  position: absolute;
+  top: 6px;
+  left: 20px;
+  .item {
+    background: #FFF;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    @include flex();
+    input {
+      margin: 5px 10px;
+      border: none;
+      outline: none;
+    }
+    .button {
+      border: none;
+      color: #FFF;
+      background-color: #317dfb;
+      padding: 0 10px;
+      outline: none;
+      cursor: pointer;
+      i {
+        font-size: 28px;
+      }
+      &:active,
+      &:hover,
+      &:focus {
+        background-color: rgb(0, 96, 255);
+      }
+    }
+  }
+}

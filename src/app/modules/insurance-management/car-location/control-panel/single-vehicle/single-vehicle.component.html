@@ -1,0 +1,13 @@
+<!--Tabs-->
+<div class="single-card-header">
+  <a href="javascript" *ngFor="let item of tabs" [class.active]="item.link === currentUrl" [routerLink]="[item.link]">
+    <div class="icon-wrap">
+      <i class="fpd {{item.icon}}"></i>
+    </div>
+    <span>
+         {{item.name}}
+      </span>
+  </a>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,61 @@
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">客户名称</label>
+          <input type="text" class="form-control" [(ngModel)]="OrganizationName" [ngModelOptions]="{standalone: true}" (keyup.enter)="search(OrganizationName)"
+            placeholder="客户名称">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(OrganizationName)">查询</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/page/backend-management/base-data/customer-manage/customer/add']"><i class="fpd fpd-jiahao"></i>新增客户</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>客户名称</th>
+            <th>客户简称</th>
+            <th>联系人</th>
+            <th>手机</th>
+            <th>是否开启</th>
+            <th>管理员</th>
+            <th>创建日期</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.ID}}</td>
+            <td [title]="item.OrganizationName">{{item.OrganizationName  }}</td>
+            <td [title]="item.OrganizationShorterName">{{item.OrganizationShorterName}}</td>
+            <td>{{item.Contact}}</td>
+            <td>{{item.ContactPhone}}</td>
+            <td class="beautify-wrap"><input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="item.ID" [(ngModel)]="item.OrganizationStatus"
+                (ngModelChange)="updataOrganizationStatus(item.ID,item.OrganizationStatus);"><label [for]="item.ID"></label></td>
+            <td>
+              <button type="button" class="btn btn-link" [routerLink]="['/page/backend-management/base-data/customer-manage/user/',item.ID]"
+                [disabled]="!item.OrganizationStatus">管理员</button></td>
+            <td>{{item.CreateTime}}</td>
+            <td>
+              <span class="operator-span" (click)="modify(item.ID)">修改</span>
+              <span class="operator-span" (click)="delete(item)">删除</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [listCount]="listCount" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>
+<app-delete *ngIf="showDeleteAlert" [item]="deleteItem" (close)="closeAlert($event)"></app-delete>

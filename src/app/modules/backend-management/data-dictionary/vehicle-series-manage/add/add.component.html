@@ -1,0 +1,38 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>新建车系</h4>
+  </div>
+  <div class="custom-card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.BrandID.invalid && form.controls.BrandID.value ,'has-success': form.controls.BrandID.valid && form.controls.BrandID.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">车牌名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <app-select class="form-control" [showSearch]="true" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getBrandID($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.LineName.invalid && form.controls.LineName.value ,'has-success': form.controls.LineName.valid && form.controls.LineName.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">车系名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="LineName" placeholder="请输入车系名称">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Sort.invalid && form.controls.Sort.value ,'has-success': form.controls.Sort.valid && form.controls.Sort.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2">排序</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="Sort" placeholder="请输入排序">
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

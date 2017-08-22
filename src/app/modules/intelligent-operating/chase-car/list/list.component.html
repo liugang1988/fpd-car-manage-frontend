@@ -1,0 +1,50 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">状态</label>
+          <select name="" id="" class="form-control">
+            <option value="">请选择部门</option>
+          </select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">部门</label>
+          <select name="" id="" class="form-control">
+            <option value="">请选择部门</option>
+          </select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌、车架号、IMEI号">
+        </div>
+        <button type="button" class="btn btn-primary">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>SN</th>
+            <th>车牌</th>
+            <th>部门</th>
+            <th>申请时间</th>
+            <th>追车状态</th>
+            <th>剩余等待时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

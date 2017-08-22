@@ -1,0 +1,223 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.wrapper {
+    padding: 10px;
+}
+
+// loading 遮罩层
+.loadings {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    z-index: 999999;
+    @include flex(center, center);
+}
+
+// 故障情况
+.error-status {
+    position: relative;
+    padding: 30px;
+    @include flex(center, center, column);
+    i {
+        font-size: 64px;
+        color: #9e9c9c;
+    }
+    h1 {
+        padding: 0 0 20px 0;
+        font-size: 32px;
+        color: #9e9c9c;
+        text-align: center;
+    }
+}
+
+// 跳转历史行程
+.go-history-stroke {
+    position: absolute;
+    right: 0;
+    top: 85px;
+    background-color: #317dfb;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 20px;
+    z-index: $zindex-xlg;
+    @include remove-a-default-behavior;
+}
+
+// 仪表盘
+.speed-dial-area {
+    width: 100%;
+    position: relative;
+    height: 220px;
+    .fuel-count,
+    .fuel-count-title,
+    .fuel-count-title {
+        @include flex(center, center, column, flex, wrap);
+    }
+    .fuel-count,
+    .fuel-count-num {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .fuel-count {
+        position: absolute;
+        top: 15px;
+        left: 0;
+        .fuel-count-title {
+            font-size: 12px;
+        }
+        .fuel-count-num {
+            font-size: 18px;
+            font-weight: 700;
+        }
+    }
+    .line {
+        width: 30px;
+        height: 1px;
+        background: #b7b7b7;
+        margin: 10px auto 14px auto;
+    }
+    .car-license,
+    .car-model {
+        @include flex(center, center);
+        span {
+            font-size: 12px;
+        }
+    }
+    .car-license {
+        margin: 15px 0 0 0;
+        span {
+            font-weight: 500;
+            display: block;
+            color: #FFF;
+            line-height: 30px;
+            height: 30px;
+            width: 25%;
+            background: #1755a5;
+            text-align: center;
+        }
+    }
+    .car-model {
+        width: 90%;
+        padding: 10px;
+        border-bottom: 2px solid #b9c0c3;
+        margin: 0 auto;
+    }
+}
+
+// average-stroke
+.average-stroke {
+    width: 100%;
+    margin: 10px auto;
+    @include flex(flex-start);
+    .average-speed,
+    .stroke-time {
+        width: 50%;
+        .title,
+        .count {
+            display: block;
+            width: 100%;
+        }
+        .title {
+            text-align: left;
+            font-size: 12px;
+        }
+        .count {
+            .high {
+                font-size: 16px;
+            }
+        }
+    }
+    .stroke-time {
+        padding-left: 20px;
+    }
+}
+
+// 行程时间
+.stroke-all-time {
+    @include flex(space-between);
+    padding: 5px;
+    border: {
+        top: 1px solid #ccc4c4;
+        bottom: 1px solid #ccc4c4;
+    }
+    .stroke-start,
+    .stroke-end {
+        @include flex(flex-start);
+        font-size: 12px;
+        .title {
+            color: #929292;
+        }
+        .date {
+            padding-left: 5px;
+        }
+    }
+}
+
+// 图表车状态
+.car-status-icon {
+    @include flex(space-around, center);
+    padding: 10px 0;
+    .status-area {
+        @include flex(center, center, column);
+        i {
+            font-size: 32px;
+        }
+        .title {
+            font-size: 12px;
+        }
+        .count {
+            font-size: 14px;
+        }
+    }
+}
+
+.car-fault-icon {
+    padding: 10px 0;
+    @include flex(flex-start, center);
+    border: {
+        top: 1px solid #ccc4c4;
+        bottom: 1px solid #ccc4c4;
+    }
+    .title {
+        font-size: 12px;
+        padding: 0 1rem 0 0;
+    }
+    .car-fault-detail {
+        padding: 8px 15px;
+        background-color: #c71a1a;
+        color: #fff;
+        font-size: 10px;
+        @include remove-a-default-behavior;
+    }
+    .car-success-detail {
+        padding: 8px 15px;
+        color: #ddd;
+        font-size: 10px;
+        @include remove-a-default-behavior;
+    }
+}
+
+.car-text-info {
+    padding-top: 20px;
+    .text-area {
+        @include flex(flex-start);
+        padding: 5px 0;
+        .text-wrap {
+            width: 50%;
+            font-size: 12px;
+        }
+        .title {
+            font-size: 12px;
+            margin-right: 5px;
+            width: 38px;
+        }
+        .address {
+            font-size: 12px;
+            text-decoration: underline;
+        }
+    }
+}

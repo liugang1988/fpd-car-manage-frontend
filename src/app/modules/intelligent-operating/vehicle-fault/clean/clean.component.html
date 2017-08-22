@@ -1,0 +1,4 @@
+<app-mit-alert [title]="'清除故障'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler($event)" (submit)="saveHandler({'Vid':item.Vid});"
+  [disabled]="disabled">
+  确认清除车辆 "{{item.Plate}}" 的所有故障?
+</app-mit-alert>

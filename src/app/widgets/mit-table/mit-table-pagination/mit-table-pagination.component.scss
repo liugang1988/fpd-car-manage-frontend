@@ -1,0 +1,47 @@
+@charset 'utf-8';
+@import '../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+
+$pagination-bg-color: #FAFAFA; //背景色
+$pagination-border-color: #E8E8E8; //边框色
+$pagination-font-color: #8F8F99; //字体色
+$pagination-active-bg-color: #1EB4BE; //色块高亮色
+$pagination-active-font-color: #FFFFFF; //字体高亮色
+
+.pagination {
+  margin: 0;
+
+  .page-item {
+    .page-link {
+      text-decoration: none;
+      color: $pagination-font-color;
+      background-color: $pagination-bg-color;
+      border-color: $pagination-border-color;
+
+      &:hover {
+        color: $pagination-active-font-color;
+        background-color: $pagination-active-bg-color;
+        border-color: $pagination-active-bg-color;
+      }
+    }
+
+    &.active .page-link,
+    &.active .page-link:focus,
+    &.active .page-link:hover {
+      z-index: 2;
+      color: $pagination-active-font-color;
+      cursor: default;
+      background-color: $pagination-active-bg-color;
+      border-color: $pagination-active-bg-color;
+    }
+
+    &.disabled .page-link,
+    &.disabled .page-link:focus,
+    &.disabled .page-link:hover {
+      color: $pagination-font-color;
+      pointer-events: none;
+      cursor: not-allowed;
+      background-color: $pagination-bg-color;
+      border-color: $pagination-border-color;
+    }
+  }
+}

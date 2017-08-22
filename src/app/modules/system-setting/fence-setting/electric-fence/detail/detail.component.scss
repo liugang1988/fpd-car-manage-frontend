@@ -1,0 +1,53 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.space-between {
+    @include flex(space-between, center)
+}
+
+.slef-end {
+    align-self: flex-end;
+    padding-right: 30px;
+}
+
+.custom-body {
+    .title {
+        margin-bottom: 0;
+    }
+}
+
+.flex-center-r {
+    @include flex(flex-end, center);
+    margin-right: 30px;
+}
+
+.flex-center {
+    @include flex(flex-start, center);
+    padding: 5px 30px;
+    margin: 0.5rem 0;
+    .title {
+        margin-bottom: 0;
+    }
+}
+
+.custom-card-header {
+    h4 {
+        padding: 30px;
+    }
+}
+
+.red {
+    color: #f00;
+}
+
+app-mit-baidu-map {
+    width: 100%;
+    height: toRem(400px);
+    display: block;
+    overflow: hidden;
+    margin: 0;
+}
+
+.tips {
+    padding: 15px;
+    text-align: center;
+}

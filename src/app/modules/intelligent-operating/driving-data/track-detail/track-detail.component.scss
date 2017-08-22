@@ -1,0 +1,248 @@
+@charset 'utf-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.flex-normal {
+  @include flex(flex-start, center, row, flex, wrap);
+}
+
+.btn-print,
+.btn-export {
+  margin: 0 0.5rem;
+  i {
+    padding-right: 0.5rem;
+  }
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
+}
+
+.license {
+  padding: 20px 10px;
+  padding: 20px 10px;
+  color: #333333;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  font-size: toRem(26px);
+}
+
+.custom-card-body {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 20px 0 !important;
+}
+
+.item {
+  @include flex(center, center);
+  margin: 1rem 0;
+  padding: 10px;
+  .count-wrap,
+  .icon-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    i {
+      font-size: 32px;
+      color: #37c2dd
+    }
+  }
+  p {
+    margin: .5rem 0;
+  }
+  background-color:#fff;
+}
+
+.table-title {
+  i {
+    font-size: 32px;
+    padding-right: 0.5rem;
+  }
+}
+
+.basic-info {
+  margin-right: 1rem;
+  i{
+    color: #37c2dd
+  }
+}
+
+.tiny-card {
+  background-color: #fff;
+  margin-top: 15px;
+  .tiny-card-header {
+    border-top: 2px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    h6 {
+      margin-bottom: 0;
+      i {
+        padding-right: 1rem;
+      }
+    }
+  }
+  .tiny-card-body {
+
+    &.height{
+      height: 204px;
+      overflow: auto;
+    }
+    padding: 15px;
+  }
+}
+
+ul {
+  margin: -15px;
+  list-style: none;
+  padding-left: 0;
+  li {
+    @include flex(space-around);
+    padding: 15px 5px 14px 5px;
+    font-size: 14px;
+    &:not(:last-child) {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}
+
+.span-title {
+  display: inline-block;
+  width: 75%;
+}
+
+.time-line-area {
+  @include flex(space-between);
+  padding: 0 20px 0px 20px;
+  .time-line {
+    margin: 10px 5px;
+    position: relative;
+    &:before {
+      content: '';
+      height: 15%;
+      width: 1px;
+      background-color: #e6e6e6;
+      position: absolute;
+      top: 47%;
+      transform: translateY(-50%);
+      left: 8px;
+    }
+    .start-time,
+    .end-time {
+      padding: 3px 0;
+      font-size: 14px;
+      @include flex(flex-start);
+    }
+    .start-time {
+      i {
+        color: #37c2dd;
+        padding-right: 0.3rem;
+      }
+    }
+    .end-time {
+      i {
+        color: #f9bd0e;
+        padding-right: 0.3rem;
+      }
+    }
+  }
+  .time-count {
+    position: relative;
+    padding-left: 14px;
+    .time-count-wrap {
+      @include flex(flex-start, center);
+    }
+    .title {
+      width: 85px;
+      text-align: right;
+      font-size: 16px;
+      color: #777777;
+    }
+    .count {
+      font-size: 18px;
+      color: #f9bd0e;
+      // padding: 0 5px;
+    }
+    .high {
+      color: #a4d520;
+    }
+  }
+}
+
+.mbg-fade {
+  padding: 15px;
+  @include flex(space-around, center);
+background-color: #f1f1f1;
+}
+.echart-box{
+  height: toRem(400px); 
+}
+
+.time-table-title {
+  width: 100px;
+  padding: 5px;
+  font-size: 16px;
+  margin: 5px 0;
+  text-align: center;
+  color: #fff;
+  background-color: #a4d520;
+  display: inline-block;
+}
+
+
+
+.table{
+    border: 1px solid #ddd;
+    ul{
+      margin:0;
+    }
+    .header{
+      background: #fafafa;
+      border-bottom: 1px solid #ddd;
+      li{
+        span{
+          text-align: center;
+          display: block;
+          width: 25%;
+        }
+      }
+    }
+   .body{
+     overflow: auto;
+    height: 256px;
+      li{
+          span{
+          text-align: center;
+          display: block;
+          width: 25%;
+        }
+      }
+   }
+}
+
+
+app-mit-baidu-map {
+  width: 100%;
+  height: toRem(400px);
+  display: block;
+  overflow: hidden;
+  margin: 0;
+}
+
+.map-wrap{
+  padding-top: 20px;
+}
+
+.display{
+   display: none;
+}
+
+.no-data{
+  font-size: 18px;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.list-notice{
+  line-height: 40px;
+  font-size: 12px;
+  color: #da4f49;
+}

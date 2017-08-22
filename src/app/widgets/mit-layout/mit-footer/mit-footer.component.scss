@@ -1,0 +1,40 @@
+@charset 'utf-8';
+@import '../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+//底部
+.mit-footer {
+  transition: transform .3s ease-in-out, margin .3s ease-in-out;
+  text-align: center;
+  z-index: $zindex-sm;
+  background: $fs-color-grey2;
+  padding: toRem(15px);
+  color: $text-color-grey2;
+  border-top: 1px solid #d2d6de;
+  span {
+    margin: 0 5px;
+    font-size: $fs14;
+  }
+}
+
+@media (min-width:1199px) {}
+
+@media (max-width:991px) {}
+
+@media (max-width:767px) {
+  .mit-footer {
+    transform: translate(0, 0);
+    &.expand {
+      margin-left: $sidebar-expand-offset-width;
+    }
+  }
+}
+
+@media (max-width:479px) {}
+
+@media (min-width:768px) {
+  .mit-footer {
+    transform: translate($sidebar-collapse-offset-width, 0);
+    &.expand {
+      transform: translate($sidebar-expand-offset-width, 0);
+    }
+  }
+}

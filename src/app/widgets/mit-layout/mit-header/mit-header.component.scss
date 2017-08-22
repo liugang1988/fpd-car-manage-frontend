@@ -1,0 +1,138 @@
+@charset 'utf-8';
+@import '../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+//头部区域
+.mit-header {
+  position: relative;
+  z-index: $zindex-lg;
+  height: auto;
+  min-height: toRem(54px);
+  border: none;
+  border-radius: 0;
+  background-color: $zs-top-color;
+  @include remove-a-default-behavior;
+  // logo样式
+  .logo {
+    position: relative;
+    @include flex;
+    z-index: $zindex-lg;
+    background-color: rgba(0, 0, 0, 0.15);
+    display: block;
+    float: left;
+    overflow: hidden;
+    height: 54px;
+    transition: width .3s ease-in-out;
+    text-align: center;
+    text-decoration: none;
+    transition: 300ms all ease-in-out;
+    .svg-logo {
+      font-size: 2.3rem;
+      color: $text-color-white;
+    }
+    .logo-lg {
+      @include flex(center, center);
+      height: 54px;
+      .title {
+        color: $text-color-white;
+        font-size: toRem(40px);
+      }
+    }
+  }
+  .navbar-custom {
+    padding: 0;
+    height: 54px;
+    margin-left: $sidebar-collapse-width;
+    //toggle样式
+    .sidebar-toggle {
+      float: left;
+      margin-left: 15px;
+      line-height: 54px;
+      .toggle-icon {
+        cursor: pointer;
+        font-size: toRem(22px);
+        color: $text-color-white;
+      }
+    }
+    //顶部菜单
+    .navbar-custom-menu {
+      float: right;
+      height: toRem(54px);
+      padding:0 15px;
+      @include flex;
+      .user-info {
+        @include remove-a-default-behavior;
+        font-size: $fs18;
+        color: $text-color-white;
+        margin: 0 toRem(8px);
+      }
+
+    }
+  }
+}
+
+
+@media (min-width:768px) {
+  //自定义头部
+  .logo {
+    width: $sidebar-collapse-width;
+    .logo-mini {
+      display: block;
+    }
+    .logo-lg {
+      display: none;
+    }
+  }
+  .navbar-custom {
+    margin-left: $sidebar-collapse-offset-width;
+  }
+  &.expand {
+    .logo {
+      width: $sidebar-expand-width;
+      .logo-mini {
+        display: none;
+      }
+      .logo-lg {
+        display: flex;
+      }
+    }
+    .navbar-custom {
+      margin-left: $sidebar-expand-width;
+    }
+  }
+}
+
+@media (width:768px) {
+  &.expand {
+    .logo {
+      width: calc( 268px - 60px);
+      .logo-mini {
+        display: none;
+      }
+      .logo-lg {
+        display: block
+      }
+    }
+    .navbar-custom {
+      margin-left: calc( 268px - 60px);
+    }
+  }
+}
+
+@media (max-width:767px) {
+  .mit-header {
+    .logo {
+      float: none;
+      width: 100%;
+      .logo-mini {
+        display: none;
+      }
+      .logo-lg {
+        display: flex;
+      }
+    }
+    .navbar-custom {
+      margin-left: 0;
+    }
+  }
+}
+
+

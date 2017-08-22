@@ -1,0 +1,11 @@
+<div class="ubi-infor">
+  <span (click)="showUbi()">UBI动态保费 <i class="fpd" [class.fpd-paixuxia]="!ubiShow" [class.fpd-paixushang]="ubiShow"></i></span>
+</div>
+<div class="ubi-data-list">
+  <ul class="ubi-histony" *ngIf="ubiShow">
+    <li><span>本行程保费合计:</span> ¥{{historyData.TotalPrenium}}</li>
+    <li><span>里程保费:</span> ¥{{historyData.DynamicMileagePrenium}}</li>
+    <li><span>时间保费:</span> ¥{{historyData.DynamicTimePrenium}}</li>
+    <li><span>驾驶行为保费:</span> ¥{{historyData.DriverBehaviorPrenium}}</li>
+  </ul>
+</div>

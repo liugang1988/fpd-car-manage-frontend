@@ -1,0 +1,59 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.fast-search {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  .item {
+    background: #FFF;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    @include flex();
+    input {
+      margin: 10px 15px;
+      border: none;
+      outline: none;
+    }
+    button {
+      border: none;
+      color: #FFF;
+      background-color: #317dfb;
+      padding: 5px 10px;
+      outline: none;
+      cursor: pointer;
+      i {
+        font-size: 28px;
+      }
+      &:active,
+      &:hover,
+      &:focus {
+        background-color: rgb(0, 96, 255);
+      }
+    }
+  }
+  .result-panel {
+    margin: 1px 0 0 0;
+    background: #FFF;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-height: 290px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        cursor: pointer;
+        padding: 15px;
+        &:not(:last-child) {
+          border-bottom: 1px solid #efefef;
+        }
+        &:active,
+        &:hover,
+        &:focus {
+          background-color: #ececec;
+        }
+      }
+    }
+  }
+}

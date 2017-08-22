@@ -1,0 +1,58 @@
+@charset 'UTF-8';
+$ts-padding:35px 25px 7px; // 内填充
+$ts-bgColor:#fff; // 背景色
+input {
+  @include placeholder-color(#ccc);
+}
+
+.table-search {
+  padding: $ts-padding;
+  background: $ts-bgColor;
+  form {
+    @include flex(flex-start, center, row, flex, wrap);
+    width: 100%;
+    .form-group {
+      padding-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .form-control {
+      font-size: 0.8rem;
+    }
+    input,
+    button {
+      font-size: 85%;
+    }
+    label:not(.form-check-label),
+    label:not(.custom-control),
+    label:not(.custom-checkbox) {
+      display: inline-flex;
+      min-width: 90px;
+      width: auto;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 0;
+      padding: 0 0.5rem;
+      padding-left: 1.5rem;
+    }
+    label.time {
+      @include flex(center, center, row, inline-flex);
+      font-size: 14px;
+      padding-left: 0.5rem;
+      min-width: 50px;
+      padding: 0;
+    }
+    input {
+      width: 80%;
+    }
+    button {
+      margin: 0 0.5rem 1rem;
+      padding: 0.5rem;
+      i {
+        padding: 0 0.3rem;
+      }
+    }
+    .condition-wrapper {
+      @include flex(flex-start, center);
+    }
+  }
+}

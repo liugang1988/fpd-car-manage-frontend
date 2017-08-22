@@ -1,0 +1,38 @@
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <button type="button" class="btn btn-add-or-public" [routerLink]="['/page/backend-management/ubi-model-management/insurance-company/add']">新增项目</button>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>保险项目</th>
+            <th>类型</th>
+            <th>保障说明</th>
+            <th>是否启用</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item}}</td>
+            <td>{{item}}</td>
+            <td>{{item}}</td>
+            <td class="beautify-wrap">
+              <input type="checkbox" class="beautify-checkbox" name="enable" [id]="item.ID" [(ngModel)]="item.status"
+                (ngModelChange)="updateStatus(item.ID, item.status);"><label [for]="item.ID"></label>
+            </td>
+            <td>
+              <button class="operator-span" (click)="modify(item)" [disabled]="">修改</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+  </div>
+</div>

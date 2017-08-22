@@ -1,0 +1,43 @@
+<app-mit-alert [title]="'远程升级'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler($event)" (submit)="saveHandler(item.ID,BinUpdateType,FirewareID);"
+  [disabled]="!BinUpdateType || !FirewareID || disabled">
+  <div class="upgrade">
+    <div class="row">
+      <div class="col-6">
+        <p><span class="title badge badge-info">IMEI：</span>{{item.IMEI || ''}}</p>
+      </div>
+      <div class="col-6">
+        <p><span class="title badge badge-info">车牌：</span>{{item.Plate || ''}}</p>
+      </div>
+      <div class="col-6">
+        <p><span class="title badge badge-info">客户名称：</span>{{item.OrganizationName || ''}}</p>
+      </div>
+      <div class="col-6">
+        <p><span class="title badge badge-info">当前版本：</span>{{item.VersionNumber || ''}}</p>
+      </div>
+      <div class="col-12">
+        <p>软件版本：</p>
+        <app-software-version-select class="form-control" (result)="FirewareID = $event"></app-software-version-select>
+      </div>
+      <div class="col-12">
+        <p style="margin-top:1rem">升级方式：</p>
+        <div class="row form-group">
+          <div class="col-6 col-sm-6">
+            <label class="custom-control custom-radio">
+              <input name="radio" [(ngModel)]="BinUpdateType" type="radio" class="custom-control-input" [value]="9">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">HTTP升级</span>
+            </label>
+          </div>
+          <div class="col-6 col-sm-6">
+            <label class="custom-control custom-radio">
+              <input name="radio" [(ngModel)]="BinUpdateType" type="radio" class="custom-control-input" [value]="7">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Socket升级</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</app-mit-alert>

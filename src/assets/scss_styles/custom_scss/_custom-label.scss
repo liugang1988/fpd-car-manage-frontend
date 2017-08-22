@@ -1,0 +1,43 @@
+@charset 'UTF-8';
+
+$cc-label-padding:.25em .4em; // label填充
+
+$cc-label-default:#bac3d0;// 默认颜色
+$cc-label-success:#39c3de;// 成功颜色
+$cc-label-info: #679be6;// 信息颜色
+$cc-label-warning:#fd9163;// 警告颜色
+$cc-label-danger:#eb6d75;// 警告颜色
+
+// 自定义label样式
+.custom-label {
+  display: inline-block;
+  padding: $cc-label-padding;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+
+
+  &.custom-label-default{
+    background-color:$cc-label-default;
+  }
+  &.custom-label-success{
+    background-color:$cc-label-success;
+  }
+  &.custom-label-info{
+    background-color:$cc-label-info;
+  }
+  &.custom-label-danger{
+    background-color:$cc-label-danger;
+  }
+  &.custom-label-warning{
+    background-color:$cc-label-warning;
+  }
+}
+
+
+// 用法  class="custom-label label-*"
+

@@ -1,0 +1,44 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="ICCID、SIM卡、IMEI" [(ngModel)]="KeyName" (keyup.enter)="search(KeyName)"
+            [ngModelOptions]="{standalone:true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyName)">查询</button>
+        <button type="reset" class="btn btn-secondary">重置</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>SIM卡号</th>
+            <th>IMEI</th>
+            <th>ICCID</th>
+            <th>入库时间</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="list">
+          <tr *ngFor="let item of list">
+            <td>{{item.PhoneNumber}}</td>
+            <td>{{item.IMEI}}</td>
+            <td>{{item.ICCID}}</td>
+            <td>{{item.CreateTime}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

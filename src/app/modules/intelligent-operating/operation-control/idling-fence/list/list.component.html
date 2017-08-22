@@ -1,0 +1,69 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-tree-select class="form-control" (result)="selectCompany($event)"></app-organization-tree-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">时间范围</label>
+          <input type="text" name="dp" (click)="StartTime.toggle();" ngbDatepicker [maxDate]="nowDate" [(ngModel)]="startTime" #StartTime="ngbDatepicker"
+            class="form-control" placeholder="开始时间" [ngModelOptions]="{standalone: true}"> <label class="time">至</label>
+          <input type="text" name="dp" (click)="EndTime.toggle();" ngbDatepicker [minDate]="startTime" [maxDate]="nowDate" [(ngModel)]="endTime"
+            #EndTime="ngbDatepicker" class="form-control" placeholder="结束时间" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">时长范围</label>
+          <app-select class="form-control" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌、驾驶员" [(ngModel)]="KeyWord" (keyup.enter)="search(KeyWord,startTime,endTime)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyWord,startTime,endTime)">查询</button>
+        <button type="button" class="btn btn-secondary" (click)="download(KeyWord,startTime,endTime)"><i class="fpd fpd-export"></i>导出</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>车牌</th>
+            <th>品牌车系</th>
+            <th>部门</th>
+            <th>开始时间<br>结束时间</th>
+            <th>怠速时长</th>
+            <th>地点(起点)</th>
+            <th>驾驶员</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.Plate || '-'}}</td>
+            <td>{{item.BrandLineName || '-'}} </td>
+            <td>{{(item.OrganizationName || '-') + '/' + (item.DepartmentName || '-')}}</td>
+            <td>{{item.StartTime || '-'}}<br>{{item.EndTime || '-'}} </td>
+            <td>{{item.ContinuingTime || '-'}}</td>
+            <td>{{item.AlertAddress || '未知地点'}}</td>
+            <td>{{item.DriverName || '-'}}</td>
+            <td>
+              <span class="operator-span" (click)="detail(item)">查看行程</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

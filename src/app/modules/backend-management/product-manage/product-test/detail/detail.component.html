@@ -1,0 +1,82 @@
+<div class="custom-card" *ngIf="DeviceDetailInfo">
+  <div class="custom-card-header">
+    <h4>设备信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            IMEI：
+          </span>
+        <span class="content">{{DeviceDetailInfo.IMEI || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            终端ID：
+          </span>
+        <span class="content">{{DeviceDetailInfo.ID || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            设备SN：
+          </span>
+        <span class="content">{{DeviceDetailInfo.SN || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            供应商：
+          </span>
+        <span class="content">{{DeviceDetailInfo.SupplierName || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           产品型号：
+          </span>
+        <span class="content">{{DeviceDetailInfo.DeviceModelName || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            ICCID：
+          </span>
+        <span class="content">{{DeviceDetailInfo.ICCID || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            卡号：
+          </span>
+        <span class="content">{{DeviceDetailInfo.PhoneNumber || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           硬件版本：
+          </span>
+        <span class="content">{{DeviceDetailInfo.HardwareVersion || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            软件版本：
+          </span>
+        <span class="content">{{DeviceDetailInfo.VersionNumber || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           品牌车系协议：
+          </span>
+        <span class="content">{{DeviceDetailInfo.VehicleAgreement || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            IP Port：
+          </span>
+        <span class="content">{{DeviceDetailInfo.DeviceRemoteIp  || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            通电时间：
+          </span>
+        <span class="content">{{DeviceDetailInfo.FirstPoweronTime  || ''}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+

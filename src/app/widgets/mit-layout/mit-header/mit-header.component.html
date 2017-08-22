@@ -1,0 +1,27 @@
+<!--头部-->
+<header>
+  <div class="mit-header" [class.expand]="isExpand">
+    <a class="logo">
+      <span class="svg-logo logo-mini fpd fpd-mini-logo"></span>
+      <div class="logo-lg">
+        <a [routerLink]="['/']"><img src="/assets/images/default_img/logo.png" alt="fpd-logo"></a>
+        <!--<span class="svg-logo fpd fpd-mini-logo"></span>
+        <span class="svg-logo fpd fpd-mini-logo-title title"></span>-->
+      </div>
+
+    </a>
+    <nav class="navbar-custom">
+      <a class="sidebar-toggle" (click)="toggleNav()">
+        <i class="fpd fpd-more toggle-icon"></i>
+      </a>
+      <div class="navbar-custom-menu">
+        <div>
+          <app-mit-task-box></app-mit-task-box>
+        </div>
+        <div>
+          <app-mit-user-box></app-mit-user-box>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

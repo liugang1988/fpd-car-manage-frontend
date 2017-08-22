@@ -1,0 +1,4 @@
+<app-mit-alert [title]="'操作提示'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler()" (submit)="saveHandler(selectedItem)">
+ 请确认是否删除 "{{selectedItem.DepartmentName}}"？
+ <p class="warning" *ngIf="selectedItem.SubDepts">警告：该菜单包含子类，请确认无误后操作!</p>
+</app-mit-alert>

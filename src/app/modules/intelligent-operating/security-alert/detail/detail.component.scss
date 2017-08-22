@@ -1,0 +1,42 @@
+@charset 'utf-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.wrapper {
+  height: 100%;
+}
+
+.alert-detail {
+  padding: 15px;
+  .text-center {
+    border: 1px solid #eceeef;
+    padding: 5px;
+  }
+}
+
+.item-area {
+  padding: 15px;
+  margin: 30px 0;
+  background-color: #fff;
+}
+
+app-mit-baidu-map {
+  width: 100%;
+  height: toRem(400px);
+  display: block;
+  overflow: hidden;
+  margin: 0;
+}
+
+h6 {
+  padding: 10px;
+  @include flex(flex-start, center);
+}
+
+.title-icon {
+  font-size: 24px;
+  color: #32aec6;
+  padding-right: 0.5rem;
+}
+
+.text-center {
+  text-align: center;
+}

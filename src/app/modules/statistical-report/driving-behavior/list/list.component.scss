@@ -1,0 +1,19 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.car-width{
+    width: 32rem;
+}
+.advanceSearch{
+    line-height: 35px;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+.advanceWrap{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    input{
+        height: 37px;
+        margin: 0 10px;
+    }
+}

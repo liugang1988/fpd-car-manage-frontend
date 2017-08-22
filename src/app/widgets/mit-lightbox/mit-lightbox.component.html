@@ -1,0 +1,29 @@
+<div class="mit-light-box">
+  <!--多组图片-->
+  <div class="mutil-image row">
+    <div class="col-{{col}}" *ngFor="let item of images">
+      <div class="single-image">
+        <img [src]="item.src || 'assets/images/default_img/login-bg.jpg'" alt="assets/images/default_img/login-bg.jpg" onError="this.src='assets/images/default_img/img_error_load.png';"
+          (click)="isExpand = !isExpand">
+      </div>
+      <p>{{item.name}}</p>
+    </div>
+  </div>
+  <!--单张图片-->
+  <div class="single-image">
+    <img [src]="image || 'assets/images/default_img/login-bg.jpg'" alt="'assets/images/default_img/login-bg.jpg'" onError="this.src='assets/images/default_img/img_error_load.png';"
+      (click)="isExpand = !isExpand">
+  </div>
+  <!--灯箱-->
+  <div class="light-box-fixed" *ngIf="isExpand">
+    <div class="light-box" @alertAnimate>
+      <div class="box-header">
+        <i class="fpd fpd-guanbi1" (click)="isExpand = !isExpand"></i>
+      </div>
+      <div class="box-body">
+        <img [src]="image || 'assets/images/default_img/login-bg.jpg'" alt="'assets/images/default_img/login-bg.jpg'" onError="this.src='assets/images/default_img/img_error_load.png';">
+      </div>
+      <div class="box-footer"></div>
+    </div>
+  </div>
+</div>

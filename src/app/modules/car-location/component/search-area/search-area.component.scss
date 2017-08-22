@@ -1,0 +1,22 @@
+ @charset 'UTF-8';
+ @import '../../../../../assets/scss_styles/custom_scss/_custom-export';
+ .search-area {
+   background: rgba(248, 248, 248, 0.95);
+   padding: 15px;
+   .col-6 {
+     padding: 10px;
+     @include flex(space-around);
+     .input-group-btn {
+       .btn {
+         padding: 0.5rem;
+       }
+       i {
+         padding-right: 0.3rem;
+         cursor: pointer;
+       }
+     }
+     .dropdown-menu {
+       margin-left: -54px !important;
+     }
+   }
+ }

@@ -1,0 +1,23 @@
+<app-mit-alert [title]="'批量导入车辆档案信息'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler($event)" (submit)="saveHandler(item);"
+  [disabled]="!file">
+  <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+  <div class="custom-card" *ngIf="!showLoading">
+    <div class="custom-card-body">
+      <app-file-upload [uploadType]="'excel'" (uploadedEvt)="uploadHandle($event)"></app-file-upload>
+    </div>
+    <div class="message" *ngIf="message">
+      <!--<i class="fpd fpd-jinggao"></i>-->
+      <pre>
+        {{message}}
+      </pre>
+    </div>
+    <div class="custom-card-footer">
+      <h6>导入说明：</h6>
+      <ol>
+        <li>导入数据前，先下载数据模板 点击<a [href]="DownExcel">下载模板</a></li>
+        <li>填写数据.</li>
+        <li>上传</li>
+      </ol>
+    </div>
+  </div>
+</app-mit-alert>

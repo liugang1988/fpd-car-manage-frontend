@@ -1,0 +1,72 @@
+<app-mit-loading [option]="'load7'" *ngIf="!cardInfo">
+</app-mit-loading>
+<div class="row" *ngIf="cardInfo" [@fadeIn]="true">
+  <div class="col-12 col-sm-12">
+    <div class="card ">
+      <div class="card-header card-info">
+        <h5>报警处理:</h5>
+      </div>
+      <div class="card-block">
+        <div class="col-12 col-sm-12">
+          <p>
+            <span class=" badge badge-default label-title ">当前状态:</span><span>{{cardInfo.ProcessingStatusDesc || ''}}</span>
+          </p>
+        </div>
+        <div class="col-12 col-sm-12" *ngIf="!successHidden">
+          <p>
+            <span class="badge badge-default label-title" [@fadeIn]="true">处理时间:</span><span>{{cardInfo.ExecutionTime || ''}}</span>
+          </p>
+        </div>
+        <div class="col-12 col-sm-12  ">
+          <p>
+            <span class="badge badge-default label-title">车牌:</span><span>{{cardInfo.Plate || ''}}</span>
+          </p>
+        </div>
+        <div class="col-12 col-sm-12 ">
+          <p>
+            <span class="badge badge-default label-title">发生时间:</span><span>{{cardInfo.OccurTime || ''}}</span>
+          </p>
+        </div>
+        <div class="col-12 col-sm-12 ">
+          <p>
+            <span class="badge badge-default label-title">地点:</span><span>{{cardInfo.Address || ''}}</span>
+          </p>
+        </div>
+        <div class="col-12 col-sm-12">
+          <p>
+            <span class="badge badge-default label-title">备注:</span><span>{{cardInfo.Memo || ''}}</span>
+          </p>
+          <textarea *ngIf="cardInfo.ProcessingStatus < 2" [(ngModel)]="Memo" class="form-control" style="margin-bottom:10px" cols="30"
+            rows="5" [ngModelOptions]="{standalone: true}" [readonly]="!successHidden">
+            
+         
+        </textarea>
+        </div>
+        <div class="col-12 col-sm-12" *ngIf="successHidden" [@fadeIn]="true">
+          <p>
+            <span class="badge badge-default label-title">处理方式:</span>
+          </p>
+        </div>
+        <div class="col-12 col-sm-12" *ngIf="successHidden" [@fadeIn]="true">
+          <div class="operator">
+            <div class="row">
+              <div class="col-12  col-sm-6 col-md-6 ">
+                <button type="button" class="btn  btn-outline-info btn-block " [class.active]="ProcessingStatus === 4" (click)="ProcessingStatus = 4">误报</button>
+              </div>
+              <div class="col-12  col-sm-6 col-md-6 ">
+                <button type="button" class="btn  btn-outline-info btn-block " [class.active]="ProcessingStatus === 2" (click)="ProcessingStatus = 2">已处理</button>
+              </div>
+              <div class="col-12 col-sm-6 col-md-6 ">
+                <button type="button" class="btn  btn-outline-info btn-block " [class.active]="ProcessingStatus === 3" (click)="ProcessingStatus = 3">忽略处理</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12" *ngIf="successHidden" [@fadeIn]="true">
+          <button type="button" class="btn btn-info btn-block " [disabled]="!ProcessingStatus || !Memo" (click)="submit(ProcessingStatus,Memo)">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

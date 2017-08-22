@@ -1,0 +1,74 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>用户信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" *ngIf="!showLoading">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" >
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">用户帐号</label>
+            <div class="col-sm-12 col-md-9 col-lg-10" [ngClass]="{ 'has-danger': form.controls.AccountName.invalid && form.controls.AccountName.value ,'has-success': form.controls.AccountName.valid && form.controls.AccountName.value }">
+              <input type="text" class="form-control" formControlName="AccountName" placeholder="手机号码 / 邮箱" [readonly]="id">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">昵称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10" [ngClass]="{ 'has-danger':  form.controls.NickName.invalid && form.controls.NickName.value ,'has-success':  form.controls.NickName.valid && form.controls.NickName.value }">
+              <input type="text" class="form-control" formControlName="NickName" placeholder="昵称">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">用户角色</label>
+            <div class="col-sm-12 col-md-9 col-lg-10" [ngClass]="{ 'has-danger':  form.controls.RoleId.invalid && form.controls.RoleId.value ,'has-success':  form.controls.RoleId.valid && form.controls.RoleId.value }">
+              <app-role-select class="form-control" [defaultVal]="form.controls.RoleId.value" (result)="selectRole($event)"></app-role-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">所属部门</label>
+            <div class="col-sm-12 col-md-9 col-lg-10" [ngClass]="{ 'has-danger': form.controls.DeptId.invalid && form.controls.DeptId.value,'has-success': form.controls.DeptId.valid && form.controls.DeptId.value }">
+              <app-organization-tree-select class="form-control" [defaultVal]="departmentName" [treeFalg]="treeFalg" [isDepartment]="true" (result)="selectCompany($event)"></app-organization-tree-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 ">联系电话</label>
+            <div class="col-sm-12 col-md-9 col-lg-10" [ngClass]="{ 'has-danger': form.controls.UserPhone.invalid && form.controls.UserPhone.value ,'has-success': form.controls.UserPhone.valid && form.controls.UserPhone.value }">
+              <input type="text" class="form-control" formControlName="UserPhone" placeholder="手机号码">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">状态</label>
+            <div class="col-sm-12 col-md-9 col-lg-10" [ngClass]="{ 'has-danger': form.controls.UserStatus.invalid && form.controls.DeptId.value != null,'has-success': form.controls.UserStatus.valid && form.controls.DeptId.value != null}">
+              <app-select class="form-control" [defaultValue]="form.controls.UserStatus.value" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star" [class.star]="!id">密码</label>
+            <div class="col-sm-12 col-md-9 col-lg-10" [ngClass]="{ 'has-danger':  form.controls.PassWord.invalid && form.controls.PassWord.value ,'has-success': form.controls.PassWord.valid && form.controls.PassWord.value }">
+              <input type="password" class="form-control" formControlName="PassWord" placeholder="密码">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star" [class.star]="!id">确认密码</label>
+            <div class="col-sm-12 col-md-9 col-lg-10" [ngClass]="{ 'has-danger': form.controls.ConfirmPassWord.invalid && form.controls.ConfirmPassWord.value,'has-success': form.controls.ConfirmPassWord.valid && form.controls.ConfirmPassWord.value}">
+              <input type="password" class="form-control" formControlName="ConfirmPassWord" placeholder="确认密码">
+            </div>
+          </div>
+          <div class="form-group row"  *ngIf="id">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2"></label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              (密码为选填，不填则不修改原密码)
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

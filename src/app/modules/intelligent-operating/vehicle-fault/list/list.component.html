@@ -1,0 +1,60 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-tree-select class="form-control" (result)="selectCompany($event)"></app-organization-tree-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌" [(ngModel)]="KeyValue" (keyup.enter)="search(KeyValue)" [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyValue)">查询</button>
+        <button type="button" class="btn btn-secondary" (click)="download(KeyValue)"><i class="fpd fpd-export"></i>导出</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>更新日期</th>
+            <th>车牌</th>
+            <th>品牌车系</th>
+            <th>排量</th>
+            <th>部门</th>
+            <th>当前故障数</th>
+            <th>当前故障码</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.ServerTime || '-'}}</td>
+            <td>{{item.Plate || '-'}}</td>
+            <td>{{item.VehicleBrand ? item.VehicleBrand + '/' + item.VehicleLine : '-'}}</td>
+            <td>{{item.Displacement || '-'}}</td>
+            <td>{{(item.OrganizeName || '-')+ '/'+(item.DepartmentName || '-')}}</td>
+            <td>{{item.FaultCount || '-'}}</td>
+            <td [title]="item.FaultCode">{{item.FaultCode | SliceStr:0:40:'...' || '-'}}</td>
+            <td style="min-width:180px;">
+              <button type="button" class="btn btn-link operator-span" (click)="showAlert = true;currentItem = item;" [disabled]="!item.FaultCount">清除故障</button>
+              <a class="operator-span" [routerLink]="['./detail', item.Vid]"
+                target="_blank">查看详情</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>
+<app-clean [item]="currentItem" (close)="closeAlert($event)" *ngIf="showAlert"></app-clean>

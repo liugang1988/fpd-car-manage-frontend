@@ -1,0 +1,19 @@
+<div class="organization-tree-select select-temp">
+  <div class="select" (click)="toggle()">
+    <input type="text" placeholder="请选择公司" [(ngModel)]="selected" class="form-control" [disabled]="true">
+  </div>
+  <div class="list-menu" *ngIf="isExpand">
+    <div class="loading" *ngIf="!companyTree">数据加载中...</div>
+    <Tree [nodes]="companyTree" [options]="treeOptions" #tree>
+      <ng-template #treeNodeTemplate let-node>
+        <!--子节点-->
+        <div class="node float-md-left float-xs-left float-lg-left float-xl-left float-sm-left" [class.active]="node.data.SequenceId == showOptionId">
+          <i class="fpd fpd-wenjianjia" *ngIf="node.data.SequenceId == -1"></i>
+          <span *ngIf="isDepartment && node.data.IsDept" (click)="chooseName(node)">{{ node.data.Name }}</span>
+          <span *ngIf="isDepartment && !node.data.IsDept">{{ node.data.Name }}</span>
+          <span *ngIf="!isDepartment" (click)="chooseName(node)">{{ node.data.Name }}</span>
+        </div>
+      </ng-template>
+    </Tree>
+  </div>
+</div>

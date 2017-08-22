@@ -1,0 +1,18 @@
+<app-mit-alert [title]="'处理结果'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler($event)" (submit)="saveHandler(item)">
+  <form>
+    <div class="row"  [@fadeIn]="true" *ngIf="infor">
+      <div class="col-12 col-sm-12 ">
+          <p>
+            <span class="label-title">处理人:</span>
+            <span>{{infor.UserName}}</span>
+          </p>
+        </div>
+        <div class="col-12 col-sm-12">
+          <p>
+            <span class="label-title">备注:</span>
+          </p>
+          <p>{{infor.Result}}</p>
+        </div>
+    </div>
+  </form>
+</app-mit-alert>

@@ -1,0 +1,50 @@
+@charset 'utf-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.home-overview {
+  .count-allcar {
+    @include flex(space-between);
+    margin: toRem(15px) 0;
+    padding: 0 toRem(15px);
+    color: #616365;
+    background-color: #fff;
+    width: 100%;
+    height: toRem(128px);
+    transition: all 200ms linear;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05),-1px -1px 0 rgba(0, 0, 0, 0.05);
+    @include remove-a-default-behavior;
+    .count {
+      text-align: left;
+      padding: toRem(10px) toRem(15px);
+      div:first-child {
+        font-size: toRem(32px);
+      }
+      .title {
+        font-size: toRem($fs16);
+        color: #898b8d;
+      }
+    }
+    .icon-wrap {
+      @include flex(center, center);
+      height: 60px;
+      width: 60px;
+      border-radius: 7px;
+      i {
+        font-size: toRem(32px);
+        color: #fff;
+      }
+      //背景色
+      &.count-allcar-total {
+        background-color: #9b77b4;
+      }
+      &.count-allcar-active {
+        background-color: #46b1a1;
+      }
+      &.count-allcar-reg {
+        background-color: #5695cb;
+      }
+      &.count-allcar-offline {
+        background-color: #b4b6b9;
+      }
+    }
+  }
+}

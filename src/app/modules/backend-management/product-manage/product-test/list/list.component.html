@@ -1,0 +1,54 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">IMEI</label>
+          <input type="text" class="form-control" placeholder="请输入IMEI" [(ngModel)]="IMEI" [ngModelOptions]="{standalone: true}" (keyup.enter)="search(IMEI)">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(IMEI)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>终端ID</th>
+            <th>设备(IMEI)</th>
+            <th>设备SN</th>
+            <th>ICCID</th>
+            <th>软件版本</th>
+            <th>品牌车系协议</th>
+            <th>硬件版本</th>
+            <th>IP Port</th>
+            <th>通电时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.ID || '-' }}</td>
+            <td>{{item.IMEI || '-' }}</td>
+            <td>{{item.SN || '-' }}</td>
+            <td>{{item.ICCID || '-' }}</td>
+            <td>{{item.SoftwareVersion || '-' }}</td>
+            <td>{{item.VehicleAgreement || '-' }}</td>
+            <td>{{item.HardwareVersion || '-' }}</td>
+            <td>{{item.Ip || '-' }}</td>
+            <td>{{item.FirstPoweronTime || '-' }}</td>
+            <td> <span class="operator-span" (click)="detail(item.ID)">详情</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

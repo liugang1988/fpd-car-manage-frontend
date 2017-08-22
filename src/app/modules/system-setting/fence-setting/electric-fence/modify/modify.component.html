@@ -1,0 +1,70 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>电子围栏</h4>
+  </div>
+  <div class="custom-card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="row" formGroupName="RuleContent">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.get('RuleContent.FenceName').invalid && form.get('RuleContent.FenceName').value ,'has-success': form.get('RuleContent.FenceName').valid && form.get('RuleContent.FenceName').value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">栅栏名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="FenceName" placeholder="栅栏名称">
+            </div>
+          </div>
+
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.get('RuleContent.AlarmType').invalid && form.get('RuleContent.AlarmType').value ,'has-success': form.get('RuleContent.AlarmType').valid
+&& form.get('RuleContent.AlarmType').value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">报警方式</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <select class="form-control" formControlName="AlarmType">
+                <option *ngIf="form.get('RuleContent.AlarmType').untouched ||form.get('RuleContent.AlarmType').invalid" value="0" disabled selected>请选择报警方式</option>
+                <option value="3" >进出报警</option>
+                <option value="1" >进入报警</option>
+                <option value="2" >离开报警</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row" [ngClass]="{ 'has-danger':form.get('RuleContent.FenceAddress').invalid && form.get('RuleContent.FenceAddress').value ,'has-success': form.get('RuleContent.FenceAddress').valid && form.get('RuleContent.FenceAddress').value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">围栏地点</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="FenceAddress" placeholder="请在下方绘制围栏">
+            </div>
+          </div>
+
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.get('RuleContent.R').invalid &&  form.get('RuleContent.R').value ,'has-success':  form.get('RuleContent.R').valid &&  form.get('RuleContent.R').value }"
+            *ngIf="!form.get('RuleContent.Shape').value">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">范围(米)</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="R" placeholder="范围" [readonly]="true">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2"></label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <!--百度地图-->
+              <app-mit-baidu-map></app-mit-baidu-map>
+              <div class="fast-search">
+                <div class="item">
+                  <input type="text" placeholder="请输入地点" #searcVal  (keyup.enter)="selected(searcVal.value)" id="suggestId">
+                  <div class="button" (click)="selected(searcVal.value)"><i class="fpd fpd-sousuo"></i></div>
+                </div>
+              </div>
+              <br />
+              <p>小提示: 1.绘制围栏时，双击鼠标即可完成绘制。 2.每次只能绘制一个围栏。</p>
+            </div>
+          </div>
+
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid  || !form.get('RuleContent.AlarmType').value || disabled">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

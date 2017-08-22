@@ -1,0 +1,51 @@
+<div class="custom-card insurance-project">
+  <div class="custom-card-header">
+    <h4>保障方案</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="!insuranceProjectList"></app-mit-loading>
+    <table class="table table-hover" *ngIf="insuranceProjectList">
+      <tr>
+        <th>类型</th>
+        <th>项目</th>
+        <th>选择投保</th>
+        <th>不计免赔险</th>
+        <th>保障说明</th>
+      </tr>
+      <tr *ngFor="let item of insuranceProjectList; let i = index">
+        <td>{{item.BelongTypeDesc}}</td>
+        <td>{{item.ItemName}}</td>
+        <td>
+          <app-select class="form-control" *ngIf="!(item.BelongType == 3)" [defaultValue]="insuranceArr[i].IsIntenance"  [placeholder]="placeholder" [optionName]="optionName" [optionList]="item.Content"  (result)="getInsuranceId($event, i)" ></app-select>
+          <span *ngIf="item.BelongType == 3">与交强险一致</span>
+        </td>
+        <td>
+          <label class="custom-control custom-checkbox" [class.disabled]="!insuranceArr[i].IsIntenance" *ngIf="item.NoDeductible">
+            <input type="checkbox" class="custom-control-input" [disabled]="!insuranceArr[i].IsIntenance" [(ngModel)]="insuranceArr[i].NoDeductible" (click)="check(i)">
+            <span class="custom-control-indicator"></span>
+            投保
+          </label>
+        </td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div class="custom-card-header">
+    <h4>保障公司报价</h4>
+  </div>
+  <div class="custom-card-body">
+    <table class="table table-hover">
+      <tr>
+        <th>保险公司</th>
+        <th>报价</th>
+        <th>操作</th>
+      </tr>
+      <tr>
+        <td>脚印车险</td>
+        <td>{{total}}元</td>
+        <td><button class="btn btn-primary" [disabled]="isChooseStatus" (click)="next()" type="button">购买</button></td>
+      </tr>
+    </table>
+  </div>
+  <button class="btn btn-primary" (click)="up()" type="button">上一步</button>
+</div>

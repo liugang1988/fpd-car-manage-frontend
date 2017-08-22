@@ -1,0 +1,52 @@
+@charset 'utf-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$show-item-content-fontSize:14px !default;
+.date-select{
+    width: 100%;
+    height:40px;
+    margin-bottom: 20px;
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        li{
+            flex:1;
+            margin-right: 2px;
+            background: #ccc;
+            height: 38px;
+            line-height: 38px;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .active{
+            background: #37c2dd;
+            color: #fff;
+        }
+    } 
+}
+.ubi-infor{
+    p{
+        font-size: 14px;
+        color:#37c2dd;
+        margin-bottom: 20px;
+    }
+    table{
+        font-size: 0.875rem;
+        color: #6b6e70;
+        text-align: center;
+        th{
+            text-align: center;
+            font-size: 0.875rem;
+        } 
+    }
+}
+.isLoading{
+    font-size: 16px;
+    color: #636c72;
+    text-align: center;
+    margin: 10px 0;
+}

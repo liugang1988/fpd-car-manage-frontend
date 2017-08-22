@@ -1,0 +1,31 @@
+<div class="user-box">
+  <div class="item" (click)="isExpand = !isExpand">
+    <div class="img-wrapper">
+      <!--<span class="systeminfo-count badge badge-warning">99</span>-->
+      <img src="assets/images/default_img/default_avatar.png">
+    </div>
+    <span>{{username}}</span>
+  </div>
+  <div class="user-box-list" *ngIf="isExpand" [@fadeIn]="true">
+    <div class="card-body">
+      <ul>
+        <li>
+          <a [routerLink]="['/page/ucenter/system-message']" (click)="isExpand = !isExpand">
+            <i class="fpd fpd-task"></i>系统消息
+            <!--<span class="systeminfo-count badge badge-warning">99</span>-->
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/page/ucenter/personal-center']" (click)="isExpand = !isExpand">
+            <i class="fpd fpd-ordinarylogin1"></i>个人中心
+          </a>
+        </li>
+        <li>
+          <a (click)="signOut() || isExpand = !isExpand">
+            <i class="fpd fpd-sign-out"></i><span>退出</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.message {
+  color: red;
+  @include flex(center, center);
+  max-height: 250px;
+  overflow: auto;
+}
+
+h6,
+ol {
+  color: #ccc;
+}

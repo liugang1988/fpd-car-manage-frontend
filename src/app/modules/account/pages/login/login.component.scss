@@ -1,0 +1,76 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.flex-wrap {
+  @include flex;
+}
+
+.flex {
+  @include flex(space-between, center);
+  padding: 0 0.1rem;
+  color: #f9f9f9;
+  a {
+    @include remove-a-default-behavior;
+  }
+}
+
+.beautify-form {
+  margin-top: -200px;
+  min-width: 25rem;
+  width: 30rem;
+  @include center-block;
+  .page-header {
+    font-weight: 200;
+    font-size: toRem(50px);
+    color: #FFF;
+    padding: 60px 0;
+  }
+  .input-group-addon {
+    background-color: transparent;
+    color: #bbbbbd;
+    border-right: none;
+    background-color: rgba(111, 111, 119, 0.6);
+  }
+  .form-control {
+    background-color: rgba(0, 0, 0, 0.15);
+    color: #f9f9f9;
+    box-shadow: none;
+    @include placeholder-color(#f9f9f9);
+  }
+  .noaccount-notify {
+    color: #fff;
+    &+a {
+      padding: 0 0.5rem;
+    }
+  }
+  .has-success {
+    .input-group-addon,
+    input {
+      border-color: #43bcc5;
+    }
+    .form-control-feedback{
+      color:#43bcc5;
+    }
+  }
+  .btn {
+    color: #43bcc5;
+    border-color: #43bcc5;
+    &:hover,
+    &:active {
+      background-color: #43bcc5;
+      color: #fff;
+    }
+  }
+  .message-tips{
+    padding: 10px 0;
+    color: #d9534f;
+  }
+}
+.ma{
+  width: 150px;
+  text-align: center;
+  color:#fff;
+  img{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

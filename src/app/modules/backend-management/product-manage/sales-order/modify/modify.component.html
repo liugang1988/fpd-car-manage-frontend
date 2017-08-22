@@ -1,0 +1,79 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h4><span *ngIf="!id">新增</span><span *ngIf="id">修改</span>销售订单</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.OID.invalid && form.controls.OID.value ,'has-success': form.controls.OID.valid && form.controls.OID.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">客户名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <app-select class="form-control" [showSearch]="true" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" [defaultValue]="form.controls.OID.value" (result)="getOrganizationlID($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Contacts.invalid && form.controls.Contacts.value ,'has-success': form.controls.Contacts.valid && form.controls.Contacts.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">联系人</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="Contacts" placeholder="联系人">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.ContactPhone.invalid && form.controls.ContactPhone.value ,'has-success': form.controls.ContactPhone.valid && form.controls.ContactPhone.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">联系电话</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="ContactPhone" placeholder="联系电话">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Address.invalid && form.controls.Address.value ,'has-success': form.controls.Address.valid && form.controls.Address.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">送货地址</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="Address" placeholder="送货地址">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.SalesOrderPerson.invalid && form.controls.SalesOrderPerson.value ,'has-success': form.controls.SalesOrderPerson.valid && form.controls.SalesOrderPerson.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">下单人</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="SalesOrderPerson" placeholder="下单人">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DeviceSuppliersID.invalid && form.controls.DeviceSuppliersID.value ,'has-success': form.controls.DeviceSuppliersID.valid && form.controls.DeviceSuppliersID.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">供应商</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <app-supplier-select class="form-control" (result)="getSupplierID($event)"  [defaultVal]="form.controls.DeviceSuppliersID.value"></app-supplier-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DeviceModelID.invalid && form.controls.DeviceModelID.value ,'has-success': form.controls.DeviceModelID.valid && form.controls.DeviceModelID.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">产品型号</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <app-product-number-select class="form-control" [defaultVal]="form.controls.DeviceModelID.value" [SupplierId]="form.controls.DeviceSuppliersID.value" (result)="getDeviceModelID($event)"></app-product-number-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DeviceCount.invalid && form.controls.DeviceCount.value ,'has-success': form.controls.DeviceCount.valid && form.controls.DeviceCount.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">数量：</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="number" class="form-control" formControlName="DeviceCount" placeholder="数量">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DevicePrice.invalid && form.controls.DevicePrice.value ,'has-success': form.controls.DevicePrice.valid && form.controls.DevicePrice.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2 star">单价：</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="number" class="form-control" formControlName="DevicePrice" placeholder="单价">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-2">备注：</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <textarea class="form-control" formControlName="Remark" cols="30" rows="10"> </textarea>
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

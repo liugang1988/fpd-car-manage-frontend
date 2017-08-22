@@ -1,0 +1,27 @@
+<app-mit-alert [title]="'新增或修改部门'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler()" (submit)="saveHandler(form.value)"
+  [disabled]="form.invalid || disabled">
+  <div class="row">
+    <div class="col-sm-2 col-md-12">
+      <form [formGroup]="form">
+        <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DepartmentName.invalid && form.controls.DepartmentName.value ,'has-success':  form.controls.DepartmentName.valid && form.controls.DepartmentName.value }">
+          <label class="col-sm-4 custom-form-label label-star">部门名称:</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" formControlName="DepartmentName" placeholder="请输入部门名称">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 custom-form-label">上级部门:</label>
+          <div class="col-sm-8">
+            {{content.action === 'add'? content.DepartmentName:form.controls.ParentDeptName.value}}
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DepartmentRemark.invalid && form.controls.DepartmentRemark.value ,'has-success':  form.controls.DepartmentRemark.valid && form.controls.DepartmentRemark.value }">
+          <label class="col-sm-4 custom-form-label">备注:</label>
+          <div class="col-sm-8">
+            <textarea cols="15" rows="5" class="form-control" formControlName="DepartmentRemark"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-mit-alert>

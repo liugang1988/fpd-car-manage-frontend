@@ -1,0 +1,106 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>事件设置</h4>
+  </div>
+  <div class="custom-card-body convention">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <div class="row event-set" [@fadeIn]="true" *ngIf="list">
+        <div class="col-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <div class="title">
+                <h3>驾驶行为</h3>
+                <span class="beautify-wrap">
+                    <span>是否启用</span>
+                    <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="driveID" [(ngModel)]="driveData.Enabled"
+                (ngModelChange)="updateOneKindAlertSetting(driveData.Kind, driveData.Enabled);"><label [for]="driveID"></label>
+                </span>
+            </div>
+            <table class="table table-bordered my-table">
+                <tr>
+                    <th>驾驶行为项目</th>
+                    <th>是否启用</th>
+                    <th>是否弹框提示</th>
+                </tr>
+                <tr *ngFor="let item of driveData.ConfigItems;">
+                    <td>{{item.AlertName}}</td>
+                    <td>
+                        <span class="beautify-wrap">
+                            <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="item.ID" [(ngModel)]="item.Enabled"
+                (ngModelChange)="updateSingleAlertSetting(item.ID,item.Enabled,item.IsPush,'isUse');"><label [for]="item.ID"></label>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="beautify-wrap">
+                            <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="item.ID + '00'" [(ngModel)]="item.IsPush"
+                (ngModelChange)="updateSingleAlertSetting(item.ID,item.Enabled,item.IsPush);" [disabled]="!item.Enabled"><label [class.disabled]="!item.Enabled" [for]="item.ID + '00'"></label>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <div class="title">
+                <h3>运营管控</h3>
+                <span class="beautify-wrap">
+                    <span>是否启用</span>
+                    <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="oprationID" [(ngModel)]="oprationData.Enabled"
+                (ngModelChange)="updateOneKindAlertSetting(oprationData.Kind, oprationData.Enabled);"><label [for]="oprationID"></label>
+                </span>
+            </div>
+            <table class="table table-bordered my-table">
+                <tr>
+                    <th>运营管控项目</th>
+                    <th>是否启用</th>
+                    <th>是否弹框提示</th>
+                </tr>
+                <tr *ngFor="let item of oprationData.ConfigItems">
+                    <td>{{item.AlertName}}</td>
+                    <td>
+                        <span class="beautify-wrap">
+                            <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="item.ID" [(ngModel)]="item.Enabled"
+                (ngModelChange)="updateSingleAlertSetting(item.ID,item.Enabled,item.IsPush,'isUse');"><label [for]="item.ID"></label>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="beautify-wrap">
+                            <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="item.ID + '00'" [(ngModel)]="item.IsPush"
+                (ngModelChange)="updateSingleAlertSetting(item.ID,item.Enabled,item.IsPush);" [disabled]="!item.Enabled"><label [class.disabled]="!item.Enabled" [for]="item.ID + '00'"></label>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <div class="title">
+                <h3>安全报警</h3>
+                <span class="beautify-wrap">
+                    <span>是否启用</span>
+                    <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="safeID" [(ngModel)]="safeData.Enabled"
+                (ngModelChange)="updateOneKindAlertSetting(safeData.Kind, safeData.Enabled);"><label [for]="safeID"></label>
+                </span>
+            </div>
+            <table class="table table-bordered my-table">
+                <tr>
+                    <th>安全报警项目</th>
+                    <th>是否启用</th>
+                    <th>是否弹框提示</th>
+                </tr>
+                <tr *ngFor="let item of safeData.ConfigItems">
+                    <td>{{item.AlertName}}</td>
+                    <td>
+                        <span class="beautify-wrap">
+                            <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="item.ID" [(ngModel)]="item.Enabled"
+                (ngModelChange)="updateSingleAlertSetting(item.ID,item.Enabled,item.IsPush,'isUse');"><label [for]="item.ID"></label>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="beautify-wrap">
+                            <input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="item.ID + '00'" [(ngModel)]="item.IsPush"
+                (ngModelChange)="updateSingleAlertSetting(item.ID,item.Enabled,item.IsPush);" [disabled]="!item.Enabled"><label [class.disabled]="!item.Enabled" [for]="item.ID + '00'"></label>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>

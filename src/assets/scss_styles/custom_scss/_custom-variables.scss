@@ -1,0 +1,98 @@
+//自定义全局颜色
+$zs-top-color:#32aec6 !default; //用于顶部示栏目
+$zs-sidebar-color:#9ba5ab !default; //用于左侧边导航栏
+$fs-color-blue:#32c5d2 !default; //用于搜索等按钮以及文字链接
+$fs-color-grey1:#e1e5ec !default; //用于高级搜索按钮底色
+$fs-color-grey2:#f3f3f3 !default; //用于背景色
+$fs-color-grey3:#ebebeb !default; //用于分割线颜色
+$fs-color-grey4:#e5e6e7 !default; //用于白色底边描边色
+$fs-color-grey5:#59626a !default; //用于左侧导航点击色
+$text-color-black: #333 !default; //用于重要标题
+$text-color-grey1:#6b6e70 !default; //用于正文小标题
+$text-color-grey2:#737373 !default; //用于辅助色备注等;
+$text-color-grey3:#9f9f9f !default; //用于弱化辅助色(提示)
+$text-color-white:#fff !default; //纯白
+//自定义font-size;
+$fs10: 10px;
+$fs12: 12px;
+$fs14: 14px;
+$fs16: 16px;
+$fs18: 18px;
+$fs20: 20px;
+$fs22: 22px;
+$fs24: 24px;
+//z-index的等级
+$zindex-xlg:9000 !default;
+$zindex-lg:6000 !default;
+$zindex-md:3000 !default;
+$zindex-sm:1000 !default;
+$zindex-xs:100 !default;
+// ------------------------ Bootstrap变量---------------------//
+// 颜色
+//
+// Grayscale and brand colors for use across Bootstrap.
+$white: #fff;
+$black: #000;
+$red: #d9534f;
+$orange: #f0ad4e;
+$yellow: #ffd500;
+$green: #5cb85c;
+$blue: #0275d8;
+$mi-blue:#37c2dd;
+$teal: #5bc0de;
+$pink: #ff5b77;
+$purple: #613d7c;
+$gray-dark: #292b2c;
+$gray: #55595c;
+$gray-light: #636c72;
+$gray-lighter: #eceeef;
+$gray-lightest: #f7f7f9;
+$brand-primary: $mi-blue;
+$brand-success: $green !default;
+$brand-info: $teal !default;
+$brand-warning: $orange !default;
+$brand-danger: $red !default;
+$brand-inverse: $gray-dark !default;
+//页面主体
+// Settings for the `<body>` element.
+$body-bg: #f3f3f3;
+$body-color: $gray-dark;
+//选项
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: true !default;
+$enable-hover-media-query: false !default;
+$enable-grid-classes: true !default;
+$enable-print-styles: true !default;
+// 段落字体
+//
+// Font, line-height, and color for body text, headings, and more.
+$font-family-sans-serif: "Microsoft YaHei",
+"微软雅黑",
+SimSun,
+'\5b8b\4f53',
+sans-serif;
+$font-family-serif: "Microsoft YaHei",
+"微软雅黑",
+SimSun,
+'\5b8b\4f53',
+sans-serif;
+$font-family-monospace: "Microsoft YaHei",
+"微软雅黑",
+SimSun,
+'\5b8b\4f53',
+sans-serif,
+Menlo,
+Monaco,
+Consolas,
+"Liberation Mono",
+"Courier New",
+monospace;
+$font-family-base: $font-family-sans-serif;
+// Pixel value used to responsively scale all typography. Applied to the `<html>` element.
+$font-size-root: 16px; //根字体大小
+$font-size-base: 1rem; //基础字体大小是1rem;
+$font-size-lg: 1.25rem;
+$font-size-sm: .875rem;
+$font-size-xs: .75rem;

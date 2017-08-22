@@ -1,0 +1,50 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <div class="car-base-info" *ngIf="carinfo" [@fadeIn]="true">
+      <div class="row">
+        <div class="col-12 col-sm-6 col-lg-2">
+          <span class="title">车牌：</span>{{carinfo.Plate || ''}}
+        </div>
+        <div class="col-12 col-sm-6 col-lg-6">
+          <span class="title">品牌车系：</span> {{carinfo.VehicleModelName || ''}}
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="title">检测范围：</span> 发动机排放系统
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <h3 *ngIf="!checkRenderlist " class="text-center text-info" [@flyIn]="true">系统正在远程检测中,请稍后!!!(过程请勿手动刷新)</h3>
+    <h3 *ngIf="checkRenderlist && checkRenderlist.length === 0 " class="text-center text-muted" [@flyIn]="true">设备暂无返回数据,请稍后重试!!!</h3>
+    <app-mit-loading [option]="'load6'" *ngIf="!checkRenderlist" [@flyIn]="true"></app-mit-loading>
+
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="checkRenderlist && checkRenderlist.length !== 0">
+        <thead>
+          <tr>
+            <th>项目(共{{checkRenderlist.length}}项)</th>
+            <th>单位</th>
+            <th>当前值</th>
+            <th>最小值(参考值)</th>
+            <th>最大值(参考值)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of checkRenderlist">
+            <td>{{item.Name || '-'}}</td>
+            <td>{{item.Unit || '-'}}</td>
+            <td>{{item.CurValue || '-'}}</td>
+            <td>{{item.MinValue || '-'}}</td>
+            <td>{{item.MaxValue || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount " (pageChange)="pageChange($event) " [maxSize]="5
+                  " [rotate]="true "></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.areas {
+  padding: 10px;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  @include flex(flex-start, center, row, flex, wrap);
+  .item {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    background: #ececec;
+    i {
+      cursor: pointer;
+    }
+  }
+}

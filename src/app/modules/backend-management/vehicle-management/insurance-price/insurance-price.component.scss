@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.top{
+    width: 700px;
+    font-size: 16px;
+    margin: 50px auto;
+    .item{
+        width: 20%;
+        color: #CDCDCD;
+        line-height: 30px;
+        display: inline-block;
+        text-align: center;
+        span{
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 50%;
+            background: #CDCDCD;
+            color: #fff;
+            line-height: 30px;
+            text-align: center;
+            margin-right: 10px;
+        }
+    }
+    .line{
+        width: 18%;
+        height: 1px;
+        display: block;
+        border-bottom: 1px dashed #ccc;
+        display: inline-block;
+    }
+    .active{
+        color:#2EAEC4;
+        border-color:#2EAEC4;
+        span{
+            background: #2EAEC4;
+        }
+    }
+}
+@media (max-width: 767px){
+    .top{
+        .line{
+            display: none;
+        }
+    } 
+}

@@ -1,0 +1,40 @@
+<!--<app-mit-alert [title]="'远程车况扫描'" [closeName]="'关闭'" (close)="closeHandler($event)">
+  <div class="row">
+    <div class="col-4">
+      <app-mit-loading [option]="'load3'"></app-mit-loading>
+    </div>
+    <div class="col-8">
+      <ul>
+        <li>发动机转速: {{data.EngineSpeed}}rpm</li>
+        <li>车速: {{data.VehicleSpeed}}km/h</li>
+        <li>水温: {{data.WaterTemperature}}℃</li>
+        <li>发动机负荷: {{data.EngineLoad}}%</li>
+        <li>瞬时油耗: {{data.Instantaneousfuelconsumption}}L</li>
+        <li>电瓶电压: {{data.BatteryPressure}}V</li>
+      </ul>
+    </div>
+  </div>
+</app-mit-alert>-->
+
+
+<div class="real-time-condition">
+  <div class="body">
+    <div class="loading">
+      <div class="load-container load3">
+        <div class="loader">Loading...</div>
+      </div>
+
+    </div>
+    <div class="content">
+      <h6>正在扫描</h6>
+      <ul>
+        <li>发动机转速: {{data.EngineSpeed}}</li>
+        <li>车速: {{data.VehicleSpeed}}</li>
+        <li>水温: {{data.WaterTemperature}}</li>
+        <li>发动机负荷: {{data.EngineLoad}}</li>
+        <li>瞬时油耗: {{data.Instantaneousfuelconsumption}}</li>
+        <li>电瓶电压: {{data.BatteryPressure}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

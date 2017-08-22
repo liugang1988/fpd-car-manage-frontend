@@ -1,0 +1,45 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">操作类型：</label>
+          <input type="text" class="form-control" placeholder="开始时间">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">时长范围：</label>
+          <select class="form-control">
+              <option value="">10分钟以下</option>
+              <option value="">10到30分钟</option>
+              <option value="">30分钟以上</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(OrderNumber)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>操作时间</th>
+            <th>操作人员</th>
+            <th>操作类型</th>
+            <th>相关数据</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+  </div>
+</div>

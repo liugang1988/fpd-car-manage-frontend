@@ -1,0 +1,17 @@
+<app-mit-alert [title]="'生成ubi保单'" [saveName]="'确认'"  [closeName]="'关闭'" (close)="closeHandler($event)" (submit)="saveHandler()">
+  <div class="create-insurance" *ngIf="carInfor">
+    <div class="row">
+      <div class="col-6">车牌号：{{carInfor.VehicleContent.Plate}}</div>
+      <div class="col-6">车辆所属：{{carInfor.VehicleContent.CompanyName}}</div>
+      <div class="col-6">车型：{{carInfor.VehicleContent.VehicleModelName}}</div>
+      <div class="col-6">荷载人数：{{carInfor.VehicleContent.OverloadPerson}}人</div>
+      <div class="col-6">保单号：{{carInfor.CINo}}</div>
+      <div class="col-6">生效日期：{{carInfor.StartTime | splitTime}}</div>
+      <div class="col-6">保险公司：{{carInfor.InsuranceCompanyName}}</div>
+      <div class="col-6">到期日期：{{carInfor.EndTime | splitTime}}</div>
+      <div class="col-6">保费：{{carInfor.Premium}}元</div>
+      <div class="col-6">UBI模型：<app-select class="form-control" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="selectModel($event)"></app-select></div>
+      <div class="col-12 errorMsg" *ngIf="errMsg">{{errMsg}}</div>
+    </div>
+  </div>
+</app-mit-alert>

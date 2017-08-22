@@ -1,0 +1,6 @@
+@charset 'UTF-8';
+
+@function toRem($size) {
+  //px转rem
+  @return ($size / $font-size-root ) * 1rem;
+}

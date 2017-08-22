@@ -1,0 +1,177 @@
+<div class="cpanel">
+  <ng-template [ngIf]="!realTimeInfo">
+    <div class="cpanel-header">
+      <span class="title">
+       <p>实时轨迹</p>
+      </span>
+    </div>
+    <div class="tips">
+      {{tips}}
+    </div>
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+  </ng-template>
+
+  <ng-template [ngIf]="realTimeInfo">
+    <div class="cpanel-header">
+      <span class="title">
+      <p *ngIf="realTimeInfo" [routerLink]="[ '/page/base-data/vehicle-information/detail', realTimeInfo.VID]">{{realTimeInfo.Plate || '粤B00000'}}</p>
+    </span>
+      <span class="track-end">
+      <p *ngIf="!realTimeInfo">车辆状态</p>
+      <p *ngIf="realTimeInfo"> {{realTimeInfo.RealTimeTrip.EndStatus?'行程结束':'行驶中' || ''}}</p>
+    </span>
+    </div>
+    <div class="cpanel-body">
+      <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+      <div *ngIf="realTimeInfo">
+        <div class="speed-canvas">
+          <app-speed-dial [option]="[{name:'speed', radius:'89%',  position:[ '25%', '48%' ],data:realTimeInfo.RealTimeCarCondition.VehicleSpeed || 0},{name:'tacho', radius:'89%',  position:[ '75%', '48%' ],data:realTimeInfo.RealTimeCarCondition.EngineSpeed || 0}]"></app-speed-dial>
+          <div class="mini-status" *ngIf="realTimeInfo.RealTimeCarCondition.RemainingFueltank">
+            <div class="content-wrap">
+              <i class="fpd fpd-yibiaozonglicheng"></i> 仪表总里程:
+              <span class="count black">{{realTimeInfo.RealTimeTrip.DashboardMileage || ''}} km</span>
+            </div>
+            <div class="content-wrap">
+              当前剩余油量:
+              <span class="count green">{{realTimeInfo.RealTimeCarCondition.RemainingFueltank || 0}}L</span>
+            </div>
+          </div>
+          <div class="single-mini-status" *ngIf="!realTimeInfo.RealTimeCarCondition.RemainingFueltank">
+            <div class="content-wrap">
+              <i class="fpd fpd-yibiaozonglicheng"></i> 仪表总里程:
+              <span class="count black">{{realTimeInfo.RealTimeTrip.DashboardMileage || ''}} km</span>
+            </div>
+          </div>
+        </div>
+        <div class="time-line-area">
+          <div class="img-wrap">
+            <img src="assets/images/default_img/default_avatar.png" alt="">
+          </div>
+          <div class="time-line">
+            <div class="start-time">
+              <i class="fpd fpd-yuandiankuang"></i>
+              <span class="title"></span>
+              <span class="time">{{realTimeInfo.RealTimeTrip.StartTime}}</span>
+            </div>
+            <div class="end-time">
+              <div class="start-time">
+                <i class="fpd fpd-yuandiankuang"></i>
+                <span class="title"></span>
+                <span class="time">{{realTimeInfo.RealTimeTrip.EndStatus?realTimeInfo.RealTimeTrip.EndTime:"行驶中"}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="time-count">
+            <div class="title">总用时</div>
+            <div class="count">{{realTimeInfo.RealTimeTrip.TrackTime}}</div>
+          </div>
+        </div>
+        <div class="car-content">
+          <ul class="car-status">
+            <li>
+              <div class="title">
+                <i class="fpd fpd-licheng"></i>
+                <span>行程里程(km)</span>
+              </div>
+              <div class="count">{{realTimeInfo.RealTimeTrip.TrackMileage}}</div>
+            </li>
+            <li>
+              <div class="title">
+                <i class="fpd fpd-zonghaoyouliang"></i>
+                <span>总耗油量(L)</span>
+              </div>
+              <div class="count">{{realTimeInfo.RealTimeTrip.TrackOil}}</div>
+            </li>
+            <li>
+              <div class="title">
+                <i class="fpd fpd-baigonglihaoyou"></i>
+                <span>百公里耗油(L/KM)</span>
+              </div>
+              <div class="count">{{realTimeInfo.RealTimeTrip.TrackOilForHundred}}</div>
+            </li>
+            <li>
+              <div class="title">
+                <i class="fpd fpd-daisushijian"></i>
+                <span>怠速时长</span>
+              </div>
+              <div class="count">{{realTimeInfo.RealTimeTrip.IdleTime}}</div>
+            </li>
+            <li>
+              <div class="title">
+                <i class="fpd fpd-daisuyouhao"></i>
+                <span>怠速油耗(L)</span>
+              </div>
+              <div class="count">{{realTimeInfo.RealTimeTrip.TrackIdleOil}}</div>
+            </li>
+            <li>
+              <div class="title">
+                <i class="fpd fpd-zuigaochesu"></i>
+                <span>最高车速(km/h)</span>
+              </div>
+              <div class="count">{{realTimeInfo.RealTimeTrip.TrackMaxSpeed}}</div>
+            </li>
+            <li>
+              <div class="title">
+                <i class="fpd fpd-pingjunchesu"></i>
+                <span>平均车速(km/h)</span>
+              </div>
+              <div class="count">{{realTimeInfo.RealTimeTrip.AvgTrackSpeed}}</div>
+            </li>
+          </ul>
+          <div class="car-title">驾驶行为</div>
+          <ul class="driving-behavior">
+            <li class="status-area">
+              <i class="fpd fpd-zhuanwanjiayou"></i>
+              <span class="title">急加速</span>
+              <div class="count">{{realTimeInfo.RealTimeDrivingBehavior.RapidAcceleration}}</div>
+            </li>
+            <li class="status-area">
+              <i class="fpd fpd-jichache"></i>
+              <span class="title">急刹车</span>
+              <div class="count">{{realTimeInfo.RealTimeDrivingBehavior.EmergencyBrake}}</div>
+            </li>
+            <li class="status-area">
+              <i class="fpd fpd-kuaisubiandao"></i>
+              <span class="title">快速变道</span>
+              <div class="count">{{realTimeInfo.RealTimeDrivingBehavior.FastChang}}</div>
+            </li>
+            <li class="status-area">
+              <i class="fpd fpd-jizhuanwan"></i>
+              <span class="title">急转弯</span>
+              <div class="count">{{realTimeInfo.RealTimeDrivingBehavior.SharpTurn}}</div>
+            </li>
+          </ul>
+          <div class="car-title">安全报警</div>
+          <ul class="security-alarm">
+            <li class="status-area">
+              <i class="fpd fpd-pengzhuangbaojing"></i>
+              <span class="title">碰撞报警</span>
+              <div class="count">{{realTimeInfo.RealTimeDrivingBehavior.CollisionWarning}}</div>
+            </li>
+            <li class="status-area">
+              <i class="fpd fpd-cefanbaojing"></i>
+              <span class="title">侧翻报警</span>
+              <div class="count">{{realTimeInfo.RealTimeDrivingBehavior.RolloverAlarm}}</div>
+            </li>
+            <li class="status-area">
+              <i class="fpd fpd-yichangzhendongbaojing"></i>
+              <span class="title">异常震动</span>
+              <div class="count">{{realTimeInfo.RealTimeDrivingBehavior.AbnormalVibration}}</div>
+            </li>
+            <li class="status-area">
+              <i class="fpd fpd-shuiwenbaojing"></i>
+              <span class="title">水温异常报警</span>
+              <div class="count">{{realTimeInfo.RealTimeDrivingBehavior.WaterHigh}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="cpanel-footer" *ngIf="!isSupport51">
+        <button class="btn btn-block btn-primary btn-lg" (click)="showRealTimeConditionAlert = !showRealTimeConditionAlert">
+           远程车况扫描
+        </button>
+        <app-real-time-condition [data]="realTimeInfo.RealTimeCarCondition" *ngIf="showRealTimeConditionAlert" [@flyIn]="true"></app-real-time-condition>
+      </div>
+    </div>
+  </ng-template>
+</div>

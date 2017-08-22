@@ -1,0 +1,34 @@
+<div class="custom-card" [@bounceIn]="true">
+  <div class="custom-card-header">
+    <h4>部门管理</h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="loading" *ngIf="showLoading">
+      <app-mit-loading [option]="'load7'"></app-mit-loading>
+    </div>
+    <div *ngIf="!showLoading">
+      <Tree [nodes]="deptTree" [options]="treeOptions" [focused]="true" #tree>
+        <ng-template #treeNodeTemplate let-node>
+          <div (click)="showOptionId = node.data.ID">
+            <!--节点-->
+            <div class="node float-md-left float-xs-left float-lg-left float-xl-left float-sm-left">
+              <i class="fpd fpd-bumen" *ngIf="node.data.ID != -1"></i>
+              <i class="fpd fpd-wenjianjia" *ngIf="node.data.ID == -1"></i>
+              <span>{{ node.data.DepartmentName }}</span>
+            </div>
+            <!--操作-->
+            <div class="option float-md-right float-xs-right float-lg-right float-xl-right float-sm-right" *ngIf="showOptionId === node.data.ID">
+              <span class="add" (click)="add(node,tree) || showAlert = true"><i class="fpd fpd-tianjia"></i></span>
+              <span class="edit" (click)="edit(node,tree)" *ngIf="node.data.ID != -1"><i class="fpd fpd-bianji"></i></span>
+              <span class="delete" (click)="delete(node,tree)" *ngIf="node.data.ID != -1"><i class="fpd fpd-shanchu1"></i></span>
+            </div>
+          </div>
+        </ng-template>
+      </Tree>
+    </div>
+  </div>
+</div>
+<!--新增或编辑部门弹窗-->
+<app-modify *ngIf="showModifyAlert" [content]="modifyContent" (close)="closeAlert($event)"></app-modify>
+<!--删除部门弹窗-->
+<app-delete *ngIf="showDeleteAlert" [selectedItem]="modifyContent" (close)="closeAlert($event)"></app-delete>

@@ -1,0 +1,93 @@
+<form>
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h4>出库信息</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="form-custom-area">
+        <label>订单号：</label>
+        <app-select class="form-control" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getSalesOrder($event)"></app-select>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>下单人：</label>
+        <span class="c-static-text">{{deviceOutInfor.SalesOrderPerson || ''}}</span>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>订单时间：</label>
+        <span class="c-static-text">{{deviceOutInfor.SalesOrderTime || ''}}</span>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>设备类型：</label>
+        <span class="c-static-text">{{deviceOutInfor.DeviceCategory || ''}}</span>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>型号：</label>
+        <span class="c-static-text">{{deviceOutInfor.Name || ''}}</span>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>供应商：</label>
+        <span class="c-static-text">{{deviceOutInfor.SuppliersName || ''}}</span>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>客户：</label>
+        <span class="c-static-text">{{deviceOutInfor.OrganizationName || ''}}</span>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>数量：</label>
+        <span class="c-static-text">{{deviceOutInfor.DeviceCount || ''}}</span>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>未出库：</label>
+        <span class="c-static-text">{{deviceOutInfor.NotImportCount || ''}}</span>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <div class="control-wrap">
+          <label>收货人：</label>
+          <input type="text" class="form-control" placeholder="张三" [(ngModel)]="Receiver" name="Receiver">
+        </div>
+      </div>
+      <div class="form-custom-area extra-area" *ngIf="deviceOutInfor && OrderCode">
+        <div class="control-wrap">
+          <label>收货地址：</label>
+          <input type="text" class="form-control" placeholder="广东省深圳市xxxx" [(ngModel)]="Address" name="Address">
+        </div>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>发货方式：</label>
+        <app-select class="form-control" [placeholder]="ShippingPlaceholder" [defaultValue]="ShippingMethods" [optionName]="ShippingOptionName" [optionList]="ShippingOptionList"
+          (result)="getShippingMethods($event)"></app-select>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <label>物流公司：</label>
+        <app-select class="form-control" [placeholder]="LogisticsCompanyPlaceholder" [optionName]="LogisticsCompanyOptionName" [optionList]="LogisticsCompanyOptionList"
+          (result)="getLogisticsCompany($event)"></app-select>
+      </div>
+      <div class="form-custom-area" *ngIf="deviceOutInfor && OrderCode">
+        <div class="control-wrap">
+          <label>物流/快递单号:</label>
+          <input type="text" class="form-control" placeholder="4681324575555555" [(ngModel)]="LogisticsNumber" name="LogisticsNumber">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h4 class="import-desrc">导入说明:</h4>
+      <ol>
+        <li>导入数据前，先下载数据模板,点击 <a [href]="DownExcel">下载设备模板</a></li>
+        <li>填写数据.</li>
+        <li>上传.</li>
+      </ol>
+    </div>
+    <div class="custom-card-body">
+      <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+      <app-file-upload style="width:50%;margin:0 auto;" (uploadedEvt)="uploadHandle($event)"></app-file-upload>
+    </div>
+    <div class="custom-card-footer ">
+      <div class="operator-button">
+        <button class="btn btn-success" [disabled]="!file || showLoading || !LogisticsCompany || !LogisticsNumber" (click)="saveHandler(file)">保存</button>
+        <button class="btn btn-secondary" (click)="back()">取消</button>
+      </div>
+    </div>
+  </div>
+</form>

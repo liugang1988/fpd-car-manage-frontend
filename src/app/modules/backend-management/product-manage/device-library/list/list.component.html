@@ -1,0 +1,60 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">工作状态</label>
+          <app-select class="form-control" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">客户</label>
+          <app-organization-select class="form-control" [showAll]="true" (result)="OID = $event"></app-organization-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">IMEI</label>
+          <input type="text" class="form-control" placeholder="请输入IMEI" [(ngModel)]="IMEI" [ngModelOptions]="{standalone: true}" (keyup.enter)="search(IMEI,DeviceStatusName,OID)">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(IMEI,DeviceStatusName,OID)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>终端ID<br>设备(IMEI)</th>
+            <th>产品型号</th>
+            <th>卡号</th>
+            <th>客户</th>
+            <th>车牌</th>
+            <th>车架号</th>
+            <th>工作状态</th>
+            <th>入库时间<br>出库时间</th>
+            <th>更新时间<br>创建日期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td><a [routerLink]="['/page/backend-management/product-manage/device-library/detail', item.ID]">{{item.ID || '-' }}</a><br>{{item.IMEI || '-' }}</td>
+            <td>{{item.DeviceModelName || '-' }}</td>
+            <td>{{item.PhoneNumber || '-' }}</td>
+            <td>{{item.OrganizationName || '-' }}</td>
+            <td>{{item.Plate || '-' }}</td>
+            <td>{{item.VIN || '-' }}</td>
+            <td>{{item.DeviceStatusName || '-' }}</td>
+            <td>{{item.InStorageTime || '-' }}<br>{{item.OutStorageTime || '-' }}</td>
+            <td>{{item.LastConnectionTime || '-' }}<br>{{item.CreateTime || '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

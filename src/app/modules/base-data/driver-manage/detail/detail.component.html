@@ -1,0 +1,116 @@
+<app-mit-loading [option]="'load7'" *ngIf="!data"></app-mit-loading>
+<div class="details" *ngIf="data">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h4>一、基础信息</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="vehicle-basic">
+        <h5>职位信息</h5>
+        <div class="row">
+          <div class="col-md-12 col-lg-6">
+            <div class="show-item">
+              <label>工号:</label>
+              <span>{{data.WorkNumber}}</span>
+            </div>
+            <div class="show-item">
+              <label>部门:</label>
+              <span>{{data.DepartmentName}}</span>
+            </div>
+            <div class="show-item">
+              <label>是否在职:</label>
+              <span>{{data.InJob?'是':'否'}}</span>
+            </div>
+            <div class="show-item">
+              <label>入职日期:</label>
+              <span>{{data.JoinTime | splitTime}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vehicle-details">
+        <h5>司机信息</h5>
+        <div class="row">
+          <div class="col-md-12 col-lg-6">
+            <div class="show-item">
+              <label>姓名:</label>
+              <span>{{data.DriverName}}</span>
+            </div>
+            <div class="show-item">
+              <label>性别:</label>
+              <span>{{data.Sex === 1?'男':'女'}}</span>
+            </div>
+            <div class="show-item">
+              <label>出生日期:</label>
+              <span>{{data.Birthdate | splitTime}}</span>
+            </div>
+            <div class="show-item">
+              <label>手机号码</label>
+              <span>{{data.Phone}}</span>
+            </div>
+            <div class="show-item">
+              <label>籍贯</label>
+              <span>{{data.Birthplace}}</span>
+            </div>
+            <div class="show-item">
+              <label>身份证号码</label>
+              <span>{{data.IDCard}}</span>
+            </div>
+            <div class="show-item">
+              <label>身份证地址</label>
+              <span>{{data.IDCardAddress}}</span>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6">
+            <div class="show-item">
+              <label>驾驶证类型:</label>
+              <span>{{data.DriversLicenseTypeDesc}}</span>
+            </div>
+            <div class="show-item">
+              <label>驾照有效期:</label>
+              <span>{{data.DriversLicenseValid | splitTime}}</span>
+            </div>
+            <div class="show-item">
+              <label>初次领证日期:</label>
+              <span>{{data.FirstDriversLicense | splitTime}}</span>
+            </div>
+            <div class="show-item">
+              <label>驾龄:</label>
+              <span>{{data.Driving || '0'}} 年</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h4>二、证件展示</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="row">
+        <div class="col-md-12 col-lg-4">
+          <div class="show-img">
+            <app-mit-lightbox [image]="data.DriverPhoto"></app-mit-lightbox>
+            <!--<img [src]="data.DriverPhoto || 'assets/images/default_img/login-bg.jpg'" alt="驾驶员照片">-->
+            <p>驾驶员照片</p>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="show-img">
+            <app-mit-lightbox [image]="data.IDCardAPhoto"></app-mit-lightbox>
+            <!--<img [src]="data.IDCardAPhoto || 'assets/images/default_img/login-bg.jpg'" alt="身份证照片">-->
+            <p>身份证照片</p>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="show-img">
+            <app-mit-lightbox [image]="data.DriversLicenseAPhoto"></app-mit-lightbox>
+            <!--<img [src]="data.DriversLicenseAPhoto || 'assets/images/default_img/login-bg.jpg'" alt="驾驶证照片">-->
+            <p>驾驶证照片</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+@charset 'utf-8';
+@import '../../../assets/scss_styles/custom_scss/custom-export.scss';
+.upload-area {
+  position: relative;
+  min-width: 80%;
+  max-width: 90%;
+  margin: 10px auto;
+  border: 2px dashed #ccc;
+  height: 130px;
+  .error_status {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    color: #f00;
+    transform: translateX(-50%);
+  }
+  .select {
+    @include flex(center, center);
+    input[type=file] {
+      cursor: pointer;
+      position: absolute;
+      opacity: 0;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+    }
+    input[placeholder],
+    [placeholder],
+    *[placeholder] {
+      color: #55595c !important;
+    }
+    i {
+      font-size: 4rem;
+      color: #ccc;
+    }
+  }
+  .await {
+    @include flex(center, center);
+    height: 90px;
+    padding: 10px;
+    i {
+      margin-right: 10px;
+      font-size: 2rem;
+    }
+  }
+  .delete {
+    cursor: pointer;
+    border-top: 1px solid #eaeaea;
+    padding: 5px 0;
+    height: 30px;
+    @include flex(center, bottom);
+    i {
+      margin-right: 10px;
+      font-size: 1rem;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      color: red;
+    }
+  }
+}

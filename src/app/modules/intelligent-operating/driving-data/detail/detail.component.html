@@ -1,0 +1,195 @@
+<div class="custom-card" *ngIf="!TrackData">
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'"></app-mit-loading>
+  </div>
+</div>
+<div class="custom-card separation" [@fadeIn]="true" *ngIf="TrackData">
+  <div class="custom-card-header">
+    <form>
+      <div class="row">
+        <div class="col-12 col-sm-2 flex-normal">
+          <div class="license">
+            <span>{{TrackData.Plate || ''}}</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-10">
+          <div class="form-group row">
+            <div class="col-8 col-sm-8">
+              <a class="view-track" [routerLink]="['/page/car-location/control/'+ TrackData.Did + '/real-time']"><i class="fpd fpd-dangqianhangchengjilu"></i>查看当前行程</a>
+            </div>
+            <div class="col-4 col-sm-4">
+              <button type="button" class="btn btn-return float-right btn-outline-primary" (click)="back()"><i class="fpd fpd-fanhui"></i> 返回</button>
+            </div>
+
+          </div>
+          <hr>
+          <div class="form-group row">
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="input-group">
+                <input type="text" ngbDatepicker #StartDate="ngbDatepicker" class="form-control" placeholder="开始时间" [(ngModel)]="StartTime"
+                  [ngModelOptions]="{standalone: true}" (click)="StartDate.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="StartDate.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3">
+              <div class="input-group">
+                <input type="text" ngbDatepicker #EndDate="ngbDatepicker" [maxDate]="currentDate" class="form-control" placeholder="结束时间"
+                  [(ngModel)]="EndTime" [ngModelOptions]="{standalone: true}" (click)="EndDate.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="EndDate.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4 col-md-2">
+              <button type="button" class="btn btn-primary btn-block btn-search" (click)="search(StartTime,EndTime)"><i class="fpd fpd-chaxun"></i> 查询</button>
+            </div>
+            <div class="col-12 col-sm-1 col-md-4">
+              <button type="button" class="btn btn-secondary" (click)="download(StartTime,EndTime)"><i class="fpd fpd-export"></i>导出</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="custom-card-body">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+        <div class="item">
+          <div class="icon-wrap">
+            <i class="fpd fpd-hangchengshu_fuzhi"></i>
+          </div>
+          <div class="count-wrap">
+            <p>行程数(次)</p>
+            <p>{{TrackData.TotalTrackCount || '0'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+        <div class="item">
+          <div class="icon-wrap">
+            <i class="fpd fpd-licheng_fuzhi"></i>
+          </div>
+          <div class="count-wrap">
+            <p>里程(km)</p>
+            <p>{{TrackData.TotalMileage || '0'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+        <div class="item">
+          <div class="icon-wrap">
+            <i class="fpd fpd-rijunlicheng_fuzhi"></i>
+          </div>
+          <div class="count-wrap">
+            <p>日均里程(km)</p>
+            <p>{{TrackData.AvgMileage || '0'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+        <div class="item">
+          <div class="icon-wrap">
+            <i class="fpd fpd-haoyouliang_fuzhi"></i>
+          </div>
+          <div class="count-wrap">
+            <p>耗油量(L)</p>
+            <p>{{TrackData.TotalOil || '0'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+        <div class="item">
+          <div class="icon-wrap">
+            <i class="fpd fpd-shijian_fuzhi"></i>
+          </div>
+          <div class="count-wrap">
+            <p>运行时间(h)</p>
+            <p>{{TrackData.TotalTrackTime || '0'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="item">
+          <div class="icon-wrap">
+            <i class="fpd fpd-daisushichang_fuzhi"></i>
+          </div>
+          <div class="count-wrap">
+            <p>怠速时长(h:m:s)</p>
+            <p>{{TrackData.TotalIdleTime || '0'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="item">
+          <div class="icon-wrap">
+            <i class="fpd fpd-baigongliyouhao_fuzhi"></i>
+          </div>
+          <div class="count-wrap">
+            <p>百公里油耗(L/100km)</p>
+            <p>{{TrackData.TrackOilForHundred || '0'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="item">
+          <div class="icon-wrap">
+            <i class="fpd fpd-daisuhaoyouliang_fuzhi"></i>
+          </div>
+          <div class="count-wrap">
+            <p>怠速耗油量(L)</p>
+            <p>{{TrackData.TotalIdleOil || '0'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-footer">
+    <h5 class="table-title"><i class="fpd fpd-chelianghangchengjilu1"></i>车辆行程记录</h5>
+    <hr>
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table [@fadeIn]="true" *ngIf="list">
+        <thead>
+          <tr>
+            <th>开始时间<br/>结束时间</th>
+            <th>行程时长</th>
+            <th>里程(km)</th>
+            <th>耗油量(L)</th>
+            <th>怠速时长</th>
+            <th>百公里油耗(L/100km)</th>
+            <th>平均车速(km/h)</th>
+            <th>操作</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.StartTime}} <br/> {{item.EndTime}}</td>
+            <td>{{item.TrackTime}}</td>
+            <td>{{item.TrackMileage}}</td>
+            <td>{{item.TrackOil}}</td>
+            <td>{{item.IdleTime}}</td>
+            <td>{{item.TrackIdleOilAverage}}</td>
+            <td>{{item.AvgSpeed}}</td>
+            <td>
+              <a class="operator-span" [routerLink]="Time ? ['../../../track-detail',item.TrackInfoId] : ['../../track-detail',item.TrackInfoId]" target="_blank">详细信息</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <div class="tips" *ngIf="list && !list.length">
+      暂无行车记录
+    </div>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [listCount]="listCount" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <a [routerLink]="['/page/backend-management/product-manage/sales-order/add']" class="btn-add-or-public">新增销售订单</a>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">订单号</label>
+          <input type="text" class="form-control" [(ngModel)]="SimpleKey" (keyup.enter)="search(SimpleKey)" [ngModelOptions]="{standalone: true}"
+            placeholder="搜索单号、客户名称、产品型号">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(SimpleKey)">搜索</button>
+        <!--<button type="button" class="btn btn-primary">展开高级搜索</button>-->
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>订单日期</th>
+            <th>订单编号</th>
+            <th>客户名称</th>
+            <th>产品型号</th>
+            <th>数量</th>
+            <th>金额</th>
+            <th>下单人</th>
+            <th>出库状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.SalesOrderTime || '-'}}</td>
+            <td>{{item.SalesOrderNo || '-'}}</td>
+            <td>{{item.OrganizationName || '-'}}</td>
+            <td>{{item.Name || '-'}}</td>
+            <td>{{item.DeviceCount || '-'}}</td>
+            <td>￥ {{item.TotalAmount || '-'}}</td>
+            <td>{{item.SalesOrderPerson || '-'}}</td>
+            <td>{{item.Status || '-'}}</td>
+            <td>
+              <span class="operator-span" (click)="modify(item.SalesOrderID)">修改</span>
+              <span class="operator-span" (click)="detail(item.SalesOrderID)">详情</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

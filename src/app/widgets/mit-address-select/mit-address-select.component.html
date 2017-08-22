@@ -1,0 +1,27 @@
+<div class="mit-address-select" [ngClass]="{dark: dark}">
+  <div class="select" (click)="isExpand = !isExpand">
+    <input type="text" placeholder="{{multi?'选择区域':'选择所在地区'}}" [(ngModel)]="selected" [disabled]="true">
+  </div>
+  <div class="list-menu" *ngIf="isExpand">
+    <div class="sub-list">
+      <ul>
+        <li *ngFor="let item of list | mitAddressSelect" (click)="province = {id:item.value,name:item.name};city = undefined;district = undefined;"
+          [class.active]="province && item.value === province.id">{{item.name}}</li>
+      </ul>
+    </div>
+    <div class="sub-list" *ngIf="province && province.id">
+      <ul>
+        <li *ngIf="multi" (click)="selectHandle(province)">全省</li>
+        <li *ngFor="let item of list | mitAddressSelect: province.id" (click)="city = {id: item.value,name: item.name}"
+        [class.active]="city && item.value === city.id">{{item.name}}</li>
+      </ul>
+    </div>
+    <div class="sub-list" *ngIf="city && city.id">
+      <ul>
+        <li *ngIf="multi" (click)="selectHandle(province,city)">全市</li>
+        <li *ngFor="let item of list | mitAddressSelect:city.id" (click)="district = {id: item.value,name:item.name};selectHandle(province,city,district);"
+          [class.active]="district && item.value ===  district.id">{{item.name}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>采购订单信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DeviceSuppliersID.invalid && form.controls.DeviceSuppliersID.value ,'has-success': form.controls.DeviceSuppliersID.valid && form.controls.DeviceSuppliersID.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-3 star">供应商</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <app-supplier-select class="form-control" (result)="getSupplierID($event)"  [defaultVal]="form.controls.DeviceSuppliersID.value"></app-supplier-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.PurchaseDeviceModelID.invalid && form.controls.PurchaseDeviceModelID.value ,'has-success': form.controls.PurchaseDeviceModelID.valid && form.controls.PurchaseDeviceModelID.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">产品型号</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <app-product-number-select class="form-control" [defaultVal]="form.controls.PurchaseDeviceModelID.value" [SupplierId]="form.controls.DeviceSuppliersID.value" (result)="getDeviceModelID($event)"></app-product-number-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.DeviceCount.invalid && form.controls.DeviceCount.value ,'has-success': form.controls.DeviceCount.valid && form.controls.DeviceCount.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">数量</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="number" class="form-control" formControlName="DeviceCount" placeholder="数量">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.UnitMoney.invalid && form.controls.UnitMoney.value ,'has-success': form.controls.UnitMoney.valid && form.controls.UnitMoney.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">单价</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="number" class="form-control" min="0"  step="0.001" formControlName="UnitMoney" placeholder="单价">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.OrdersPerson.invalid && form.controls.OrdersPerson.value ,'has-success': form.controls.OrdersPerson.valid && form.controls.OrdersPerson.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">下单人</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" formControlName="OrdersPerson" placeholder="下单人">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.PurchaseTime.invalid && form.controls.PurchaseTime.value ,'has-success': form.controls.PurchaseTime.valid && form.controls.PurchaseTime.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">采购日期</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <div class="input-group">
+                <input type="text" name="dp" formControlName="PurchaseTime" ngbDatepicker #PurchaseTime="ngbDatepicker" class="form-control"
+                  placeholder="采购日期" (click)="PurchaseTime.toggle()">
+                  <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="PurchaseTime.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3">备注</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <textarea name="" class="form-control" formControlName="Remarks" cols="30" rows="10"></textarea>
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-9 offset-lg-3">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

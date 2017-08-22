@@ -1,0 +1,193 @@
+<div class="custom-card" *ngIf="!TrackData">
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'"></app-mit-loading>
+  </div>
+</div>
+
+<div class="custom-card separation">
+  <div class="custom-card-header" [@fadeIn]="true" *ngIf="TrackData">
+    <form>
+      <div class="row">
+        <div class="col-12 col-sm-2 flex-normal">
+          <div class="license">
+            <span>{{TrackData.Plate}}</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-10">
+          <div class="form-group row">
+            <div class="col-12 col-sm-12 flex-normal">
+
+              <div class="basic-info">
+                <i class="fpd fpd-bumen1"></i>
+                <span>{{TrackData.DepartmentName}}</span>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12 col-sm-12 flex-normal">
+              <div class="basic-info">
+                <i class="fpd fpd-jiashiyuan"></i>
+                <span>驾驶人: {{TrackData.Driver}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true" *ngIf="TrackData">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-xl-6">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6><i class="fpd fpd-shijian1"></i>时间</h6>
+          </div>
+          <div class="tiny-card-body">
+
+            <div class="time-line-area">
+              <div class="time-line">
+                <div class="start-time">
+                  <i class="fpd fpd-yuandiankuang"></i>
+                  <span class="title"></span>
+                  <span class="time">{{TrackData.StartTime}}</span>
+                </div>
+                <div class="end-time">
+                  <div class="start-time">
+                    <i class="fpd fpd-yuandiankuang"></i>
+                    <span class="title"></span>
+                    <span class="time">{{TrackData.EndTime}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="time-count">
+                <div class="time-count-wrap">
+                  <div class="title">总时长: </div>
+                  <div class="count">{{TrackData.TrackTime || '无'}}</div>
+                </div>
+                <div class="time-count-wrap">
+                  <div class="title">总怠速时长: </div>
+                  <div class="count high">{{TrackData.IdleTime || '无'}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="time-table-title">
+              怠速详情
+            </div>
+            <span class="list-notice">注：列表只显示超过2分钟的怠速记录</span>
+            <div class="table" >
+              <ul class="header">
+                <li>
+                  <span>序号</span>
+                  <span>开始时间</span>
+                  <span>怠速时长</span>
+                </li>
+              </ul>
+              <ul class="body">
+                <h3 class="no-data" *ngIf="TrackData.IdleRecordList && !TrackData.IdleRecordList.length">暂无数据~</h3>
+                <li *ngFor="let item of TrackData.IdleRecordList;let index = index;">
+                  <span *ngIf="!index">热车</span>
+                  <span *ngIf="index">{{index}}</span>
+                  <span>{{item.StartTime}}</span>
+                  <span>{{item.IdleTime}}</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-xl-6">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6><i class="fpd fpd-licheng2"></i>里程</h6>
+          </div>
+          <div class="tiny-card-body">
+            <div class="mbg-fade">
+              <span>OBD里程(km): {{TrackData.TrackMileage || '0'}}</span>
+              <span>GPS里程(km): {{TrackData.GPSMileage || 'GPS信号丢失'}}</span>
+              <span>差值: {{TrackData.Difference || '0'}}</span>
+            </div>
+            <div class="echart-box">
+              <app-mit-echarts *ngIf="TrackData.TrackMileageInfoList" [option]="TrackMileageInfoList" [id]="'TrackMileageInfoList'" [height]="'400px'"></app-mit-echarts>
+              <h3 class="no-data" *ngIf="!TrackData.TrackMileageInfoList">暂无数据~</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6><i class="fpd fpd-youhao"></i>油耗/排放</h6>
+          </div>
+          <div class="tiny-card-body height">
+            <ul>
+              <li><span class="span-title">总油耗量(L)</span><span>{{TrackData.TrackOil}}</span></li>
+              <li><span class="span-title">怠速耗油量(L)</span><span>{{TrackData.TrackIdleOil}}</span></li>
+              <li><span class="span-title">百公里耗油量(L/100km)</span><span>{{TrackData.TrackOilForHundred}}</span></li>
+              <li><span class="span-title">二氧化碳(kg)</span><span>{{TrackData.CarbonDioxide}}</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6><i class="fpd fpd-chesu"></i>车速/转速</h6>
+          </div>
+          <div class="tiny-card-body height">
+            <ul>
+              <li><span class="span-title">最高车速(km/h)</span><span>{{TrackData.TrackMaxSpeed}}</span></li>
+              <li><span class="span-title">平均车速(km/h)</span><span>{{TrackData.AvgSpeed}}</span></li>
+              <li><span class="span-title">怠速最高转速(rpm)</span><span>{{TrackData.RotatingSpeedMax}}</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6><i class="fpd fpd-jiashihangwei"></i>驾驶行为</h6>
+          </div>
+          <div class="tiny-card-body height">
+            <ul>
+              <h3 class="no-data" *ngIf="!TrackData.TrackDrivingBehaviorList.length">暂无数据~</h3>
+              <li *ngFor="let item of TrackData.TrackDrivingBehaviorList">
+                <span class="span-title">{{item.Name}}</span><span>{{item.Count}} 次</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+        <div class="tiny-card">
+          <div class="tiny-card-header">
+            <h6><i class="fpd fpd-jingbaoxinxi"></i>报警信息</h6>
+          </div>
+          <div class="tiny-card-body height">
+            <ul>
+              <h3 class="no-data" *ngIf="!TrackData.TrackEventList.length">暂无数据~</h3>
+              <li *ngFor="let item of TrackData.TrackEventList">
+                <span class="span-title">{{item.Name}}</span><span>{{item.Count}} 次</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-footer" [@fadeIn]="true" [class.display]="!gpsPoints">
+    <h5 class="table-title"><i class="fpd fpd-dangqianhangchengjilu"></i>历史轨迹</h5>
+    <div class="row">
+      <div class="col-12 map-wrap">
+        <app-mit-baidu-map></app-mit-baidu-map>
+        <!--行车事件筛选-->
+        <app-map-event-filter (result)="changeShowEvent($event)" [checkedList]="TrackLineData.GPSEvents" *ngIf="TrackLineData"></app-map-event-filter>
+        <!--渐变轨迹颜色说明-->
+        <app-gradient-path-intro *ngIf="gradientPath"></app-gradient-path-intro>
+      </div>
+    </div>
+
+  </div>
+</div>

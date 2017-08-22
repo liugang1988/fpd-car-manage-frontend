@@ -1,0 +1,45 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <a [routerLink]="['/page/backend-management/data-dictionary/vehicle-series-manage/add']" class="btn-add-or-public">新建车系</a>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">车系名称</label>
+          <input type="text" class="form-control" placeholder="请输入车系名称" [(ngModel)]="keyValue" (keyup.enter)="search(keyValue)" [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(keyValue)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>车系名称</th>
+            <th>品牌名称</th>
+            <th>排序</th>
+            <th>创建人</th>
+            <th>创建日期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.LineName || '-'}}</td>
+            <td>{{item.BrandName || '-'}}</td>
+            <td>{{item.Sort || '-'}}</td>
+            <td>{{item.Creator || '-'}}</td>
+            <td>{{item.CreateTime || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

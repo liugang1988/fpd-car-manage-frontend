@@ -1,0 +1,74 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">日期</label>
+          <input type="text" name="dp" (click)="time.toggle();" ngbDatepicker [(ngModel)]="Time" #time="ngbDatepicker" class="form-control"
+            placeholder="日期" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-tree-select class="form-control" [defaultVal]="departmentName" (result)="selectCompany($event)"></app-organization-tree-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">状态</label>
+          <app-select class="form-control" [showAll]="true" [defaultValue]="IsOut" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">车牌</label>
+          <input type="text" placeholder="车牌" class="form-control" [(ngModel)]="Plate" (keyup.enter)="search(Time,Plate)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(Time,Plate)">查询</button>
+        <button type="button" class="btn btn-secondary" (click)="download(Time,Plate)"><i class="fpd fpd-export"></i>导出</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body flex-center">
+    <ul class="single-render" *ngIf="singleRenderInfo" [@fadeIn]="true">
+      <li><span class="title">日期：</span>{{singleRenderInfo.Date || ''}}</li>
+      <li><span class="title">总车辆数：</span>{{singleRenderInfo.VehicleCount || '0'}}</li>
+      <li><span class="title">出车数：</span>{{singleRenderInfo.OutVehicleCount || '0'}}</li>
+      <li><span class="title">出车率：</span>{{singleRenderInfo.DepartureRate || ''}}</li>
+      <li><span class="title">里程：</span>{{singleRenderInfo.TrackMileage || ''}}</li>
+      <li><span class="title">耗油量：</span>{{singleRenderInfo.TrackOil || ''}}</li>
+      <li><span class="title">怠速耗油量：</span>{{singleRenderInfo.TrackIdleOil || ''}}</li>
+    </ul>
+  </div>
+  <div class="custom-card-footer" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>车牌</th>
+            <th>品牌车系</th>
+            <th>部门</th>
+            <th>里程</th>
+            <th>耗油量</th>
+            <th>怠速耗油量</th>
+            <th>行程数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.Plate || '-'}}</td>
+            <td>{{item.BrandLine || '-'}}</td>
+            <td>{{(item.OrganizeName || '-') + '/' + (item.DepartmentName || '-')}}</td>
+            <td>{{item.TrackMileage || '-'}}</td>
+            <td>{{item.TrackOil || '-'}}</td>
+            <td>{{item.TrackIdleOil || '-'}}</td>
+            <td>{{item.TrackCount || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

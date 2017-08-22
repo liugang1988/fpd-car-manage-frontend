@@ -1,0 +1,9 @@
+@charset 'utf-8';
+@import '../../../assets/scss_styles/custom_scss/_custom-export.scss';
+//运营的首页
+.operation-dashboard {
+    .operation-dashboard-content {
+        background-color: #fff;
+        box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05), -1px -1px 0 rgba(0, 0, 0, 0.05);
+    }
+}

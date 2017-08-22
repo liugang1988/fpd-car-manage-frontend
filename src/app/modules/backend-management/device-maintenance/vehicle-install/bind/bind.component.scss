@@ -1,0 +1,66 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.table-search {
+  padding: 0;
+}
+
+.custom-card .custom-card-body {
+  padding: 0;
+}
+
+.custom-card.separation .custom-card-body {
+  margin: 0;
+}
+
+.icon {
+  display: none;
+  &.active {
+    display: block;
+    color: #37c2dd;
+  }
+}
+
+.title {
+  font-size: 1.1rem;
+  line-height: 2.4rem;
+  border-bottom: 3px solid #d1d1d1;
+}
+
+.dash-mil {
+  form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+.flex {
+  @include flex(flex-start, center);
+  padding: 15px 0 0 0;
+}
+
+.table-search {
+  form {
+    padding-top: 0.5rem;
+    .form-group{
+      margin-bottom:0.5rem;
+    }
+  }
+}
+
+.custom-card * {
+  font-size: 75% !important;
+}

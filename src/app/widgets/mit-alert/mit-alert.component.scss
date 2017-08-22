@@ -1,0 +1,65 @@
+@charset 'UTF-8';
+@import '../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$ca-fixed-bgColor:rgba(37, 37, 37, 0.7);
+; // 遮罩层颜色
+$ca-border-radius:3px; // 弹窗圆角
+$ca-border-color:#ececec !default; // 边框颜色
+$ca-header-padding:10px !default; // 头部填充
+$ca-header-bgColor:#f6f6f6 !default; // 头部颜色
+$ca-body-padding:15px 30px !default; // 内容填充
+$ca-footer-padding:10px !default; // 尾部填充
+$ca-body-bgColor:#fff !default; // 内容背景颜色
+$ca-header-title-text-color:#434950 !default; // 标题颜色
+$ca-footer-bgColor:#fff !default; // 尾部背景颜色
+$ca-card-margin:15px 0 !default; // 卡片之间的间距
+// 弹窗样式
+.custom-alert-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $ca-fixed-bgColor;
+  z-index: $zindex-lg;
+  .custom-alert {
+    border-radius: $ca-border-radius;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 25rem;
+    width: auto;
+    z-index: $zindex-xlg;
+  }
+  .custom-alert-header {
+    color: #333;
+    padding: $ca-header-padding;
+    background-color: $ca-header-bgColor;
+    min-height: 3rem;
+    height: auto;
+    .close {
+      cursor: pointer;
+      line-height: 24px;
+      i {
+        font-size: toRem(30px);
+      }
+    }
+  }
+  .custom-alert-body {
+    padding: $ca-body-padding;
+    background-color: $ca-body-bgColor;
+    min-height: 4rem;
+    min-height: auto;
+    border-bottom: 1px solid $ca-border-color;
+  }
+  .custom-alert-footer {
+    @include flex(flex-end, center);
+    padding: $ca-footer-padding;
+    background-color: $ca-footer-bgColor;
+    min-height: 3rem;
+    height: auto;
+    button {
+      margin: 0 0.5rem;
+    }
+  }
+}

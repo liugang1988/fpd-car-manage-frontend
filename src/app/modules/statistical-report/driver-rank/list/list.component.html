@@ -1,0 +1,60 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">月份</label>
+          <app-only-year-month-select class="form-control" [placeholder]="'yyyy-mm'" (result)="Time = $event" [range]="{before:5,after:10}"></app-only-year-month-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-tree-select class="form-control" (result)="selectCompany($event)"></app-organization-tree-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="驾驶员" [(ngModel)]="KeyValue" (keyup.enter)="search(KeyValue)" [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyValue)">查询</button>
+        <button type="button" class="btn btn-secondary" (click)="download(KeyValue)"><i class="fpd fpd-export"></i>导出</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>月份</th>
+            <th>部门</th>
+            <th>驾驶员</th>
+            <th>绑定车辆</th>
+            <th>驾驶行为得分</th>
+            <th>运行管控得分</th>
+            <th>总分</th>
+            <th>公司排名</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.YearTime}}年{{item.MonthTime}}月</td>
+            <td>{{(item.OrgnizeName || '-') + '/' + (item.DepartmentName || '-')}}</td>
+            <!--<td><a [routerLink]="['/page/statistical-report/driver-rank/detail', item.DriverID]">{{item.DriverName}}</a></td>-->
+            <td>{{item.DriverName}}</td>
+            <td>{{item.Plate}}</td>
+            <td>{{item.DrivingBehaviorScore}}</td>
+            <td>{{item.OperationControlScore}}</td>
+            <td>{{item.TotalScore}}</td>
+            <td>{{item.Rank}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

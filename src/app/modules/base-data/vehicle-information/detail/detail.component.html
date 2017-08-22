@@ -1,0 +1,148 @@
+<div class="details" *ngIf="!singleVehicleInfo">
+  <app-mit-loading [option]="'load7'"></app-mit-loading>
+</div>
+<div class="details" *ngIf="singleVehicleInfo">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h4>一、车辆信息</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="vehicle-basic">
+        <h5>车辆基础信息</h5>
+        <div class="row">
+          <div class="col-md-12 col-lg-6">
+            <div class="show-item">
+              <label>车牌:</label>
+              <span>{{singleVehicleInfo.Plate || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>发动机号:</label>
+              <span>{{singleVehicleInfo.EngineNumber || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>车型:</label>
+              <span>{{singleVehicleInfo.VehicleModelName || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>注册登记日期:</label>
+              <span>{{singleVehicleInfo.RegistrationTime | splitTime }}</span>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6">
+            <div class="show-item">
+              <label>车架号:</label>
+              <span>{{singleVehicleInfo.VIN || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>车辆所属:</label>
+              <span>{{singleVehicleInfo.CompanyName || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>排量:</label>
+              <span>{{singleVehicleInfo.Displacement || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>核载人数:</label>
+              <span>{{singleVehicleInfo.OverloadPerson || '' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vehicle-details">
+        <h5>车辆详细信息</h5>
+        <div class="row">
+          <div class="col-md-12 col-lg-6">
+            <div class="show-item">
+              <label>车辆所有者:</label>
+              <span>{{singleVehicleInfo.Owner || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>使用性质:</label>
+              <span>{{singleVehicleInfo.UserType || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>排放标准:</label>
+              <span>{{singleVehicleInfo.EmissionStandards || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>车身颜色:</label>
+              <span>{{singleVehicleInfo.Color || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>登记证号:</label>
+              <span>{{singleVehicleInfo.RegistrationCertificate || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>经销商名称:</label>
+              <span>{{singleVehicleInfo.Dealer || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>油费承担:</label>
+              <span>{{singleVehicleInfo.OilCost || '' }}</span>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6">
+            <div class="show-item">
+              <label>登记车型:</label>
+              <span>{{singleVehicleInfo.RegistrationModelName || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>变速箱参数:</label>
+              <span>{{singleVehicleInfo.ATM || ''}}</span>
+            </div>
+            <div class="show-item">
+              <label>燃油类型:</label>
+              <span>{{singleVehicleInfo.FuelType || '' }}</span>
+            </div>
+            <div class="show-item">
+              <label>轮胎参数:</label>
+              <span>{{singleVehicleInfo.TireModel || ''}}</span>
+            </div>
+            <div class="show-item">
+              <label>购车日期:</label>
+              <span>{{singleVehicleInfo.PurchaseDate | splitTime }}</span>
+            </div>
+            <div class="show-item">
+              <label>购置金额:</label>
+              <span>{{singleVehicleInfo.PurchaseAmount || ''}}</span>
+            </div>
+            <div class="show-item">
+              <label>油耗参考值:</label>
+              <span>{{singleVehicleInfo.OilFuelReferenc || ''}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h4>二、证件展示</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="row">
+        <div class="col-md-12 col-lg-4">
+          <div class="show-img">
+            <app-mit-lightbox [image]="singleVehicleInfo.DrivingLicenseA"></app-mit-lightbox>
+            <!--<img [src]="singleVehicleInfo.DrivingLicenseA  || 'assets/images/default_img/login-bg.jpg'" alt="assets/images/default_img/login-bg.jpg">-->
+            <p>行驶证</p>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="show-img">
+            <app-mit-lightbox [image]="singleVehicleInfo.CertificateImage"></app-mit-lightbox>
+            <!--<img [src]="singleVehicleInfo.CertificateImage  || 'assets/images/default_img/login-bg.jpg'" alt="assets/images/default_img/login-bg.jpg">-->
+            <p>合格证</p>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="show-img">
+            <app-mit-lightbox [image]="singleVehicleInfo.RegistrationImage"></app-mit-lightbox>
+            <!--<img [src]="singleVehicleInfo.RegistrationImage  ||  'assets/images/default_img/login-bg.jpg'" alt="assets/images/default_img/login-bg.jpg">-->
+            <p>登记证</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

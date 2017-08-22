@@ -1,0 +1,44 @@
+.gradient-path-intro{
+    background: #ffffff;
+    position: absolute;
+    top:35%;
+    left: 40px;
+    padding: 5px;
+    z-index: 999;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    h3{
+        font-size: 14px;
+        color: #333;
+        text-align: center;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    li{
+        font-size: 12px;
+        color: #333;
+        display: flex;
+        .path-bg{
+            width: 10px;
+            height: 50px;
+            display: inline-block;
+        }
+        .bg1{
+            background: #02b430;
+        }
+        .bg2{
+            background: #476cea;
+        }
+        .bg3{
+            background: #fde800;
+        }
+        .bg4{
+            background: #bb2828;
+        }
+        span{
+            vertical-align: top;
+        }
+    }
+}

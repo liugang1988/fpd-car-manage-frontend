@@ -1,0 +1,22 @@
+<div class="event-filter-notice">
+  <span (click)="showEvent()">事件信息 <i class="fpd" [class.fpd-paixuxia]="!eventShow" [class.fpd-paixushang]="eventShow"></i></span>
+  <span (click)="showGradient()">速度段 <i class="fpd" [class.fpd-paixuxia]="!gradientShow" [class.fpd-paixushang]="gradientShow"></i></span>
+</div>
+<div class="event-filter row" [@flyIn]="true" *ngIf="eventBoxStatus">
+  <div class="event-filter-box gradient-box" *ngIf="gradientShow">
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" [(ngModel)]="gradientOpenObj.checked" (click)="check(gradientOpenObj)">
+      <span class="custom-control-indicator"></span>
+      {{gradientOpenObj.checked ? "隐藏" : "显示"}}速度段
+    </label>
+  </div>
+  <div class="event-filter-box"  *ngIf="eventShow && eventList.length">
+    <label class="custom-control custom-checkbox" *ngFor="let item of eventList">
+      <input type="checkbox" class="custom-control-input" [(ngModel)]="item.checked" (ngModelChange)="check(eventList)">
+      <span class="custom-control-indicator"></span>
+      <img src="../../../assets/images/car_location/tracks/{{item.id}}.png"  alt="" title="{{item.name | getName:list}}"> 
+       <!--<i class="fpd {{item.icon}}"></i>-->
+         ({{item.num}})
+    </label>
+  </div>
+</div>

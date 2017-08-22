@@ -1,0 +1,37 @@
+<app-mit-alert [title]="'操作记录'" [closeName]="'关闭'" (close)="closeHandler($event)">
+  <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+  <!--表格区域-->
+  <app-mit-data-table>
+    <table *ngIf="list">
+      <thead>
+        <tr>
+          <th>激活/拆除时间</th>
+          <th>设备号SN</th>
+          <th>IMEI</th>
+          <th>产品型号</th>
+          <th>操作记录</th>
+          <th>操作说明</th>
+          <th>操作人</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list">
+          <td>{{item.OperatorTime || '-'}}</td>
+          <td>{{item.SN || '-'}}</td>
+          <td>{{item.IMEI}}</td>
+          <td>{{item.DeviceModelName || '-'}}</td>
+          <td>{{item.OperatorType || '-'}}</td>
+          <td>{{item.Description || '-'}}</td>
+          <td>{{item.OperatorMan || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </app-mit-data-table>
+  <!--分页-->
+  <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"
+    [hidden]="!totalCount"></app-mit-data-table-pagination>
+  <!--Tips-->
+  <div class="tips" *ngIf="!totalCount">
+    暂时没有相关的记录
+  </div>
+</app-mit-alert>

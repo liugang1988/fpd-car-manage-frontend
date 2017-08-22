@@ -1,0 +1,3 @@
+<div class="car-status">
+  <span *ngFor="let item of status" (click)="selected(item)" [class.active]="currentItem === item.value"><i class="fpd fpd-car {{item.class}}"></i> {{item.name}} {{item.number}}</span>
+</div>

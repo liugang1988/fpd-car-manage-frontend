@@ -1,0 +1,67 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.custom-card {
+  .red {
+    color: #d9534f;
+  }
+  margin:$cc-card-margin;
+  .custom-card-header {
+    border-top: 2px solid $cc-border-color;
+    border-bottom: 1px solid $cc-border-color;
+    padding: $cc-header-padding;
+    background-color: $cc-header-bgColor;
+    h4 {
+      font-size: $fs14;
+      font-weight: 700;
+      color: $cc-header-title-text-color;
+    }
+  }
+  .custom-card-body {
+    padding: $cc-body-padding;
+    background-color: $cc-body-bgColor;
+  }
+  .custom-card-footer {
+    padding: $cc-footer-padding;
+    background-color: $cc-footer-bgColor;
+  }
+}
+
+form {
+  font-size: $fs16;
+  width: 100%;
+  @include center-block;
+  .custom-form-label {
+    color: #8b8a8a;
+    margin-bottom: 0;
+    padding: 0.5rem 0.75rem;
+  }
+  .custom-input-extra {
+    position: relative;
+    &::after {
+      content: "*";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      margin-right: -0.5rem;
+      transform: translateY(-50%);
+      color: #d9534f;
+      font-size: $fs12;
+    }
+  }
+  .flex-inline {
+    padding: 0.5rem 0.75rem;
+    @include flex(flex-start, center, flex-inline);
+  }
+  .input-wrapper {
+    @include flex(flex-end, center);
+    >button {
+      margin: 0.5rem;
+    }
+  }
+}
+
+
+.upload-file-tooltip {
+  font-size: 12px;
+  color: #727374;
+}

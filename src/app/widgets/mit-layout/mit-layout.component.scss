@@ -1,0 +1,49 @@
+@charset 'utf-8';
+@import '../../../assets/scss_styles/custom_scss/_custom-export.scss';
+
+
+//内容块区域
+.content-wrapper {
+  transition: transform .3s ease-in-out, margin .3s ease-in-out;
+  z-index: $zindex-sm;
+  min-height: toRem(901px);
+  height: auto;
+  padding: toRem(12px) toRem(24px);
+}
+
+@media (max-width:1199px) {}
+
+@media (max-width:991px) {}
+
+@media (max-width:767px) {
+  .content-wrapper {
+    transform: translate(0, 0);
+    &.expand {
+      transform: translate($sidebar-expand-offset-width, 0);
+    }
+  }
+}
+
+@media (max-width:479px) {}
+
+@media (min-width:768px) {
+  .content-wrapper {
+    &.expand {
+      margin-left: $sidebar-expand-offset-width;
+    }
+    &:not(.expand) {
+      margin-left: $sidebar-collapse-width;
+    }
+  }
+}
+
+@media (width:768px) {
+  .content-wrapper {
+    &.expand {
+      margin-left: 208px;
+    }
+    &:not(.expand) {
+      margin-left: $sidebar-collapse-width;
+    }
+  }
+}

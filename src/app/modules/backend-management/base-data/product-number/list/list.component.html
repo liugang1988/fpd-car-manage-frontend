@@ -1,0 +1,46 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <a [routerLink]="['/page/backend-management/base-data/product-number/add']" class="btn-add-or-public">新增产品型号</a>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>产品名称</th>
+            <th>产品型号</th>
+            <th>产品类型</th>
+            <th>供应商</th>
+            <th>产品描述</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.ID || '-'}}</td>
+            <td>{{item.DeviceModel || '-'}}</td>
+            <td>{{item.Name || '-'}}</td>
+            <td>{{item.DeviceCategoryName || '-' }}</td>
+            <td [title]="item.SupplierName">{{item.SupplierName | SliceStr:0:13:'...' || '-' }}</td>
+            <td [title]="item.Description">{{item.Description | SliceStr:0:10:'...' || '-' }}</td>
+            <td>
+              <span class="operator-span" (click)="modify(item.ID)">修改</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>
+<app-delete *ngIf="showDeleteAlert" [item]="deleteItem" (close)="closeAlert($event)"></app-delete>

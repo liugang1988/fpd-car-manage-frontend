@@ -1,0 +1,20 @@
+<app-mit-alert [title]="'分配菜单'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler($event)" [disabled]="disabled"
+  (submit)="saveHandler(item)">
+  <app-mit-loading [option]="'load7'" *ngIf="!menuTree"></app-mit-loading>
+  <div *ngIf="menuTree" class="menuTree" [@zoomInRight]="true">
+    <Tree [nodes]="menuTree" [options]="treeOptions" [focused]="true" #tree>
+      <ng-template #treeNodeTemplate let-node>
+        <div (click)="showOptionId = node.data.ID">
+          <!--节点-->
+          <div class="node float-md-left float-xs-left float-lg-left float-xl-left float-sm-left">
+            <input type="checkbox" [(ngModel)]="node.data.HasRight" [indeterminate]="node.partialSelection" (ngModelChange)="onChange(node.data)"
+            />
+            <!--<i class="fpd {{node.datad.IconName}}" *ngIf="node.data.ID != -1"></i>-->
+            <i class="fpd fpd-wenjianjia" *ngIf="node.data.ID == -1"></i>
+            <span>{{ node.data.MenuName }}</span>
+          </div>
+        </div>
+      </ng-template>
+    </Tree>
+  </div>
+</app-mit-alert>

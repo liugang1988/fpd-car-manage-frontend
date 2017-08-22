@@ -1,0 +1,50 @@
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <button type="button" class="btn btn-add-or-public" [routerLink]="['/page/backend-management/ubi-model-management/ubi-model/add']">新增模型</button>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>模型名称</th>
+            <th>时间</th>
+            <th>参考值</th>
+            <th>驾驶行为</th>
+            <th>超速里程系数</th>
+            <th>当前保单出险系数</th>
+            <th>保险折扣率</th>
+            <th>是否启用</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.ModelName}}</td>
+            <td>{{item.CreateTime}}</td>
+            <td>{{item.MileagePerYear || 0}}km/年<br>{{item.StaticHourPerDay || 0}}小时/天</td>
+            <td>{{item.BehaviorEnable ? '启动' : '不启动'}}</td>
+            <td>{{item.SpeedEnable ? '启动' : '不启动'}}</td>
+            <td>{{item.AccidentEnable ? '启动' : '不启动'}}</td>
+            <td>{{item.DiscountRate}}%</td>
+            <td class="beautify-wrap">
+              <input type="checkbox" class="beautify-checkbox" name="enable" [id]="item.ID" [(ngModel)]="item.Enabled"
+                (ngModelChange)="updateStatus(item.ID, item.Enabled);"><label [for]="item.ID"></label>
+            </td>
+            <td>
+              <span class="operator-span" (click)="detail(item.ID)">查看</span>
+              <span class="operator-span" (click)="modify(item.ID)">修改</span>
+              <span class="operator-span" (click)="delete(item)">删除</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>
+<app-delete *ngIf="showDeleteAlert" [item]="deleteItem" (close)="closeAlert($event)"></app-delete>

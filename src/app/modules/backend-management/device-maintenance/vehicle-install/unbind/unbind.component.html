@@ -1,0 +1,26 @@
+<app-mit-alert [title]="'解绑设备'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler($event)" (submit)="saveHandler(form.value);"
+  [disabled]="form.invalid">
+  <div class="info">
+    <ul>
+      <li>
+        IMEI: {{item.IMEI}}
+      </li>
+       <li>
+        车牌: {{item.Plate}}
+      </li>
+       <li>
+        车架号: {{item.VIN}}
+      </li>
+    </ul>
+  </div>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="form-group row">
+        <label class="col-12">备注(选填)</label>
+        <div class="col-12">
+          <textarea name="" id="" cols="30" rows="5" placeholder="请描述解绑原因" formControlName="Description" class="form-control"></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+  </app-mit-alert>

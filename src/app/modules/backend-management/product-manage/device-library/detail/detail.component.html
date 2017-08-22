@@ -1,0 +1,157 @@
+<div class="custom-card" *ngIf="DeviceDetailInfo">
+  <div class="custom-card-header">
+    <h4>设备信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            IMEI：
+          </span>
+        <span class="content">{{DeviceDetailInfo.IMEI || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            终端ID：
+          </span>
+        <span class="content">{{DeviceDetailInfo.ID || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            设备SN：
+          </span>
+        <span class="content">{{DeviceDetailInfo.SN || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            供应商：
+          </span>
+        <span class="content">{{DeviceDetailInfo.SupplierName || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           产品型号：
+          </span>
+        <span class="content">{{DeviceDetailInfo.DeviceModelName || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            ICCID：
+          </span>
+        <span class="content">{{DeviceDetailInfo.ICCID || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            卡号：
+          </span>
+        <span class="content">{{DeviceDetailInfo.PhoneNumber || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           硬件版本：
+          </span>
+        <span class="content">{{DeviceDetailInfo.HardwareVersion || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            软件版本：
+          </span>
+        <span class="content">{{DeviceDetailInfo.VersionNumber || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           品牌车系协议：
+          </span>
+        <span class="content">{{DeviceDetailInfo.VehicleAgreement || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            IP Port：
+          </span>
+        <span class="content">{{DeviceDetailInfo.DeviceRemoteIp  || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            通电时间：
+          </span>
+        <span class="content">{{DeviceDetailInfo.FirstPoweronTime  || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            入库时间：
+          </span>
+        <span class="content">{{DeviceDetailInfo.InStorageTime  || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            出库时间：
+          </span>
+        <span class="content">{{DeviceDetailInfo.OutStorageTime  || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            客户：
+          </span>
+        <span class="content">{{DeviceDetailInfo.OrganizationName || ''}}</span>
+      </div>
+      <!--<div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            读取VIN：
+          </span>
+        <span class="content">{{CarDetailInfo.VIN || ''}}</span>
+        <button type="button" class="btn btn-primary" [disabled]="readStatus == 2" (click)="read()">{{readStatus == 2 ? '读取中' : '读取'}}</button>
+      </div>-->
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           设备位置：
+          </span>
+        <span class="content">{{CarDetailInfo.address || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           定位时间：
+          </span>
+        <span class="content">{{CarDetailInfo.LastConnectionTime || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            设备状态：
+          </span>
+        <span class="content">{{DeviceDetailInfo.DeviceStatus || ''}}</span>
+      </div>   
+    </div>
+  </div>
+</div>
+<div class="custom-card" *ngIf="CarDetailInfo">
+  <div class="custom-card-header">
+    <h4>车辆信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           车牌：
+          </span>
+        <span class="content">{{CarDetailInfo.Plate || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+            车架号：
+          </span>
+        <span class="content">{{CarDetailInfo.VIN || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           品牌车系：
+          </span>
+        <span class="content">{{CarDetailInfo.ModelName || ''}}</span>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <span class="title">
+           安装时间：
+          </span>
+        <span class="content">{{CarDetailInfo.DeviceBindTime || ''}}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="organization-select select-temp">
+  <div class="select" (click)="isExpand = !isExpand">
+    <input type="text" placeholder="请选择客户" [(ngModel)]="selected" class="form-control" [disabled]="true">
+  </div>
+  <div class="list-menu" [@fadeIn]="true" *ngIf="isExpand">
+    <div class="sub-input">
+      <input type="text" placeholder="快速搜索" [(ngModel)]="searcVal">
+    </div>
+    <ul>
+      <ng-template [ngIf]="!showAll && !array.length">
+        <li>暂无客户</li>
+      </ng-template>
+      <ng-template [ngIf]="showAll">
+        <li (click)="selectHandler('all');isExpand = !isExpand">全部</li>
+      </ng-template>
+      <ng-template ngFor let-item [ngForOf]="array | organizationSelect:searcVal">
+        <li (click)="selectHandler(item);isExpand = !isExpand">{{item.OrganizationName}}</li>
+      </ng-template>
+    </ul>
+  </div>
+</div>

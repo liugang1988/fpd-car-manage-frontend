@@ -1,0 +1,15 @@
+<div class="custom-alert-fixed">
+  <div class="custom-alert" @fadeIn>
+    <div class="custom-alert-header">
+      <span class="title float-left">{{title}}</span>
+      <span class="close float-right" (click)="closeHandler()"><i class="fpd fpd-guanbi"></i></span>
+    </div>
+    <div class="custom-alert-body">
+      <ng-content></ng-content>
+    </div>
+    <div class="custom-alert-footer" *ngIf="saveName || closeName">
+      <button type="button" class="btn btn-primary" (click)="submitHandler()" *ngIf="saveName" [disabled]="disabled">{{saveName}}</button>
+      <button type="button" class="btn btn-secondary" (click)="closeHandler()" *ngIf="closeName">{{closeName}}</button>
+    </div>
+  </div>
+</div>

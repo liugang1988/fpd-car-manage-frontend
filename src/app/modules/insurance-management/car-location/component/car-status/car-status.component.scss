@@ -1,0 +1,41 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.car-status {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  position: absolute;
+  background: #FFF;
+  top: 40px;
+  left: 40px;
+  padding: 8px;
+  @include flex();
+  span {
+    border-right: 1px solid #efefef;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 2px 15px;
+    &.active {
+     border: 1px solid #efefef;
+    background: #e8e8e8;
+    border-radius: 2px;
+    margin-left: -1px;
+    }
+    &:last-child {
+      border-right: none;
+    }
+    i {
+      &.all {
+        color: #9b77b4;
+      }
+      &.run {
+        color: #46b1a1;
+      }
+      &.stop {
+        color: #5695cb;
+      }
+      &.offline {
+        color: #b4b6b9;
+      }
+    }
+  }
+}

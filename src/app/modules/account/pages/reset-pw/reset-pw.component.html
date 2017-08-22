@@ -1,0 +1,31 @@
+<!--返回-->
+<div class="back" (click)="back()">
+  <i class="fpd fpd-110"></i>
+</div>
+<!--表单-->
+<div class="beautify-form" [@flyIn]="true">
+  <div class="page-header">
+    找回密码
+  </div>
+  <form [formGroup]="form">
+    <div class="form-group" [ngClass]="{ 'has-danger': form.get('form.username').invalid && form.get('form.username').value ,'has-success': form.get('form.username').valid && form.get('form.username').value}">
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon fpd fpd-ordinarylogin1"></span>
+        <input type="text" class="form-control" formControlName="username" placeholder="手机号码 \ 邮箱 ">
+      </div>
+      <div class="form-control-feedback" *ngIf="(form.get('form.username').dirty || form.get('form.username').pristine) && form.get('form.username').invalid && form.get('form.username').value">账号不符合规范</div>
+      <div class="form-control-feedback" *ngIf="(form.get('form.username').dirty || form.get('form.username').pristine) && form.get('form.username').valid && form.get('form.username').value">账号符合规范</div>
+    </div>
+    <div class="attent-item">
+      <h5>注明事项:</h5>
+      <ol>
+        <li>如果系统中没有绑定正确邮箱地址，那我们无法帮您找回密码。</li>
+        <li>提交成功后，进入绑定邮箱查收修改密码链接。</li>
+        <li>如有疑问请联系客服</li>
+      </ol>
+    </div>
+    <div class="form-group ">
+      <button class="btn btn-lg btn-outline-success btn-block" type="submit" [disabled]="form.get('form.username').invalid || !form.get('form.username').value ">找回密码</button>
+    </div>
+  </form>
+</div>

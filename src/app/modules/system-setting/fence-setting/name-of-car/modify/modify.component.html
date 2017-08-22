@@ -1,0 +1,83 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>汽车点名</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="row" formGroupName="RuleContent">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.get('RuleContent.FenceName').invalid && form.get('RuleContent.FenceName').value ,'has-success': form.get('RuleContent.FenceName').valid && form.get('RuleContent.FenceName').value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">栅栏名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="FenceName" placeholder="栅栏名称">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label col-lg-2 star">时间段</label>
+            <div class="col-sm-6 col-md-4 col-lg-4" [ngClass]="{ 'has-danger': form.get('RuleContent.StartHourTime').invalid && form.get('RuleContent.StartHourTime').value ,'has-success': form.get('RuleContent.StartHourTime').valid && form.get('RuleContent.StartHourTime').value }">
+              <app-mit-time-picker class="form-control" [selected]="form.get('RuleContent.StartHourTime').value" [placeholder]="'请选择开始时间 (hh:mm)'"
+                (timeResult)="SetStatrtTime($event)"></app-mit-time-picker>
+            </div>
+            <span>-</span>
+            <div class="col-sm-6 col-md-4 col-lg-4" [ngClass]="{ 'has-danger': form.get('RuleContent.EndHourTime').invalid && form.get('RuleContent.EndHourTime').value ,'has-success': form.get('RuleContent.EndHourTime').valid && form.get('RuleContent.EndHourTime').value }">
+              <app-mit-time-picker class="form-control" [selected]="form.get('RuleContent.EndHourTime').value" [placeholder]="'请选择结束时间 (hh:mm)'"
+                [minTime]="form.get('RuleContent.StartHourTime').value" (timeResult)="SetEndTime($event)"></app-mit-time-picker>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label col-lg-2 star">重复周期</label>
+            <div class="col-sm-12 col-md-9 col-lg-10 cycle">
+              <div class="item" *ngFor="let item of cycleArr">
+                <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="item.checked"  [ngModelOptions]="{standalone: true}" (ngModelChange)="checkCycle(cycleArr)">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{item.name}}</span>
+              </label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.get('RuleContent.FenceAddress').invalid && form.get('RuleContent.FenceAddress').value ,'has-success': form.get('RuleContent.FenceAddress').valid && form.get('RuleContent.FenceAddress').value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">驻车点</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="FenceAddress" placeholder="请在下方绘制驻车点">
+            </div>
+          </div>
+
+          <div class="form-group row" *ngIf="form.get('RuleContent.R').value" [ngClass]="{ 'has-danger': form.get('RuleContent.R').invalid && form.get('RuleContent.R').value,'has-success': form.get('RuleContent.R').valid && form.get('RuleContent.R').value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">范围(米)</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="R" placeholder="范围" [readonly]="true">
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2"></label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <!--百度地图-->
+              <app-mit-baidu-map></app-mit-baidu-map>
+              <br />
+              <p>小提示: 1.绘制围栏时，双击鼠标即可完成绘制。 2.每次只能绘制一个围栏。</p>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+      <div class="form-group row save-area">
+        <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading || disabled">保存</button>
+          <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

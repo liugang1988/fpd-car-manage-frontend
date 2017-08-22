@@ -1,0 +1,31 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+// 面板头部
+.single-card-header {
+  position: relative;
+  @include flex;
+  a {
+    padding: 10px;
+    @include remove-a-default-behavior;
+    color: #fff;
+    display: flex;
+    @include flex(center, center, column);
+    width: 64px;
+    height: 64px;
+    border-right: 1px solid rgba(255, 255, 255, .1);
+    .icon-wrap {
+      text-align: center;
+      i {
+        font-size: 20px;
+      }
+    }
+    span {
+      font-size: 12px;
+    }
+    &.active,
+    &:hover {
+      background-color: #317dfb;
+    }
+  }
+  background-color:#333a3d;
+}

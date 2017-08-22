@@ -1,0 +1,21 @@
+<app-mit-alert [title]="'事件处理'" [saveName]="'确认'" [disabled]="!status" [closeName]="'取消'" (close)="closeHandler($event)" (submit)="saveHandler(item)">
+  <form>
+    <div class="row"  [@fadeIn]="true">
+      <div class="col-12 col-sm-12 ">
+          <p>
+            <span class="label-title">处理结果:</span>
+            <button type="button" class="btn" [class.btn-primary]="status == 1" (click)="status = 1">已处理</button>
+            <button type="button" class="btn" [class.btn-primary]="status == 2" (click)="status = 2">非法数据</button>
+          </p>
+        </div>
+        <div class="col-12 col-sm-12">
+          <p>
+            <span class="label-title">备注:</span>
+          </p>
+          <textarea [(ngModel)]="Remark" class="form-control" style="margin-bottom:10px" cols="30"
+            rows="5" [ngModelOptions]="{standalone: true}">
+        </textarea>
+        </div>
+    </div>
+  </form>
+</app-mit-alert>

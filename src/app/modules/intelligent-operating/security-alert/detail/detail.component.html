@@ -1,0 +1,66 @@
+<div class="wrapper">
+  <app-mit-loading [option]="'load7'" *ngIf="!renderAlertInfo || !renderAlertInfo"></app-mit-loading>
+  <div class="item-area" *ngIf="renderAlertInfo && renderEventInfo" [@fadeIn]="true">
+    <h6><i class="fpd fpd-car title-icon"></i>车辆信息：</h6>
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th class="text-center">车牌</th>
+          <th class="text-center">品牌车系</th>
+          <th class="text-center">部门/分组</th>
+          <th class="text-center">驾驶员</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{renderAlertInfo.Plates || '-' }}</td>
+          <td>{{renderAlertInfo.Brandname || '-' }}</td>
+          <td>{{renderAlertInfo.DepartmentName || '-' }}</td>
+          <td>{{renderAlertInfo.DriverName || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="item-area" *ngIf="renderAlertInfo && renderEventInfo" [@fadeIn]="true">
+    <h6><i class="fpd fpd-guzhang title-icon"></i>报警详情：</h6>
+    <div class="alert-detail">
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6" *ngFor="let item of renderAlertInfo.Report">
+          <div class="row">
+            <div class="col-6 col-sm-3 col-md-3 text-center">{{item.Title}}</div>
+            <div class="col-6 col-sm-9 col-md-9 text-center">
+              {{item.Value}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <h6 *ngIf="renderAlertInfo.Report.length === 0" class="text-center" style="padding:15px;">暂无没有相关的记录！</h6>
+    </div>
+  </div>
+  <div class="item-area" [@fadeIn]="true" *ngIf="renderAlertInfo && renderEventInfo">
+    <h6><i class="fpd fpd-background-management title-icon"></i>处理情况：</h6>
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th class="text-center">日期</th>
+          <th class="text-center">处理方式</th>
+          <th class="text-center">处理内容</th>
+          <th class="text-center">操作人</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of renderEventInfo">
+          <td>{{item.ExecutionTime || '-' }}</td>
+          <td>{{item.ProcessStyle || '-' }}</td>
+          <td>{{item.ProcessMemo || '-' }}</td>
+          <td>{{item.ExecutionName || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="renderEventInfo.length === 0" class="text-center" style="padding:15px;">暂无没有相关的记录！</div>
+  </div>
+  <div class="item-area">
+    <h6><i class="fpd fpd-dangqianhangchengjilu title-icon"></i>故障位置：</h6>
+    <app-mit-baidu-map></app-mit-baidu-map>
+  </div>
+</div>

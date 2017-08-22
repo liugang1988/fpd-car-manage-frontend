@@ -1,0 +1,25 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.title,
+.content {
+  display: inline-block;
+  padding: 1rem;
+  font-size: 14px;
+}
+
+.title {
+  width: 6rem;
+  text-align: right;
+}
+
+.custom-card-body {
+  background-color: #fff;
+}
+
+.table-search {
+  padding: 0;
+  .form-group,
+  button {
+    margin: 0 !important;
+  }
+}

@@ -1,0 +1,193 @@
+<app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <div class="custom-card" *ngIf="!showLoading">
+    <div class="custom-card-header">
+      <h4>一、基本信息( <span class="red">*</span> 为必填目 )</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="row">
+        <div class="col-sm-3 col-md-11 offset-md-1">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.WorkNumber.invalid && form.controls.WorkNumber.value ,'has-success': form.controls.WorkNumber.valid && form.controls.WorkNumber.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">工号:</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" formControlName="WorkNumber" minlength="1" maxlength="20" placeholder="工号">
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.ODID.invalid && form.controls.ODID.value ,'has-success': form.controls.ODID.valid && form.controls.ODID.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">部门:</label>
+            <div class="col-sm-6">
+              <app-department-select class="form-control" [defaultVal]="form.controls.ODID.value" (result)="selectDept($event)"></app-department-select>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DriverName.invalid && form.controls.DriverName.value ,'has-success': form.controls.DriverName.valid && form.controls.DriverName.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">姓名:</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" minlength="2" maxlength="10" formControlName="DriverName" placeholder="姓名">
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">性别:</label>
+            <div class="col-sm-6">
+              <label class="custom-control custom-radio">
+                <input formControlName="Sex" name="Sex" type="radio" class="custom-control-input" value="1" [checked]="form.controls.Sex.value === 1">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">男</span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input formControlName="Sex" name="Sex" type="radio" class="custom-control-input" value="0" [checked]="form.controls.Sex.value === 0">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">女</span>
+              </label>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Birthdate.invalid && form.controls.Birthdate.value ,'has-success': form.controls.Birthdate.valid && form.controls.Birthdate.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">出生年月:</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="text" name="dp" formControlName="Birthdate" ngbDatepicker [maxDate]="currentDate" #birthdate="ngbDatepicker"
+                  class="form-control" placeholder="出生年月" (click)="birthdate.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="birthdate.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Phone.invalid && form.controls.Phone.value ,'has-success': form.controls.Phone.valid && form.controls.Phone.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">手机号码:</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" minlength="11" formControlName="Phone" placeholder="手机号码">
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Birthplace.invalid && form.controls.Birthplace.value ,'has-success': form.controls.Birthplace.valid && form.controls.Birthplace.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">籍贯:</label>
+            <div class="col-sm-6">
+              <app-mit-address-select (result)="selectAddress($event)" [selected]="form.controls.Birthplace.value" class="form-control"></app-mit-address-select>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.IDCard.invalid && form.controls.IDCard.value ,'has-success': form.controls.IDCard.valid && form.controls.IDCard.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">身份证号:</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" minlength="18" maxlength="18" formControlName="IDCard" placeholder="身份证号">
+            </div>
+
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.IDCardAddress.invalid && form.controls.IDCardAddress.value ,'has-success': form.controls.IDCardAddress.valid && form.controls.IDCardAddress.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">身份证地址:</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" formControlName="IDCardAddress" maxlength="80" placeholder="身份证地址">
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DriversLicenseType.invalid && form.controls.DriversLicenseType.value != null ,'has-success': form.controls.DriversLicenseType.valid && form.controls.DriversLicenseType.value != null }">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">驾驶证类型:</label>
+            <div class="col-sm-6">
+              <app-select class="form-control" [defaultValue]="form.controls.DriversLicenseType.value" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getDriversLicenseType($event)"></app-select>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DriversLicenseValid.invalid && form.controls.DriversLicenseValid.value ,'has-success': form.controls.DriversLicenseValid.valid && form.controls.DriversLicenseValid.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2">驾照有效期:</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="text" name="dp" formControlName="DriversLicenseValid" ngbDatepicker #driversLicenseValid="ngbDatepicker" class="form-control"
+                  (click)="driversLicenseValid.toggle()" placeholder="驾照有效期">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="driversLicenseValid.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.FirstDriversLicense.invalid && form.controls.FirstDriversLicense.value ,'has-success': form.controls.FirstDriversLicense.valid && form.controls.FirstDriversLicense.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2">初次领证日期:</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="text" name="dp" formControlName="FirstDriversLicense" [maxDate]="currentDate" ngbDatepicker #firstDriversLicense="ngbDatepicker"
+                  class="form-control" (click)="firstDriversLicense.toggle()" placeholder="初次领证日期">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="firstDriversLicense.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 custom-form-label col-lg-2 star">是否在职:</label>
+            <div class="col-sm-6">
+              <label class="custom-control custom-radio">
+                <input formControlName="InJob" name="InJob" type="radio" class="custom-control-input" value="1" [checked]="form.controls.InJob.value === 1">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">是</span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input formControlName="InJob" name="InJob" type="radio" class="custom-control-input" value="0" [checked]="form.controls.InJob.value === 0">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">否</span>
+              </label>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.JoinTime.invalid && form.controls.JoinTime.value ,'has-success': form.controls.JoinTime.valid && form.controls.JoinTime.value }">
+            <label class="col-sm-3 custom-form-label col-lg-2">入职日期:</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="text" name="dp" formControlName="JoinTime" ngbDatepicker [maxDate]="currentDate" #joinTime="ngbDatepicker" class="form-control"
+                  placeholder="入职日期" (click)="joinTime.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="joinTime.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card" *ngIf="!showLoading">
+    <div class="custom-card-header">
+      <h4>二、证件上传</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <app-mit-upload [uploadType]="'image'" [preview]="form.controls.DriverPhoto.value" [valiScope]="{'Type':['image/png','image/jpeg','image/jpg'],'Size':3}"
+            [height]="200" [uploadTitleName]="'驾驶员照片'" (uploadEvt)="uploadEvt($event,'DriverPhoto')"></app-mit-upload>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <app-mit-upload [uploadType]="'image'" [preview]="form.controls.IDCardAPhoto.value" [valiScope]="{'Type':['image/png','image/jpeg','image/jpg'],'Size':3}"
+            [height]="200" [uploadTitleName]="'身份证照片'" (uploadEvt)="uploadEvt($event,'IDCardAPhoto')"></app-mit-upload>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <app-mit-upload [uploadType]="'image'" [preview]="form.controls.DriversLicenseAPhoto.value" [valiScope]="{'Type':['image/png','image/jpeg','image/jpg'],'Size':3}"
+            [height]="200" [uploadTitleName]="'驾驶证照片'" (uploadEvt)="uploadEvt($event,'DriversLicenseAPhoto')"></app-mit-upload>
+        </div>
+      </div>
+    </div>
+    <div class="custom-card-footer">
+      <div class="upload-file-tooltip">
+        温馨提示：图片仅支持PNG,JPG/JPEG格式,大小不能超过3M;
+      </div>
+    </div>
+  </div>
+  <div class="input-wrapper">
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+    <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+  </div>
+</form>

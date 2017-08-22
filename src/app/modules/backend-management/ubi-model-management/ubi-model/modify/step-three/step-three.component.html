@@ -1,0 +1,28 @@
+<div class="model-box model-box-last">
+  <div class="row">
+    <h4 class="col-10">当前保单出险计费系数设置</h4>
+    <div class="beautify-wrap col-2 text-right">
+      <span>是否启用</span>
+      <input type="checkbox" class="beautify-checkbox" [(ngModel)]="AccidentEnable">
+      <label for="" (click)="AccidentEnable = AccidentEnable ? 0 : 1"></label>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>出险次数</th>
+        <th>系数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of AccidentContent; let index = index">
+        <td>{{item.Name || ''}}</td>
+        <td [ngClass]="{ 'has-danger': item.AccidentinputType && item.AccidentinputType == 2 ,'has-success': item.AccidentinputType && item.AccidentinputType == 1 }">
+          <input type="number" [(ngModel)]="item.Coefficient" class="form-control" [ngModelOptions]="{standalone: true}" min="0" (ngModelChange)="AccidentContentChange(item.Coefficient,index)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<button type="button" class="btn btn-primary" (click)="up()">上一步</button>
+<button type="button" class="btn btn-primary" [disabled]="showLoading || AccidentInputStatus" (click)="submit()">完成</button>

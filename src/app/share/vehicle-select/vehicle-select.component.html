@@ -1,0 +1,28 @@
+<div class="vehicle-select">
+  <div class="select" (click)="isExpand = !isExpand">
+    <input type="text" placeholder="品牌车系" [(ngModel)]="selected" [disabled]="true">
+  </div>
+  <div class="list-menu" *ngIf="isExpand">
+    <div class="sub-list" *ngIf="brandList">
+      <input type="text" [(ngModel)]="searcBrandVal" placeholder="品牌">
+      <ul>
+        <li *ngFor="let item of brandList | vehicleSelect:searcBrandVal:'brand'" (click)="GetVehicleLineList(item.ID);CurrentBrand = item;CurrentLine = undefined;CurrentModel = undefined;vehicleModelList = undefined;vehicleLineList = undefined;"
+          [class.active]="CurrentBrand && item.ID == CurrentBrand.ID">{{item.BrandName}}</li>
+      </ul>
+    </div>
+    <div class="sub-list" *ngIf="vehicleLineList">
+      <input type="text" [(ngModel)]="searcLineVal" placeholder="车系">
+      <ul>
+        <li *ngFor="let item of vehicleLineList | vehicleSelect:searcLineVal:'line'" (click)="GetVehicleModelList(item.ID);CurrentLine = item;"
+          [class.active]="CurrentLine && item.ID == CurrentLine.ID">{{item.LineName}}</li>
+      </ul>
+    </div>
+    <div class="sub-list" *ngIf="vehicleModelList">
+      <input type="text" [(ngModel)]="searcModelVal" placeholder="车型">
+      <ul>
+        <li *ngFor="let item of vehicleModelList | vehicleSelect:searcModelVal:'model'" (click)="CurrentModel = item;select(CurrentBrand,CurrentLine,CurrentModel);isExpand = false"
+          [class.active]="CurrentModel && item.ID == CurrentModel.ID">{{item.ModelName}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="home-overview">
+  <div class="row"></div>
+  <div class="row" *ngIf="homeOverviewInfo">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3">
+      <a [routerLink]="['/page/car-location']" class="count-allcar ">
+        <div class="count">
+          <div class="CarNum">{{homeOverviewInfo.AllVehicleCount | thousandSeparation }}</div>
+          <div class="title">总车辆数</div>
+        </div>
+        <div class="icon-wrap count-allcar-total">
+          <i class="fpd fpd-car"></i>
+        </div>
+      </a>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3">
+      <a [routerLink]="['/page/car-location/run']" class="count-allcar ">
+        <div class="count">
+          <div class="RunStateOfCar">{{homeOverviewInfo.RunVehicleCount || '0' }}</div>
+          <div class="title">行驶</div>
+        </div>
+        <div class="icon-wrap count-allcar-active">
+          <i class="fpd fpd-car"></i>
+        </div>
+      </a>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3">
+      <a [routerLink]="['/page/car-location/stop']" class="count-allcar ">
+        <div class="count">
+          <div class="signStatus">{{homeOverviewInfo.StopVehicleCount || '0' }}</div>
+          <div class="title">停止</div>
+        </div>
+        <div class="icon-wrap count-allcar-reg">
+          <i class="fpd fpd-car"></i>
+        </div>
+      </a>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3">
+      <a [routerLink]="['/page/car-location/offline']" class="count-allcar ">
+        <div class="count">
+          <div class="OffLineOfCar">{{homeOverviewInfo.OfflineVehicleCount || '0' }}</div>
+          <div class="title">离线情况</div>
+        </div>
+        <div class="icon-wrap count-allcar-offline">
+          <i class="fpd fpd-car"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

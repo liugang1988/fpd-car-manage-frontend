@@ -1,0 +1,75 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>供应商信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" *ngIf="!showLoading">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger':  form.controls.SuppliersName.invalid && form.controls.SuppliersName.value ,'has-success': form.controls.SuppliersName.valid && form.controls.SuppliersName.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-3 star">供应商名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" placeholder="供应商名称" formControlName="SuppliersName">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger':form.controls.Abbreviation.invalid && form.controls.Abbreviation.value ,'has-success': form.controls.Abbreviation.valid && form.controls.Abbreviation.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">供应商简称</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" placeholder="供应商简称" formControlName="Abbreviation">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.Contacts.invalid && form.controls.Contacts.value ,'has-success': form.controls.Contacts.valid && form.controls.Contacts.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">联系人</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" placeholder="联系人" formControlName="Contacts">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.SuppliersTelephone.invalid && form.controls.SuppliersTelephone.value ,'has-success': form.controls.SuppliersTelephone.valid && form.controls.SuppliersTelephone.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">固定电话</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" placeholder="固定电话" formControlName="SuppliersTelephone">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.SuppliersEmail.invalid && form.controls.SuppliersEmail.value ,'has-success': form.controls.SuppliersEmail.valid && form.controls.SuppliersEmail.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">电子邮箱</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" placeholder="电子邮箱" formControlName="SuppliersEmail">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.SuppliersMobilePhone.invalid && form.controls.SuppliersMobilePhone.value ,'has-success': form.controls.SuppliersMobilePhone.valid && form.controls.SuppliersMobilePhone.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 ">手机号码</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" placeholder="手机号码" formControlName="SuppliersMobilePhone">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 ">公司地址</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" placeholder="公司地址" formControlName="SuppliersAddress">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3">公司简介</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <textarea name="" class="form-control" id="" cols="30" rows="10" formControlName="SuppliersIntroduction"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3">资质证书</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <app-mit-upload [uploadType]="'image'" [preview]="form.controls.Certifications.value" [valiScope]="{'Type':['image/png','image/jpeg','image/jpg'],'Size':3}"
+                [height]="220" [uploadTitleName]="'资质证书'" (uploadEvt)="uploadEvt($event,'Certifications')"></app-mit-upload>
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-9 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<!--返回-->
+<div class="back" (click)="back()">
+  <i class="fpd fpd-110"></i>
+</div>
+<!--表单-->
+<div class="beautify-form" *ngIf="!showLoading" [@flyIn]="true">
+  <div class="page-header">
+    客户登记
+  </div>
+  <P class="page-header-descrition">亲爱的用户，请填写以下信息，我们将尽快为您开通。</P>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+    <div class="form-group" [ngClass]="{ 'has-danger': form.controls.CompanyName.invalid && form.controls.CompanyName.value ,'has-success':  form.controls.CompanyName.valid && form.controls.CompanyName.value }">
+      <div class="collect-input">
+        <span class="highlight-star">*</span>
+        <span class="labelname">企业名称</span>
+        <input type="text" class="form-control" formControlName="CompanyName" placeholder=" 企业名称 ">
+      </div>
+      <div class="form-control-feedback" *ngIf="(form.controls.CompanyName.dirty || form.controls.CompanyName.pristine) && form.controls.CompanyName.invalid && form.controls.CompanyName.value">企业名称为4-30个字符</div>
+      <div class="form-control-feedback" *ngIf="(form.controls.CompanyName.dirty || form.controls.CompanyName.pristine) && form.controls.CompanyName.valid && form.controls.CompanyName.value">企业名称符合规范</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-danger': form.controls.Province.invalid && form.controls.Province.value ,'has-success':  form.controls.Province.valid && form.controls.Province.value }">
+      <div class="collect-input">
+        <span class="highlight-star">*</span>
+        <span class="labelname">所在区域</span>
+        <app-mit-address-select class="form-control" (result)="selectAddress($event)" [dark]="true"></app-mit-address-select>
+      </div>
+      <div class="form-control-feedback" *ngIf="(form.controls.Province.dirty || form.controls.Province.pristine) && form.controls.Province.invalid && form.controls.Province.value">请输入中文并且不少于四个字，最多14个字</div>
+      <div class="form-control-feedback" *ngIf="(form.controls.Province.dirty || form.controls.Province.pristine) && form.controls.Province.valid && form.controls.Province.value">企业名称符合规范</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-danger': form.controls.Contacts.invalid && form.controls.Contacts.value ,'has-success':  form.controls.Contacts.valid && form.controls.Contacts.value }">
+      <div class="collect-input">
+        <span class="highlight-star">*</span>
+        <span class="labelname">联系人</span>
+        <input type="text" class="form-control" formControlName="Contacts" placeholder=" 联系人">
+      </div>
+      <div class="form-control-feedback" *ngIf="(form.controls.Contacts.dirty || form.controls.Contacts.pristine) && form.controls.Contacts.invalid && form.controls.Contacts.value">联系人名称为2-10个汉字或英文字符</div>
+      <div class="form-control-feedback" *ngIf="(form.controls.Contacts.dirty || form.controls.Contacts.pristine) && form.controls.Contacts.valid && form.controls.Contacts.value">名称符合规范</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-danger':form.controls.Phone.invalid && form.controls.Phone.value ,'has-success': form.controls.Phone.valid && form.controls.Phone.value }">
+      <div class="collect-input">
+        <span class="highlight-star">*</span>
+        <span class="labelname">手机号码</span>
+        <input type="text" class="form-control" placeholder=" 手机号码 " formControlName="Phone">
+      </div>
+      <div class="form-control-feedback" *ngIf="(form.controls.Phone.dirty || form.controls.Phone.pristine) && form.controls.Phone.invalid && form.controls.Phone.value">请输入正确的手机号码</div>
+      <div class="form-control-feedback" *ngIf="(form.controls.Phone.dirty || form.controls.Phone.pristine) && form.controls.Phone.valid && form.controls.Phone.value">手机号码格式正确</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-danger':  form.controls.Email.invalid && form.controls.Email.value ,'has-success':  form.controls.Email.valid && form.controls.Email.value }">
+      <div class="collect-input" style="margin-left:1.5rem">
+        <span class="labelname">Email</span>
+        <input type="text" class="form-control" placeholder=" 邮箱" formControlName="Email">
+      </div>
+      <div class="form-control-feedback" *ngIf="(form.controls.Email.dirty || form.controls.Email.pristine) && form.controls.Email.invalid && form.controls.Email.value">请输入正确的邮箱</div>
+      <div class="form-control-feedback" *ngIf="(form.controls.Email.dirty || form.controls.Email.pristine) && form.controls.Email.valid && form.controls.Email.value">邮箱符合规范</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-danger': form.controls.VehicleCount.invalid && form.controls.VehicleCount.value ,'has-success': form.controls.VehicleCount.valid && form.controls.VehicleCount.value }">
+      <div class="collect-input">
+        <span class="labelname" style="margin-left:1.5rem">车辆数</span>
+        <input type="number" min="0" step="1" class="form-control" placeholder="车辆数目" formControlName="VehicleCount" max="1000000">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="collect-input" style="margin-left:1.5rem"></div>
+    </div>
+    <div class="form-group ">
+      <button type="submit" class="btn btn-lg btn-outline-success btn-block" [disabled]="form.controls.CompanyName.invalid || form.controls.Contacts.invalid  || form.controls.Phone.invalid">提交</button>
+    </div>
+    <div class="form-group">
+      <span class="haveaccount-notify">已有账号？ </span>
+      <a [routerLink]="['/account/login']">立即登录</a>
+    </div>
+  </form>
+</div>
+<!--loading-->
+<div class="loading" *ngIf="!messageTips && showLoading">
+  <app-mit-loading [option]="'load4'"></app-mit-loading>
+</div>
+<!--message-->
+<div class="success-collect" *ngIf="messageTips && showLoading">
+  <div class="callout">
+    <img src="" alt="">
+    <p class="cert-text">
+      登记完成，系统审核中...<br> 请耐心等待！
+    </p>
+  </div>
+  <div class="callout-desrc">
+    管理人员将在2个工作日以内完成审核，届间将有邮件及短信通知审核结果，请注意查收！
+  </div>
+</div>

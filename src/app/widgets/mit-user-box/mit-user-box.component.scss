@@ -1,0 +1,97 @@
+@charset 'UTF-8';
+@import '../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$userboxlist-title-color: #6c6f71; //标题颜色
+$userboxlist-font-color: #6a6a6a; //文字颜色
+$userboxlist-num-color: #6b6a6a; //数字颜色，加粗
+$userboxlist-fg-line: #f4f4f4; //分割线颜色
+$userboxlist-active-hover-bgcolor: #f6f6f6; //激活和悬浮底色
+//用户模块
+.user-box {
+  position: relative;
+  min-width:10rem;
+  .item {
+    height: 54px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    color: $text-color-white;
+    @extend %pointer;
+    &.active,
+    &:active {
+      background-color: rgba(0, 0, 0, .15);
+    }
+    >span {
+      padding: 0 0.5rem;
+    }
+    .img-wrapper {
+      position: relative;
+      span {
+        position: absolute;
+        top: .5rem;
+        left: 2.3rem;
+        font-size: $fs10;
+      }
+      img {
+        display: block;
+        border-radius: 100%;
+        width: 3.35rem;
+        height: 3.35rem;
+        padding: .5rem;
+      }
+    }
+  }
+  .user-box-list {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .25);
+    border-radius: toRem(3px);
+    position: absolute;
+    min-width: 10rem;
+    width: 100%;
+    right: 0;
+    ul {
+      background: $text-color-white;
+      list-style: none;
+      width: inherit;
+      color: $userboxlist-font-color;
+      padding-left: 0;
+      margin-bottom: 0;
+      li {
+        a {
+          cursor: pointer;
+          display: block;
+          color: inherit;
+          padding: 12px 5px 12px 12px;
+          @include remove-a-default-behavior;
+          &:active,
+          &:hover {
+            background-color: $userboxlist-active-hover-bgcolor;
+          }
+          >i {
+            font-size: toRem(16px);
+            padding: 0 8px;
+          }
+          .systeminfo-count {
+            border-radius: 0.625rem;
+            padding: 0.25rem 0.5rem;
+            color: $text-color-white;
+            margin-right: 8px;
+            float: right;
+            font-size: 12px;
+            font-weight: 700;
+          }
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid $userboxlist-fg-line;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width:1199px) {}
+
+@media (max-width:991px) {}
+
+@media (max-width:767px) {}
+
+@media (max-width:479px) {}

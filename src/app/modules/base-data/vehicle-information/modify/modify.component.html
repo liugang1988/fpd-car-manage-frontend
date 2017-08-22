@@ -1,0 +1,235 @@
+<app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+<form class="modify" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <div class="custom-card" *ngIf="!showLoading">
+    <div class="custom-card-header">
+      <h4>一、车辆信息添加（<span class="red">*</span> 号为必填项）</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.Plate.invalid && form.controls.Plate.value ,'has-success': form.controls.Plate.valid && form.controls.Plate.value }">
+            <label class="star col-3 form-control-label">车牌:</label>
+            <div class="col-9">
+              <input type="text" formControlName="Plate" class="form-control" placeholder="请输入完整车牌号">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.MID.invalid && form.controls.MID.value ,'has-success': form.controls.MID.valid && form.controls.MID.value }">
+            <label class="form-control-label star  col-3">品牌车系:</label>
+            <div class="col-9">
+              <app-vehicle-select class="form-control" [selected]="(form.controls.BrandName.value || '品牌') + '/' + (form.controls.LineName.value || '车系') + '/' + (form.controls.VehicleModelName.value || '车型')"
+                (result)="selectVehicle($event)"></app-vehicle-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.RegistrationTime.invalid && form.controls.RegistrationTime.value ,'has-success': form.controls.RegistrationTime.valid && form.controls.RegistrationTime.value }">
+            <label class="star form-control-label star col-3">注册登记日期:</label>
+            <div class="col-9">
+              <div class="input-group">
+                <input type="text" formControlName="RegistrationTime" ngbDatepicker #RegistrationTime="ngbDatepicker" [maxDate]="currentDate"
+                  class="form-control" placeholder="xxxx-xx-xx" (click)="RegistrationTime.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="RegistrationTime.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.EngineNumber.invalid && form.controls.EngineNumber.value ,'has-success': form.controls.EngineNumber.valid && form.controls.EngineNumber.value }">
+            <label class="star form-control-label star col-3">发动机号:</label>
+            <div class="col-9">
+              <input type="text" formControlName="EngineNumber" minlength="3" maxlength="20" class="form-control" placeholder="发动机号">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.VIN.invalid && form.controls.VIN.value ,'has-success': form.controls.VIN.valid && form.controls.VIN.value }">
+            <label class="star col-3 form-control-label star">车架号:</label>
+            <div class="col-9">
+              <input type="text" formControlName="VIN" minlength="17" maxlength="17" class="form-control" placeholder="请输入车架号">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.ODID.invalid && form.controls.ODID.value ,'has-success': form.controls.ODID.valid && form.controls.ODID.value }">
+            <label class="col-3 star  form-control-label">车辆所属:</label>
+            <div class="col-9">
+              <app-department-select class="form-control" [defaultVal]="form.controls.ODID.value" (result)="selectDept($event)"></app-department-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.Displacement.invalid && form.controls.Displacement.value ,'has-success': form.controls.Displacement.valid && form.controls.Displacement.value }">
+            <label class="star col-3 form-control-label">排量:</label>
+            <div class="col-9">
+              <div class="row">
+                <div class="col-9">
+                  <app-dictionary-select class="form-control" [param]="[2]" [placeholder]="['排量']" [defaultVal]="[form.controls.Displacement.value]"
+                    (result)="selectPL($event)"></app-dictionary-select>
+                </div>
+                <div class="col-3" style="padding-left:0;">
+                  <select formControlName="Unit" class="form-control">
+                  <option value="L" >L</option>
+                  <option value="T">T</option>
+                </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.OverloadPerson.invalid && form.controls.OverloadPerson.value ,'has-success': form.controls.OverloadPerson.valid && form.controls.OverloadPerson.value }">
+            <label class="form-control-label  star col-3">荷载人数:</label>
+            <div class="col-9">
+              <input type="number" min="1" step="1" max="999" formControlName="OverloadPerson" min="1" max="50" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row  float-lg-right float-md-right">
+            <a class="more" href="javascript:;" (click)="isMore = !isMore">点击完善更多信息</a>
+          </div>
+        </div>
+      </div>
+      <div class="row more-carinfo" *ngIf="isMore" [@fadeIn]="true">
+        <h4 class="more-detail">更多信息填写</h4>
+        <div class="col-md-12 col-lg-6">
+          <div class="form-group row ">
+            <label class="form-control-label col-3">变速箱参数:</label>
+            <div class="col-9">
+              <app-dictionary-select class="form-control" [param]="[5,6]" [placeholder]="['变速箱参数','档位']" [defaultVal]="[form.controls.ATM.value,form.controls.CrossPiece.value]"
+                (result)="selectBSX($event)"></app-dictionary-select>
+            </div>
+          </div>
+          <div class="form-group row ">
+            <label class="form-control-label col-3">燃料:</label>
+            <div class="col-9">
+              <app-dictionary-select class="form-control" [param]="[8]" [placeholder]="['燃油种类型号']" [defaultVal]="[form.controls.FuelType.value]"
+                (result)="selectRYXH($event)"></app-dictionary-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.OilFuelReference.invalid && form.controls.OilFuelReference.value ,'has-success': form.controls.OilFuelReference.valid
+&& form.controls.OilFuelReference.value }">
+            <label class="form-control-label col-3">油耗参考值:</label>
+            <div class="col-9">
+              <input type="number" min="0" step="0.01" max="99999.99" formControlName="OilFuelReference" class="form-control" placeholder="油耗参考值">
+            </div>
+          </div>
+          <div class="form-group row ">
+            <label class="form-control-label col-3">排放标准:</label>
+            <div class="col-9">
+              <app-dictionary-select class="form-control" [param]="[7]" [placeholder]="['排放标准']" [defaultVal]="[form.controls.EmissionStandards.value]"
+                (result)="selectPF($event)"></app-dictionary-select>
+            </div>
+          </div>
+          <div class="form-group row ">
+            <label class="form-control-label col-3">油费承担者:</label>
+            <div class="col-9">
+              <app-dictionary-select class="form-control" [param]="[12]" [placeholder]="['油费承担者']" [defaultVal]="[form.controls.OilCost.value]"
+                [search]="false" (result)="selectYF($event)"></app-dictionary-select>
+            </div>
+          </div>
+          <div class="form-group row ">
+            <label class="form-control-label col-3">轮胎品牌:</label>
+            <div class="col-9">
+              <app-dictionary-select class="form-control" [param]="[1,9,10,11]" [placeholder]="['轮胎品牌','轮胎尺寸','轮胎胎宽','轮胎胎高']" [defaultVal]="[form.controls.TireBrand.value,form.controls.TireSize.value,form.controls.TireWidth.value,form.controls.TireHeight.value]"
+                (result)="selectLT($event)"></app-dictionary-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.RegistrationModel.invalid && form.controls.RegistrationModel.value ,'has-success': form.controls.RegistrationModel.valid && form.controls.RegistrationModel.value }">
+            <label class="form-control-label   col-3">登记车型:</label>
+            <div class="col-9">
+              <app-dictionary-select class="form-control" [param]="[3]" [placeholder]="['登记车型']" [defaultVal]="[form.controls.RegistrationModel.value]"
+                (result)="selectCX($event)"></app-dictionary-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.Color.invalid && form.controls.Color.value ,'has-success': form.controls.Color.valid && form.controls.Color.value }">
+            <label class="form-control-label  col-3">颜色:</label>
+            <div class="col-9">
+              <app-dictionary-select class="form-control" [param]="[13]" [placeholder]="['车辆颜色']" [defaultVal]="[form.controls.Color.value]"
+                (result)="selectCarColor($event)"></app-dictionary-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.UserType.invalid && form.controls.UserType.value ,'has-success': form.controls.UserType.valid
+&& form.controls.UserType.value }">
+            <label class="form-control-label col-3">使用性质:</label>
+            <div class="col-9">
+              <app-dictionary-select class="form-control" [param]="[4]" [placeholder]="['使用性质']" [defaultVal]="[form.controls.UserType.value]"
+                (result)="selectUseType($event)"></app-dictionary-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.Owner.invalid && form.controls.Owner.value ,'has-success': form.controls.Owner.valid
+&& form.controls.Owner.value }">
+            <label class="form-control-label col-3">所有者:</label>
+            <div class="col-9">
+              <input type="text" formControlName="Owner" minlength="2" maxlength="10" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.RegistrationCertificate.invalid && form.controls.RegistrationCertificate.value ,'has-success': form.controls.RegistrationCertificate.valid
+&& form.controls.RegistrationCertificate.value }">
+            <label class="form-control-label col-3">登记证:</label>
+            <div class="col-9">
+              <input type="text" formControlName="RegistrationCertificate" maxlength="40" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.PurchaseAmount.invalid && form.controls.PurchaseAmount.value ,'has-success':
+form.controls.PurchaseAmount.valid && form.controls.PurchaseAmount.value }">
+            <label class="form-control-label col-3">购置金额:</label>
+            <div class="col-9">
+              <input type="number" min="0" step="0.01" max="999999999.99" formControlName="PurchaseAmount" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.PurchaseDate.invalid && form.controls.PurchaseDate.value ,'has-success': form.controls.PurchaseDate.valid
+&& form.controls.PurchaseDate.value }">
+            <label class="form-control-label col-3">购车日期:</label>
+            <div class="col-9">
+              <div class="input-group">
+                <input type="text" formControlName="PurchaseDate" ngbDatepicker #PurchaseDate="ngbDatepicker" [maxDate]="currentDate" class="form-control"
+                  placeholder="xxxx-xx-xx" (click)="PurchaseDate.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="PurchaseDate.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.Dealer.invalid && form.controls.Dealer.value ,'has-success': form.controls.Dealer.valid
+&& form.controls.Dealer.value }">
+            <label class="form-control-label col-3">经销商名称:</label>
+            <div class="col-9">
+              <input type="text" formControlName="Dealer" minlength="2" maxlength="10" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card" *ngIf="!showLoading">
+    <div class="custom-card-header">二、上传证件</div>
+    <div class="custom-card-body">
+      <div class="row">
+        <div class="col-md-12 col-lg-4">
+          <div class="driver-img">
+            <app-mit-upload [uploadType]="'image'" [preview]="form.controls.DrivingLicenseA.value" [height]="200" (uploadEvt)="uploadEvt($event,'DrivingLicenseA')"
+              [uploadTitleName]="'行驶证'"></app-mit-upload>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="citizen-img">
+            <app-mit-upload [uploadType]="'image'" [preview]="form.controls.CertificateImage.value" [height]="200" (uploadEvt)="uploadEvt($event,'CertificateImage')"
+              [uploadTitleName]="'合格证'"></app-mit-upload>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="driver-license">
+            <app-mit-upload [uploadType]="'image'" [preview]="form.controls.RegistrationImage.value" [height]="200" (uploadEvt)="uploadEvt($event,'RegistrationImage')"
+              [uploadTitleName]="'登记证'"></app-mit-upload>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="custom-card-footer">
+      <div class="upload-file-tooltip">
+        温馨提示：图片仅支持PNG,JPG/JPEG格式,大小不能超过3M;
+      </div>
+    </div>
+    <div class="input-wrapper save-area">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+      <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+    </div>
+  </div>
+</form>

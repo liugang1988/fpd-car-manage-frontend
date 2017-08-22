@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12  col-lg-6">
+    <div class="DriverCount" *ngIf="DriverCount">
+      <h3>驾驶员人数 <div class="float-right">总人数<span>{{this.DriverAllCount}}</span></div></h3>
+      <div class="canvas-wrapper">
+        <a [routerLink]="['/page/base-data/people-car-binding']">
+          <app-mit-echarts [option]="DriverCount" [id]="'DriverCount'" [height]="'400px'"></app-mit-echarts>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-12 col-sm-12 col-md-12  col-lg-6">
+    <div class="DrivingBehavior" *ngIf="DrivingBehavior">
+      <h3>驾驶行为</h3>
+      <div class="canvas-wrapper">
+        <a [routerLink]="['/page/statistical-report/driver-rank']">
+          <app-mit-echarts [option]="DrivingBehavior" [id]="'DrivingBehavior'" [height]="'400px'"></app-mit-echarts>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="col-12 col-sm-12 col-md-12  col-lg-6">
+    <div class="SafeDriving">
+      <h3>安全驾驶 <em>(示例数据)</em></h3>
+      <div class="icon-constrcuct">
+        <div class="counter-wrapper no-content">
+          <div class="line-trangle color-red"></div>
+        </div>
+        <div class="icon-wrap">
+          <i class="fpd fpd-duozhongbaozhang"></i>
+        </div>
+        <div class="counter-wrapper">
+          <div class="counter">
+            <h3>疲劳驾驶</h3>
+            <p>{{safeDrive.tiredDriving || 0}}</p>
+          </div>
+          <div class="line-trangle color-orange reverse"></div>
+        </div>
+      </div>
+      <div class="icon-count-state">
+        <div class="icon-wx">
+          <div class="flex-inline ">
+            <div class="icon-wrap">
+              <i class="fpd fpd-suduspeed8 blue"></i>
+            </div>
+            <div class="counter">
+              <p>一般超速</p>
+              <p>{{safeDrive.generalOverSpeed}}</p>
+            </div>
+          </div>
+          <div class="flex-inline ">
+            <div class="icon-wrap">
+              <i class="fpd fpd-suduspeed8 orange"></i>
+            </div>
+            <div class="counter">
+              <p>严重超速</p>
+              <p>{{safeDrive.severityOverSpeed}}</p>
+            </div>
+          </div>
+          <div class="flex-inline ">
+            <div class="icon-wrap">
+              <i class="fpd fpd-suduspeed8 red"></i>
+            </div>
+            <div class="counter">
+              <p>飞车党&nbsp;&nbsp;</p>
+              <p>{{safeDrive.flyDriving}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="icon-by">
+          <div class="flex-inline overdue">
+            <div class="icon-wrap">
+              <i class="fpd fpd-gpspilaojiashi blue"></i>
+            </div>
+            <div class="counter">
+              <p>一般</p>
+              <p>{{safeDrive.generalSpeed}}</p>
+            </div>
+          </div>
+          <div class="flex-inline expiring">
+            <div class="icon-wrap">
+              <i class="fpd fpd-gpspilaojiashi orange"></i>
+            </div>
+            <div class="counter">
+              <p>严重</p>
+              <p>{{safeDrive.severitySpeed}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-12  col-lg-6">
+    <div class="MoralHazard" *ngIf="MoralHazard">
+      <h3>道德风险 <em>(示例数据)</em></h3>
+      <div class="canvas-wrapper">
+        <app-mit-echarts [option]="MoralHazard" [id]="'MoralHazard'" [height]="'400px'"></app-mit-echarts>
+      </div>
+    </div>
+  </div>-->
+</div>

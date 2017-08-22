@@ -1,0 +1,18 @@
+@charset 'utf-8';
+
+
+//滚动条样式 --webkit
+::-webkit-scrollbar{width:8px;height:10px}
+::-webkit-scrollbar-button:vertical{display:none}//垂直滚动条的按钮
+::-webkit-scrollbar-track:vertical{background-color:black} // 滚动条的滑轨背景颜色
+::-webkit-scrollbar-track-piece{background:#FFF}
+::-webkit-scrollbar-thumb:vertical{background-color:#8E8E8E;border-radius:5px} //滑块颜色
+::-webkit-scrollbar-thumb:vertical:hover{background-color:#3B3B3B}
+::-webkit-scrollbar-corner:vertical{background-color:#535353}
+::-webkit-scrollbar-resizer:vertical{background-color:#FF6E00}
+
+
+//IE
+body{
+   scrollbar-face-color: #8E8E8E;
+}

@@ -1,0 +1,84 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>出险信息详情</h4>
+    <div class="custom-card-body">
+      <div class="row" *ngIf="salesOrder">
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+            车牌：
+          </span>
+          <span class="content">{{salesOrder.SalesOrderNo || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+            车辆所属：
+          </span>
+          <span class="content">{{salesOrder.SalesOrderTime || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+            保单号：
+          </span>
+          <span class="content">{{salesOrder.OrganizationName || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+            出险时间：
+          </span>
+          <span class="content">{{salesOrder.Creator || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+            事故责任：
+          </span>
+          <span class="content">{{salesOrder.Contacts || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+           出险地址：
+          </span>
+          <span class="content">{{salesOrder.ContactPhone || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+          理赔：
+          </span>
+          <span class="content">{{salesOrder.Address || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+           出险人：
+          </span>
+          <span class="content">{{salesOrder.SalesOrderPerson || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+            手机号：
+          </span>
+          <span class="content">{{salesOrder.SuppliersName || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+            创建人：
+          </span>
+          <span class="content">{{salesOrder.DeviceModelName || '无'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+           创建时间：
+          </span>
+          <span class="content">{{salesOrder.DeviceCount || '0'}}</span>
+        </div>
+        <div class="col-12 col-md-12 col-xl-6">
+          <span class="title">
+            描述：
+          </span>
+          <span class="content">{{salesOrder.DevicePrice || '0'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="custom-card-footer">
+      <button type="button" class="btn btn-secondary return" (click)="back()">返回</button>
+    </div>
+  </div>
+</div>

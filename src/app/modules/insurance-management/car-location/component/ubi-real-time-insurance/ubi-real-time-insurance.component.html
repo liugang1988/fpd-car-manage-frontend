@@ -1,0 +1,14 @@
+<div class="ubi-infor">
+  <span (click)="showUbi()">UBI实时保费 <i class="fpd" [class.fpd-paixuxia]="!ubiShow" [class.fpd-paixushang]="ubiShow"></i></span>
+</div>
+<div class="ubi-data-list">
+  <ul class="ubi-real" *ngIf="ubiShow">
+    <li class="control-time">监控时间: {{realTimeData.nowTime}} ~ {{realTimeData.lastTime}}</li>
+    <li><span>静态保费:</span> ¥{{realTimeData.StaticTimePrenium}}</li>
+    <li><span>里程保费:</span> ¥{{realTimeData.DynamicMileagePrenium}}</li>
+    <li><span>时间保费:</span> ¥{{realTimeData.DynamicTimePrenium}}</li>
+    <li><span>驾驶行为保费:</span> ¥{{realTimeData.DriverBehaviorPrenium}}</li>
+    <li><span>超速里程保费:</span> ¥{{realTimeData.SpeedingMileagePrenium}}</li>
+    <li><span>保费合计:</span>¥{{realTimeData.TotalPrenium}}</li>
+  </ul>
+</div>

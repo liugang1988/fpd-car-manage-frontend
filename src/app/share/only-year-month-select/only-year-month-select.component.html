@@ -1,0 +1,21 @@
+<div class="only-year-month-select">
+  <div class="select" (click)="isExpand = !isExpand">
+    <input type="text"  [placeholder]="placeholder" [(ngModel)]="selected" [readonly]="true" [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="list-menu" *ngIf="isExpand" [@fadeIn]="true">
+    <div class="sub-list1">
+      <p class="title">年份</p>
+      <ul class="year-wrap">
+        <li *ngFor="let i of selectYearRange;let index = index" [class.active]="i.active" (click)="actValue(selectYearRange,index)"
+          (dblclick)="emitResult(i)">{{i.date}}</li>
+      </ul>
+    </div>
+    <div class="sub-list2">
+      <p class="title">月份</p>
+      <ul class="month-wrap">
+        <li *ngFor="let i of selectMonthRange;let index = index" [class.active]="i.active" (click)="actValue(selectMonthRange,index)"
+          (dblclick)="emitResult(i)">{{i.date}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

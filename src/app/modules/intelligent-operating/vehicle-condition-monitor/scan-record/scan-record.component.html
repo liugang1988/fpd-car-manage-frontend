@@ -1,0 +1,50 @@
+<!--硬件-->
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <table class="table table-bordered text-center" *ngIf="carinfo" [@fadeIn]="true">
+      <thead>
+        <tr>
+          <th class="text-center">车牌</th>
+          <th class="text-center">品牌车系</th>
+          <th class="text-center">排量</th>
+          <th class="text-center">部门</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{carinfo.Plate || '-' }}</td>
+          <td>{{carinfo.VehicleModelName || '-' }}</td>
+          <td>{{carinfo.Displacement || '-' }}</td>
+          <td>{{carinfo.CompanyName || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>扫描时间</th>
+            <th>操作人</th>
+            <th>扫描结果</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.CreateTime || '-'}}</td>
+            <td>{{item.AccountName || '-'}}</td>
+            <td>
+              <span class="operator-span" (click)="detail(item)">详细信息</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

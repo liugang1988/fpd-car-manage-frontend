@@ -1,0 +1,65 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <a [routerLink]="['/page/backend-management/product-manage/device-out/add']" class="btn-add-or-public">设备出库</a>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">供应商</label>
+          <div class="supplier-select">
+            <app-supplier-select class="form-control" (result)="getSupplierID($event)" [showAll]='true'></app-supplier-select>
+          </div>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">产品型号</label>
+          <app-product-number-select class="form-control" [SupplierId]="DeviceSupplierID" [showAll]='true' (result)="getDeviceModelID($event)"></app-product-number-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">订单号</label>
+          <input type="text" class="form-control" placeholder="订单号" [(ngModel)]="SalesOrderNo" (keyup.enter)="search(SalesOrderNo)" [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(SalesOrderNo)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>出库日期</th>
+            <th>出库单号</th>
+            <th>订单号</th>
+            <th>型号</th>
+            <th>数量</th>
+            <th>客户</th>
+            <th>收货人</th>
+            <th>联系电话</th>
+            <th>操作人</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.DeviceDeliveryTime || '-'}}</td>
+            <td>{{item.ID || '-'}}</td>
+            <td>{{item.SalesOrderNo || '-'}}</td>
+            <td>{{item.DeviceModelName || '-'}}</td>
+            <td>{{item.TotalQuantity || '-'}}</td>
+            <td>{{item.OrganizationName || '-'}}</td>
+            <td>{{item.Receiver || '-'}}</td>
+            <td>{{item.ContactPhone || '-'}}</td>
+            <td>{{item.AccountName || '-'}}</td>
+            <td><span class="operator-span" (click)="detail(item.ID)">明细</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

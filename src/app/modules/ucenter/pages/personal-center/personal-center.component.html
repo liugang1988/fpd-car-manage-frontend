@@ -1,0 +1,98 @@
+<div class="container personal-center" [@bounceIn]="true">
+  <div class="custom-card">
+    <div class="custom-card-head">
+      <h4>基本信息</h4>
+    </div>
+    <div class="custom-card-body">
+      <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+      <form [formGroup]="basicForm" (ngSubmit)="onUpdateBaseInfo(basicForm.value)" *ngIf="!showLoading">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-sm-12 col-lg-6">
+            <div class="form-group row"  [ngClass]="{ 'has-danger': basicForm.controls.AccountName.invalid && basicForm.controls.AccountName.value ,'has-success': basicForm.controls.AccountName.valid && basicForm.controls.AccountName.value }">
+              <label class="col-sm-3 form-control-label">账号</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" placeholder="请输入您的账号" formControlName="AccountName">
+              </div>
+            </div>
+            <div class="form-group row"  [ngClass]="{ 'has-danger': basicForm.controls.DepartmentName.invalid && basicForm.controls.DepartmentName.value ,'has-success': basicForm.controls.DepartmentName.valid && basicForm.controls.DepartmentName.value }">
+              <label class="col-sm-3 form-control-label">部门</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="DepartmentName" >
+              </div>
+            </div>
+            <div class="form-group row"  [ngClass]="{ 'has-danger': basicForm.controls.RoleName.invalid && basicForm.controls.RoleName.value ,'has-success': basicForm.controls.RoleName.valid && basicForm.controls.RoleName.value }">
+              <label class="col-sm-3 form-control-label">角色</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="RoleName" >
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-sm-12 col-lg-6">
+            <div class="form-group row" [ngClass]="{ 'has-danger': basicForm.controls.NickName.invalid && basicForm.controls.NickName.value ,'has-success': basicForm.controls.NickName.valid && basicForm.controls.NickName.value }">
+              <label class="col-sm-3 form-control-label">昵称</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="NickName" placeholder="请输入您的昵称">
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{ 'has-danger': basicForm.controls.UserEmail.invalid && basicForm.controls.UserEmail.value ,'has-success': basicForm.controls.UserEmail.valid && basicForm.controls.UserEmail.value }">
+              <label class="col-sm-3 form-control-label">邮箱</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="UserEmail" placeholder="请输入您的邮箱">
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{ 'has-danger': basicForm.controls.UserPhone.invalid && basicForm.controls.UserPhone.value ,'has-success':  basicForm.controls.UserPhone.valid && basicForm.controls.UserPhone.value }">
+              <label class="col-sm-3 form-control-label">电话</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="UserPhone" placeholder="请输入您的电话">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-sm-12 col-lg-12">
+            <div class="offset-sm-1">
+              <button type="submit" class="btn btn-primary " [disabled]="basicForm.invalid || showLoading">更新信息</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div class="custom-card" *ngIf="!showLoading">
+    <div class="custom-card-head">
+      <h4>修改密码</h4>
+    </div>
+    <div class="custom-card-body">
+      <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePass(changePasswordForm.value)">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-sm-12 col-lg-6">
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">原始密码</label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control" formControlName="OldPassWord" placeholder="请输入当前用户的旧密码">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-sm-12 col-lg-6">
+            <div class="form-group row" [ngClass]="{ 'has-danger': changePasswordForm.controls.PassWord.invalid && changePasswordForm.controls.PassWord.value ,'has-success': changePasswordForm.controls.PassWord.valid && changePasswordForm.controls.PassWord.value }">
+              <label class="col-sm-3 form-control-label">设置密码</label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control" formControlName="PassWord" placeholder="请设置新密码">
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{ 'has-danger': changePasswordForm.controls.ConfirmPassWord.value !== changePasswordForm.controls.PassWord.value ||  changePasswordForm.controls.ConfirmPassWord.invalid && changePasswordForm.controls.ConfirmPassWord.value ,'has-success': changePasswordForm.controls.ConfirmPassWord.valid || (changePasswordForm.controls.ConfirmPassWord.value && changePasswordForm.controls.ConfirmPassWord.value === changePasswordForm.controls.PassWord.value)}">
+              <label class="col-sm-3 form-control-label">确认密码</label>
+              <div class="col-sm-8">
+                <input type="password" class="form-control" formControlName="ConfirmPassWord" placeholder="请确认新密码">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-sm-12 col-lg-12">
+            <div class="offset-sm-1">
+              <button type="submit" class="btn btn-danger" [disabled]="changePasswordForm.invalid || showLoading">修改密码</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

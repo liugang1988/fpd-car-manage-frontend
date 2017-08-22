@@ -1,0 +1,18 @@
+    .operator-span {
+      background: transparent;
+      border: none;
+      outline: none;
+      &:hover {
+        color: #333 !important;
+        font-weight: normal !important;
+      }
+      &[disabled],
+      &[disabled]:hover,
+      &[disabled]:focus {
+        cursor: not-allowed;
+        color: #ccc;
+        background: transparent;
+        border: none;
+        outline: none;
+      }
+    }

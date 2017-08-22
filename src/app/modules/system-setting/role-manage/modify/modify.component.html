@@ -1,0 +1,32 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>角色信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" *ngIf="!showLoading">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.RoleName.invalid && form.controls.RoleName.value ,'has-success': form.controls.RoleName.valid && form.controls.RoleName.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">角色名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="RoleName" placeholder="角色名称">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.RoleDesc.invalid && form.controls.RoleDesc.value ,'has-success': form.controls.RoleDesc.valid && form.controls.RoleDesc.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 ">角色说明</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <input type="text" class="form-control" formControlName="RoleDesc" placeholder="角色说明">
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

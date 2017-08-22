@@ -1,0 +1,4 @@
+<app-mit-alert [title]="'操作提示'" [saveName]="'确认'" [closeName]="'取消'" (close)="closeHandler()" (submit)="saveHandler(selectedMenu)">
+ 请确认是否删除 "{{selectedMenu.MenuName}}" 菜单？
+ <p  class="warning" *ngIf="selectedMenu.SubLinks">警告：该菜单包含子类，请确认无误后操作!</p>
+</app-mit-alert>

@@ -1,0 +1,22 @@
+ @charset 'UTF-8';
+ @import '../../../../../assets/scss_styles/custom_scss/_custom-export';
+ .play-control {
+   background: rgba(248, 248, 248, 0.95);
+   padding: 15px;
+   text-align: center;
+   span {
+     cursor: pointer;
+     &:hover,
+     &:active,
+     &:focus {
+       i {
+         border-radius: 50%;
+         background: #373a3c;
+         color: #FFF;
+       }
+     }
+     i {
+       font-size: 2.4rem
+     }
+   }
+ }

@@ -1,0 +1,9 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.personal-center {
+  width: 100%;
+  padding: 20px;
+  .form-control-label {
+    text-align: right;
+  }
+}

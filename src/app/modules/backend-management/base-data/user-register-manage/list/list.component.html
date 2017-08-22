@@ -1,0 +1,63 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">状态</label>
+          <app-select class="form-control" [showAll]="true" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search()">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>创建日期</th>
+            <th>企业名称</th>
+            <th>联系人</th>
+            <th>手机</th>
+            <th>电子邮箱</th>
+            <th>车辆数</th>
+            <th>状态</th>
+            <th>区域</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.CreateTime || '-'}}</td>
+            <td>{{item.CompanyName || '-'}}</td>
+            <td>{{item.Contacts || '-'}}</td>
+            <td>{{item.Phone || '-' }}</td>
+            <td>{{item.Email  || '-' }}</td>
+            <td>{{item.VehicleCount || '-' }}</td>
+            <td>
+              <a href="javascript:void();" (click)="show(item)" *ngIf="item.Status != '未处理'">{{item.Status}}</a>
+              <span *ngIf="item.Status == '未处理'">{{item.Status}}</span>
+            </td>
+            <td>{{item.Province || '-' }}{{item.City || '-'}}</td>
+            <td>
+              <span class="operator-span" *ngIf="item.Status == '未处理'" (click)="dispose(item)">处理</span>
+              <span class="operator-span  disable" *ngIf="item.Status != '未处理'">处理</span>
+              <span class="operator-span" (click)="delete(item)">删除</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>
+<app-delete *ngIf="showDeleteAlert" [item]="deleteItem" (close)="closeAlert($event)"></app-delete>
+<app-modify *ngIf="showModifyAlert" [item]="modifyItem" (dispose)="disposeSupplier($event)"></app-modify>
+<app-dispose *ngIf="showDisposeAlert" [item]="showDisposeItem" (showDispose)="showDispose()"></app-dispose>
+

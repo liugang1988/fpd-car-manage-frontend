@@ -1,0 +1,83 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>软件版本信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" *ngIf="!showLoading">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.DeviceSuppliersID.invalid && form.controls.DeviceSuppliersID.value ,'has-success': form.controls.DeviceSuppliersID.valid && form.controls.DeviceSuppliersID.value }">
+            <label tooltip='' class="col-sm-12 col-md-3 form-control-label  col-lg-3 star">供应商</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <app-supplier-select class="form-control" (result)="getSupplierID($event)" [defaultVal]="form.controls.DeviceSuppliersID.value"></app-supplier-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.PurchaseDeviceModelID.invalid && form.controls.PurchaseDeviceModelID.value ,'has-success': form.controls.PurchaseDeviceModelID.valid && form.controls.PurchaseDeviceModelID.value }">
+            <label tooltip='' class="col-sm-12 col-md-3 form-control-label  col-lg-3 star">产品型号</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <app-product-number-select class="form-control" [SupplierId]="form.controls.DeviceSuppliersID.value" [defaultVal]="form.controls.PurchaseDeviceModelID.value"
+                (result)="getDeviceModelID($event)"></app-product-number-select>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.PublishPerson.invalid && form.controls.PublishPerson.value ,'has-success': form.controls.PublishPerson.valid && form.controls.PublishPerson.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">固件发布人</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" formControlName="PublishPerson" placeholder="固件发布人">
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.PublishDate.invalid && form.controls.PublishDate.value ,'has-success': form.controls.PublishDate.valid && form.controls.PublishDate.value }">
+            <label tooltip='' class="col-sm-12 col-md-3 form-control-label  col-lg-3 star">发布日期</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <div class="input-group">
+                <input type="text" name="dp" formControlName="PublishDate" ngbDatepicker #PublishDate="ngbDatepicker" class="form-control"
+                  placeholder="发布日期" (click)="PublishDate.toggle()">
+                <span class="input-group-btn">
+                    <button  type="button" class="btn btn-primary" (click)="PublishDate.toggle()">
+                      <i class="fpd fpd-rili"></i>
+                    </button>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row " [ngClass]="{ 'has-danger': form.controls.SoftName.invalid && form.controls.SoftName.value ,'has-success': form.controls.SoftName.valid && form.controls.SoftName.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">软件名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" formControlName="SoftName" placeholder="软件名称">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.VersionNumber.invalid && form.controls.VersionNumber.value ,'has-success': form.controls.VersionNumber.valid && form.controls.VersionNumber.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">软件版本号</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" formControlName="VersionNumber" placeholder="软件版本号">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.BinFileUrl.invalid && form.controls.BinFileUrl.value ,'has-success': form.controls.BinFileUrl.valid && form.controls.BinFileUrl.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">软件下载地址</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" formControlName="BinFileUrl" placeholder="软件下载地址">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.Status.invalid && form.controls.Status.value != null,'has-success': form.controls.Status.valid && form.controls.Status.value != null}">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">状态</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <app-select class="form-control" [defaultValue]="form.controls.Status.value" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 ">版本描述</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <textarea cols="30" rows="10" formControlName="BinDescription" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-9 offset-lg-3">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

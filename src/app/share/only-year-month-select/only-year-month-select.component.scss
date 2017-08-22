@@ -1,0 +1,77 @@
+  @charset 'utf-8';
+  @import '../../../assets/scss_styles/custom_scss/custom-export.scss';
+  .only-year-month-select {
+    background: #FFF; 
+    margin: -0.5rem -0.75rem;
+    border-radius: 0.25rem;
+    position: relative;
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .title {
+      display: block;
+      width: 100%;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0;
+      padding: 10px 0;
+    }
+    input {
+      width: 100%;
+      padding: 0 0.75rem;
+      height:33px;
+      border: none;
+      border-radius: 0.25rem;
+      color: #55595c;
+      &[disabled] {
+        cursor: pointer !important;
+        background-color: #fff !important;
+      }
+    }
+    .list-menu {
+      width: 100%;
+      position: absolute;
+      @include flex(flex-start, center);
+      .sub-list1 {
+        width: 50%;
+        background: #fff;
+      }
+      .sub-list2 {
+        width: 50%;
+        background: #fff;
+      }
+      .year-wrap,
+      .month-wrap {
+        position: absolute;
+        background: #fff;
+        width: auto;
+        padding: 5px 0;
+        max-width: 50%;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 999;
+        box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+        @include flex(flex-start, center, row, flex, wrap);
+        li:not(.title) {
+          display: block;
+          width: 55px;
+          padding: 5px;
+          cursor: pointer;
+          text-align: center;
+          margin: 0 auto;
+        }
+      }
+    }
+    .limit-height {
+      max-height: 10rem;
+      width: 100%;
+      overflow: auto;
+    }
+  }
+
+  .active {
+    background-color: #37c2dd;
+    color: #fff;
+    border-radius: 50px 50px;
+  }

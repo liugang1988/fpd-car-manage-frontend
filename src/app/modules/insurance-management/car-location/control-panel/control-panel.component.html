@@ -1,0 +1,7 @@
+<div class="control-panel-wrap" [class.show-hide-panel]="controlStatus">
+  <a (click)="tagglePanel()" class="show-hide">{{showText}}</a>
+  <div class="control-panel" [@zoomInRight]="true" >
+    <router-outlet></router-outlet>
+    <a (click)="closePanel()" class="close-panel"><i class="fpd fpd-guanbi"></i></a>
+  </div>
+</div>

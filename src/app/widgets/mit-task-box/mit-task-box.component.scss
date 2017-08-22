@@ -1,0 +1,168 @@
+@charset 'UTF-8';
+@import '../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$tasklist-border: #e7e9eb; //描边颜色
+$tasklist-header-bgcolor: #e2e6e8; //导航底色
+$tasklist-title-color: #6c6f71; //标题颜色
+$tasklist-font-color: #6a6a6a; //文字颜色
+$tasklist-num-color: #6b6a6a; //数字颜色，加粗
+$tasklist-fg-line: #f4f4f4; //分割线颜色
+$tasklist-active-hover-bgcolor: #f6f6f6; //激活和悬浮底色
+.task-box {
+  position: relative;
+  @extend %pointer;
+  .item {
+    &.active,
+    &:active {
+      background-color: rgba(0, 0, 0, .15);
+    }
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    color: $text-color-white;
+    height: 54px;
+    padding: 0 toRem(12px);
+    //顶部菜单统计条目
+    .tasklist-counts {
+      position: relative;
+      margin: 0 5px 0 0;
+      >i {
+        display: inline-block;
+        margin: 0 5px 0 0;
+        font-size: toRem(24px);
+      }
+      .mini-tag {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: 10px;
+        font-size: $fs10;
+      }
+    }
+  }
+  .tasklist-card {
+    position: absolute;
+    width: 230px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .25);
+    border-radius: toRem(3px);
+    z-index: $zindex-xlg;
+    .card-head {
+      padding: 15px 22px 15px 25px;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      color: $tasklist-title-color;
+      background-color: $tasklist-header-bgcolor;
+      @extend %pointer;
+      >h5 {
+        margin-bottom: 0;
+        font-size: $fs14;
+        width: 100%;
+      }
+      .allitem,
+      .item-count {
+        color: $zs-top-color;
+      }
+      .item-count {
+        font-weight: 700;
+        padding: 0 5px;
+      }
+      .allitem {
+        float: right;
+      }
+    }
+    .card-body {
+      background-color: $text-color-white;
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: auto;
+        max-height: 205px;
+        overflow-y: auto;
+        &.list-all-item {
+          height: auto !important;
+          max-height: 1000px;
+          overflow: hidden !important;
+        }
+        a {
+          display: block;
+          width: 100%;
+          padding: 12px 5px 12px 12px;
+          color: $tasklist-font-color;
+          @include remove-a-default-behavior;
+          @include flex(space-between, center);
+          border-bottom: 1px solid $tasklist-fg-line;
+          &:active,
+          &:hover {
+            background-color: $tasklist-active-hover-bgcolor;
+          }
+          .alert-title {
+            display: inline-block;
+            margin: 0 10px;
+          }
+          .left-wrap {
+            @include flex(flex-start, center);
+          }
+          .task-icon-wrap {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 14px;
+            padding: 0 8px;
+            background-color: #32aec6;
+            @include flex(center, center);
+            >i {
+              font-size: toRem(16px);
+              color: #fff;
+            }
+          }
+          .custom-label {
+            border-radius: toRem(10px);
+            padding: toRem(4px) toRem(8px);
+            color: $text-color-white;
+            margin-right: 8px;
+            font-size: $fs12;
+            font-weight: 700;
+            &.custom-label-primary {
+              background-color: #30afcf;
+            }
+            &.custom-label-danger {
+              background-color: #e86970;
+            }
+            &.custom-label-warning {
+              background-color: #f9bd0d;
+            }
+            &.custom-label-info {
+              background-color: #679be6;
+            }
+          }
+        }
+      }
+    }
+    .card-foot {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 10px;
+      background-color: #fff;
+      border-bottom: 1px solid $tasklist-fg-line;
+    }
+  }
+}
+
+@media (max-width:1199px) {}
+
+@media (max-width:991px) {}
+
+@media (max-width:767px) {}
+
+@media (max-width:479px) {}
+
+.list-all-item {
+  height: auto !important;
+  max-height: auto !important;
+  overflow: auto !important;
+}

@@ -1,0 +1,27 @@
+.stars{
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    color: #e3e3e3;
+    overflow: hidden;
+    font-size: 1.5rem;
+    line-height: 30px;
+    &:before{
+        content: attr(data-content);
+    }
+    .rating-stars{
+        position: absolute;
+        left: 0;
+        top: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #f00;
+        transition: all 0.25s ease-out;
+        -moz-transition: all 0.25s ease-out;
+        -webkit-transition: all 0.25s ease-out;
+        &:before{
+            content: attr(data-content);
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+        }
+    }
+}

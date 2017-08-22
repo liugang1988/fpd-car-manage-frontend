@@ -1,0 +1,23 @@
+<div class="custom-card insurance-price-wrap">
+  <div class="custom-card-body">
+    <!--面包屑-->
+    <div class="top">
+      <div class="item" [ngClass]="{'active' : step ===1 || step ===2 || step ===3}"><span>1</span>车辆信息</div>
+      <div class="line" [ngClass]="{'active' : step ===1 || step ===2 || step ===3}">
+        <div class="border"></div>
+      </div>
+      <div class="item" [ngClass]="{'active' : step ===2 || step ===3}"><span>2</span>投保项目</div>
+      <div class="line" [ngClass]="{'active' : step ===2 || step ===3}">
+        <div class="border"></div>
+      </div>
+      <div class="item" [ngClass]="{'active' : step ===3}"><span>3</span>报价结果</div>
+    </div>
+    <!--车辆信息-->
+    <app-vehicle-infor *ngIf="step == 1" (VehicleObj)="VehicleObj($event)" [defaultVehicleObj]="defaultVehicleObj" (step)="steps($event)"></app-vehicle-infor>
+    <!--投保项目-->
+    <app-insurance-project *ngIf="step == 2" (InsuranceProjectObj)="InsuranceProjectObj($event)" [defaultInsuranceProjectObj]="defaultInsuranceProjectObj" [PurchaseAmount]="defaultVehicleObj && defaultVehicleObj.PurchaseAmount" [Displacement]="defaultVehicleObj && defaultVehicleObj.Displacement"
+      [OverloadPerson]="defaultVehicleObj && defaultVehicleObj.OverloadPerson" (step)="steps($event)"></app-insurance-project>
+    <!--报价结果-->
+    <app-price-result *ngIf="step == 3" [defaultVehicleObj]="defaultVehicleObj" [defaultInsuranceProjectObj]="defaultInsuranceProjectObj" (step)="steps($event)"></app-price-result>
+  </div>
+</div>

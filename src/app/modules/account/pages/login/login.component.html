@@ -1,0 +1,52 @@
+<div [@flyIn]="true">
+  <div class="beautify-form" *ngIf="!showLoading">
+    <div class="page-header">
+      欢迎登录
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+      <div class="form-group" [ngClass]="{ 'has-danger': form.controls.UserName.invalid && form.controls.UserName.value ,'has-success':  form.controls.UserName.valid && form.controls.UserName.value }">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon fpd fpd-ordinarylogin1"></span>
+          <input type="text" class="form-control" formControlName="UserName" placeholder="手机号码 \ 邮箱 ">
+        </div>
+        <div class="form-control-feedback" *ngIf="(form.controls.UserName.dirty || form.controls.UserName.pristine) && form.controls.UserName.invalid && form.controls.UserName.value">账号不符合规范</div>
+        <div class="form-control-feedback" *ngIf="(form.controls.UserName.dirty || form.controls.UserName.pristine) && form.controls.UserName.valid && form.controls.UserName.value">账号符合规范</div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-danger': form.controls.PassWord.invalid && form.controls.PassWord.value ,'has-success': form.controls.PassWord.valid && form.controls.PassWord.value }">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon fpd fpd-mima"></span>
+          <input type="PassWord" class="form-control" formControlName="PassWord" placeholder="请输入密码">
+        </div>
+        <div class="form-control-feedback" *ngIf="(form.controls.PassWord.dirty || form.controls.PassWord.pristine) && form.controls.PassWord.invalid && form.controls.PassWord.value ">密码不符合规范,请重新输入</div>
+        <div class="form-control-feedback" *ngIf="(form.controls.PassWord.dirty || form.controls.PassWord.pristine) && form.controls.PassWord.valid && form.controls.PassWord.value ">密码符合规范</div>
+      </div>
+      <div class="form-group ">
+        <div class="flex">
+          <div class="beautify-wrap flex-wrap">
+            <input type="checkbox" class="beautify-checkbox" name="rememberme" id="rememberAccount" formControlName="rememberAccount">
+            <label for="rememberAccount"></label>记住账号
+          </div>
+          <!--<a [routerLink]="['/account/reset-pw']">忘记密码</a>-->
+        </div>
+      </div>
+      <div class="message-tips" *ngIf="messageTips">
+        <i class="fpd fpd-error"></i> {{messageTips}}
+      </div>
+      <div class="form-group ">
+        <button class="btn btn-lg btn-outline-success btn-block" type="submit" [disabled]="form.invalid">登录</button>
+      </div>
+      <div class="form-group">
+        <span class="noaccount-notify">没有账号？点击</span><a [routerLink]="['/account/collect']" class="collect-user">客户登记</a>
+      </div>
+      <div class="form-group">
+        <div class="ma">
+          <img src="assets/images/default_img/ma.png" alt="App下载">
+          <span>APP下载</span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="loading" *ngIf="showLoading">
+    <app-mit-loading [option]="'load4'"></app-mit-loading>
+  </div>
+</div>

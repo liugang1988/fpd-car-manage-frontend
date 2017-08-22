@@ -1,0 +1,122 @@
+<app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <div class="custom-card" *ngIf="!showLoading">
+    <div class="custom-card-header">
+      <h4>产品型号信息</h4>
+    </div>
+    <div class="custom-card-body">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DeviceSupplierIDs.invalid && form.controls.DeviceSupplierIDs.value ,'has-success': form.controls.DeviceSupplierIDs.valid && form.controls.DeviceSupplierIDs.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">供应商名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <app-supplier-select class="form-control" (result)="getSupplierID($event)" [defaultVal]="form.controls.DeviceSupplierIDs.value"></app-supplier-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger':  form.controls.DeviceModel.invalid && form.controls.DeviceModel.value ,'has-success': form.controls.DeviceModel.valid && form.controls.DeviceModel.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-3 star">产品名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" minlength="2" maxlength="10" placeholder="产品名称" formControlName="DeviceModel">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger':  form.controls.Name.invalid && form.controls.Name.value ,'has-success': form.controls.Name.valid && form.controls.Name.value }">
+            <label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-3 star">产品型号</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <input type="text" class="form-control" minlength="2" maxlength="10" placeholder="产品型号" formControlName="Name">
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.DeviceCategory.invalid && form.controls.DeviceCategory.value ,'has-success': form.controls.DeviceCategory.valid
+&& form.controls.DeviceCategory.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3 star">产品类型</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <app-select class="form-control" [defaultValue]="form.controls.DeviceCategory.value" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getDeviceCategory($event)"></app-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger':  form.controls.Description.invalid && form.controls.Description.value ,'has-success': form.controls.Description.valid && form.controls.Description.value }">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3">产品描述</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <textarea class="form-control" maxlength="200" placeholder="产品描述" cols="30" rows="10" formControlName="Description"></textarea>
+            </div>
+          </div>
+          <!--<div class="form-group row">
+            <label class="col-sm-12 col-md-3 form-control-label col-lg-3">支持的功能参数</label>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="">
+                    OTA远程升级
+                  </label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="">
+                    安装校正功能
+                  </label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="">
+                    OBD功能
+                  </label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="">
+                    传感器
+                  </label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="">
+                    带电池
+                  </label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="">
+                    GPS定位
+                  </label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="">
+                    LBS基站
+                  </label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="">
+                    AGPS定位
+                  </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-9 offset-lg-3">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button>
+              <button type="button" class="btn btn-secondary" (click)="back()">取消</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

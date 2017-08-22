@@ -1,0 +1,29 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+$ca-footer-padding:10px !default; // 尾部填充
+$ca-footer-bgColor:#fff !default; // 尾部背景颜色
+
+.label-star {
+  position: relative;
+  &:before {
+    content: '*';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-left: -3px;
+    transform: translateY(-50%);
+    color: #f00;
+    font-size: 12px;
+  }
+}
+
+.custom-alert-footer {
+  @include flex(flex-end, center);
+  padding: $ca-footer-padding;
+  background-color: $ca-footer-bgColor;
+  min-height: 3rem;
+  height: auto;
+  button {
+    margin: 0 0.5rem;
+  }
+}

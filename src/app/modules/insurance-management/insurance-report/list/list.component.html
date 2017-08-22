@@ -1,0 +1,81 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <button type="button" class="btn btn-primary" (click)="search(KeyValue)">出险登记</button>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌号,保单号" [(ngModel)]="KeyValue" (keyup.enter)="search(KeyValue)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">车辆所属</label>
+          <app-select class="form-control" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getCarID($event)"></app-select>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyValue)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <!--<app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>-->
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table>
+        <thead>
+          <tr>
+            <th>保单号<br/>
+                出险时间
+            </th>
+            <th>车牌<br/>
+                车架号
+            </th>
+            <th>车辆所属<br/>
+                联系电话
+            </th>
+            <th>地址</th>
+            <th>责任</th>
+            <th>理赔</th>
+            <th>出险人</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a [routerLink]="[ '/page/insurance-management/guarantee-management/detail']">UBI100025151</a><br/>
+              深圳TOGO
+            </td>
+            <td>
+              粤B151515<br/>
+              别克凯越 2015款1.5手动
+            </td>
+            <td>
+              2016-11-22<br/>
+              2017-11-21
+            </td>
+            <td>1300.00</td>
+            <td>
+              120天12时15分<br/>
+              300.00
+            </td>
+            <td>
+              8000.00<br/>
+              600.00
+            </td>
+            <td>
+              13天12时15分<br/>
+              380.00
+            </td>
+            <td>
+              <span class="operator-span disabled" [routerLink]="[ '/page/insurance-management/guarantee-management/ubiList']">明细</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <!--<h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>-->
+  </div>
+</div>

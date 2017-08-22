@@ -1,0 +1,192 @@
+<div class="custom-card">
+  <app-mit-loading [option]="'load7'" *ngIf="!insuranceDetail"></app-mit-loading>
+  <div class="custom-card-body" *ngIf="insuranceDetail">
+    <div class="vehicle-basic">
+      <h5>车辆档案信息</h5>
+      <div class="row" >
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>车牌号:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.Plate}}</span>
+          </div>
+          <div class="show-item">
+            <label>发动机号:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.EngineNumber}}</span>
+          </div>
+          <div class="show-item">
+            <label>品牌车系:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.VehicleModelName}}</span>
+          </div>
+          <div class="show-item">
+            <label>注册登记日期:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.RegistrationTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>新车购置价:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.PurchaseAmount}}元</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>车架号:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.VIN}}</span>
+          </div>
+          <div class="show-item">
+            <label>车辆所属:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.CompanyName}}</span>
+          </div>
+          <div class="show-item">
+            <label>排量:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.Displacement}}</span>
+          </div>
+          <div class="show-item">
+            <label>荷载人数:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.OverloadPerson}}人</span>
+          </div>
+          <div class="show-item">
+            <label>购车日期:</label>
+            <span>{{insuranceDetail.CommonInsurance.VehicleContent.PurchaseDate | splitTime}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="vehicle-basic">
+      <h5>投保项目</h5>
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>既往一年是否理赔:</label>
+            <span>{{insuranceDetail.CommonInsurance.IsCompensate ? '是' : '否'}}</span>
+          </div>
+          <div class="show-item">
+            <label>保单号:</label>
+            <span>{{insuranceDetail.CommonInsurance.CINo}}</span>
+          </div>
+          <div class="show-item">
+            <label>商业险保费:</label>
+            <span>{{insuranceDetail.CommonInsurance.CommercialPremium}}元</span>
+          </div>
+          <div class="show-item">
+            <label>交强险保费:</label>
+            <span>{{insuranceDetail.CommonInsurance.CompulsoryPremium}}元</span>
+          </div>
+          
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item" *ngIf="insuranceDetail.CommonInsurance.CompensateCount">
+            <label>近一年出险次数:</label>
+            <span>{{insuranceDetail.CommonInsurance.CompensateCount}}次</span>
+          </div>
+          <div class="show-item" *ngIf="insuranceDetail.CommonInsurance.NoAccidentYears">
+            <label>连续未出险年数:</label>
+            <span>{{insuranceDetail.CommonInsurance.NoAccidentYears}}年</span>
+          </div>
+          <div class="show-item">
+            <label>保险公司:</label>
+            <span>{{insuranceDetail.CommonInsurance.InsuranceCompanyName}}</span>
+          </div>
+          <div class="show-item">
+            <label>生效时间:</label>
+            <span>{{insuranceDetail.CommonInsurance.StartTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>到期时间:</label>
+            <span>{{insuranceDetail.CommonInsurance.EndTime | splitTime}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="custom-card guarantee" *ngIf="insuranceDetail">
+  <div class="custom-card-header">
+    <h4>投保项目明细</h4>
+  </div>
+  <div class="custom-card-body">
+    <table class="table table-bordered my-table">
+      <thead>
+        <tr>
+          <th>类型</th>
+          <th>项目</th>
+          <th>投保状态</th>
+          <th>保费(元)</th>
+          <th>不计免赔险</th>
+          <th>保费(元)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of insuranceDetail.CommonInsurance.InsuranceContent">
+          <td>{{item.InsuranceTypeName}}</td>
+          <td>{{item.Name}}</td>
+          <td>{{item.IntenanceName}}</td>
+          <td>{{item.Amount}}</td>
+          <td>{{item.NoDeductible ? '投保' : '不投保'}}</td>
+          <td>{{item.NoDeductibleAmount}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="custom-card-body">
+    <div class="vehicle-basic">
+      <h5>UBI保单信息</h5>
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>UBI保单号:</label>
+            <span>{{insuranceDetail.UBIInsurance.UBIInsuranceNo}}</span>
+          </div>
+          <div class="show-item">
+            <label>保险公司:</label>
+            <span>{{insuranceDetail.CommonInsurance.InsuranceCompanyName}}</span>
+          </div>
+          <div class="show-item">
+            <label>模型名称:</label>
+            <span>{{insuranceDetail.UBIInsurance.UBIModelName}}</span>
+          </div>
+          <div class="show-item">
+            <label>保费:</label>
+            <span>{{insuranceDetail.UBIInsurance.Premium}}元</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>生效日期:</label>
+            <span>{{insuranceDetail.UBIInsurance.StartTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>到期日期:</label>
+            <span>{{insuranceDetail.UBIInsurance.EndTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>参考静态保费:</label>
+            <span>{{insuranceDetail.UBIInsurance.ReferStaticPremium}}元</span>
+          </div>
+          <div class="show-item">
+            <label>参考动态保费:</label>
+            <span>{{insuranceDetail.UBIInsurance.MovePremium}}元</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-header">
+    <h4>承保/受益人信息</h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <table class="table table-bordered my-table">
+          <tr>
+            <td>投保人:</td>
+            <td>{{insuranceDetail.UBIInsurance.OrganizationName}}</td>
+          </tr>
+          <tr>
+            <td>手机号码:</td>
+            <td>{{insuranceDetail.UBIInsurance.ContactPhone}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

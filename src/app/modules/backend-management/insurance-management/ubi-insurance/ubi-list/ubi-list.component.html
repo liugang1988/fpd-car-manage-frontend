@@ -1,0 +1,206 @@
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <div class="row">
+      <div class="col-8">
+        <h4 *ngIf="ubiDetail">{{ubiDetail.UBIInsurance.Plate}}</h4>
+      </div>
+      <div class="col-4">
+        <button type="button" (click)="back()" class="btn btn-return float-right btn-outline-primary"><i class="fpd fpd-fanhui"></i> 返回</button>
+      </div>
+    </div>
+    <hr>
+    <app-mit-loading [option]="'load7'" *ngIf="!ubiDetail"></app-mit-loading>
+    <div class="vehicle-basic" *ngIf="ubiDetail">
+      <h5>UBI保单信息</h5>
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>UBI保单号:</label>
+            <span>{{ubiDetail.UBIInsurance.UBIInsuranceNo}}</span>
+          </div>
+          <div class="show-item">
+            <label>保险公司:</label>
+            <span>{{ubiDetail.UBIInsurance.InsuranceCompanyName}}</span>
+          </div>
+          <div class="show-item">
+            <label>模型名称:</label>
+            <span>{{ubiDetail.UBIInsurance.UBIModelName}}</span>
+          </div>
+          <div class="show-item">
+            <label>保费:</label>
+            <span>{{ubiDetail.UBIInsurance.Premium || 0}}元</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>生效日期:</label>
+            <span>{{ubiDetail.UBIInsurance.StartTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>到期日期:</label>
+            <span>{{ubiDetail.UBIInsurance.EndTime | splitTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>参考静态保费:</label>
+            <span>{{ubiDetail.UBIInsurance.ReferStaticPremium || 0}}元</span>
+          </div>
+          <div class="show-item">
+            <label>参考动态保费:</label>
+            <span>{{ubiDetail.UBIInsurance.MovePremium || 0}}元</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="vehicle-basic" *ngIf="ubiDetail">
+      <h5>实际UBI保单汇总</h5>
+      <div class="row">
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>UBI保费总额:</label>
+            <span>{{ubiDetail.ActualUBIInsurance.Premium || 0}}元</span>
+          </div>
+          <div class="show-item">
+            <label>动态里程保费:</label>
+            <span>{{ubiDetail.ActualUBIInsurance.MileagePremium || 0}}元</span>
+          </div>
+          <div class="show-item">
+            <label>静态保费:</label>
+            <span>{{ubiDetail.ActualUBIInsurance.StaticPremium || 0}}元</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>动态时间保费:</label>
+            <span>{{ubiDetail.ActualUBIInsurance.MovePremium || 0}}元</span>
+          </div>
+          <div class="show-item">
+            <label>驾驶行为保费:</label>
+            <span>{{ubiDetail.ActualUBIInsurance.DrivingBehaviorPremium || 0}}元</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-body ubi-infor">
+    <div class="row">
+      <div class="col-6 col-xl-5 col-lg-12 col-md-12 col-sm-12">
+        <div class="date-select">
+          <ul>
+            <li (click)="selectDate(item.ID, item.time)" *ngFor="let item of selectList" [ngClass]="{'active': currentItem == item.ID}">{{item.value}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-6 col-xl-7 col-lg-12 col-md-12 col-sm-12" *ngIf="dateComponentStatus">
+        <div class="form-group row">
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="input-group">
+              <input type="text" ngbDatepicker #StartDate="ngbDatepicker" [maxDate]="currentDate" class="form-control" placeholder="开始时间" [(ngModel)]="StartTime"
+                [ngModelOptions]="{standalone: true}" (click)="StartDate.toggle()">
+              <span class="input-group-btn">
+                  <button  type="button" class="btn btn-primary" (click)="StartDate.toggle()">
+                    <i class="fpd fpd-rili"></i>
+                  </button>
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="input-group">
+              <input type="text" ngbDatepicker #EndDate="ngbDatepicker" [maxDate]="currentDate" class="form-control" placeholder="结束时间"
+                [(ngModel)]="EndTime" [ngModelOptions]="{standalone: true}" (click)="EndDate.toggle()">
+              <span class="input-group-btn">
+                  <button  type="button" class="btn btn-primary" (click)="EndDate.toggle()">
+                    <i class="fpd fpd-rili"></i>
+                  </button>
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-4 col-lg-3 col-md-3">
+            <button type="button" class="btn btn-primary btn-block btn-search" (click)="search(StartTime,EndTime)"><i class="fpd fpd-chaxun"></i> 查询</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p>分析（{{StartTimeShow}} 00:00:00 -- {{EndTimeShow}} 23:59:59)</p>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>项目</th>
+              <th>静态时长(分钟)</th>
+              <th>动态里程(km)</th>
+              <th>动态时长(分钟)</th>
+              <th>驾驶行为(次)</th>
+              <th>超速(km)</th>
+              <th>保费</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="actualUBIForTime">
+            <tr>
+              <th>数值</th>
+              <td>{{actualUBIForTime.StaticTime.Value}}</td>
+              <td>{{actualUBIForTime.MoveMileage.Value}}</td>
+              <td>{{actualUBIForTime.MoveTime.Value}}</td>
+              <td>{{actualUBIForTime.DrivingBehavior.Value}}</td>
+              <td>{{actualUBIForTime.Speed.Value}}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>保费(元)</th>
+              <td>{{actualUBIForTime.StaticTime.Premium}}</td>
+              <td>{{actualUBIForTime.MoveMileage.Premium}}</td>
+              <td>{{actualUBIForTime.MoveTime.Premium}}</td>
+              <td>{{actualUBIForTime.DrivingBehavior.Premium}}</td>
+              <td>{{actualUBIForTime.Speed.Premium}}</td>
+              <td>{{actualUBIForTime.Premium}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-body">
+    <div class="row" >
+      <div class="col-md-12">
+        <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+        <!--保费列表-->
+        <app-mit-data-table>
+          <table *ngIf="list">
+            <thead>
+              <tr>
+                <th>起始时间<br/>结束时间</th>
+                <th>行程时长</th>
+                <th>里程(km)</th>
+                <th>平均速度(km/h)</th>
+                <th>动态里程保费</th>
+                <th>时长保费</th>
+                <th>驾驶行为保费</th>
+                <th>超速保费</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of list">
+                <td>{{item.StartTime || '-'}}<br/>{{item.EndTime || '-'}}</td>
+                <td>{{item.TrackTime || '-'}}</td>
+                <td>{{item.TrackMileage || '-'}}</td>
+                <td>{{item.AvgSpeed || '-'}}</td>
+                <td>{{item.MoveMileagePremium || '-'}}</td>
+                <td>{{item.TimePremium || '-'}}</td>
+                <td>{{item.DrivingBehaviorPremium || '-'}}</td>
+                <td>{{item.SpeedPremium || '-'}}</td>
+                <td>
+                  <span class="operator-span" [routerLink]="['/page/backend-management/insurance-management/ubi-insurance/ubi-detail',item.TrackId]">明细</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </app-mit-data-table>
+        <!--分页-->
+        <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+        <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+      </div>
+    </div>
+  </div>
+</div>

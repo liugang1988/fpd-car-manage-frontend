@@ -1,0 +1,83 @@
+<app-mit-alert [title]="'报警处理'" [saveName]="'提交'" [@flyIn]="true" [closeName]="'取消'" (close)="closeHandler($event)" (submit)="saveHandler(NotifyForm.value,SelfForm.value)"
+  [disabled]="(radio === 2 && NotifyForm.invalid) || (radio === 1 && SelfForm.invalid) || ((radio === 2  && NotifyForm.controls.NoticeType.value === 1 || NotifyForm.controls.NoticeType.value === 3) && !NotifyForm.controls.Phone.value) || (( radio === 2 && NotifyForm.controls.NoticeType.value === 2 || NotifyForm.controls.NoticeType.value === 3) && !NotifyForm.controls.Email.value) || ( radio === 2 && NotifyForm.controls.DestUserId.value === 0)">
+
+  <div class="row form-group">
+    <div class="col-6 col-sm-6" *ngFor="let item of radioGroup">
+      <label class="custom-control custom-radio">
+        <input name="radio" [(ngModel)]="radio" (ngModelChange)="checkAtion($event)" type="radio" class="custom-control-input" [value]="item.id">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">{{item.name}}</span>
+      </label>
+    </div>
+  </div>
+  <div class="self" *ngIf="radio === 1">
+    <form [formGroup]="SelfForm">
+      <div class="form-group row">
+        <label class="col-4 col-sm-4 form-control-label star">处理结果</label>
+        <div class="col-8 col-sm-8">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-sm btn-outline-primary" [class.active]="SelfForm.controls.ProcessingStatus.value === 2"
+              (click)="setProcessingStatus(2)">已处理</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" [class.active]="SelfForm.controls.ProcessingStatus.value === 3"
+              (click)="setProcessingStatus(3)">忽略处理</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" [class.active]="SelfForm.controls.ProcessingStatus.value === 4"
+              (click)="setProcessingStatus(4)">误报</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row " [ngClass]="{ 'has-danger': SelfForm.controls.Memo.invalid && SelfForm.controls.Memo.value ,'has-success': SelfForm.controls.Memo.valid
+&& SelfForm.controls.Memo.value }">
+        <label class="col-4 col-sm-4 form-control-label star spec-center">备注</label>
+        <div class="col-8 col-sm-8">
+          <textarea formControlName="Memo" maxlength="300" cols="30" rows="3" class="form-control"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="callout" *ngIf="radio === 2">
+    <form [formGroup]="NotifyForm">
+      <div class="form-group row" [ngClass]="{ 'has-danger': NotifyForm.controls.DestUserId.invalid && NotifyForm.controls.DestUserId.value ,'has-success': NotifyForm.controls.DestUserId.valid
+&& NotifyForm.controls.DestUserId.value }">
+        <label class="col-4 col-sm-4 form-control-label star">处理人</label>
+        <div class="col-8 col-sm-8">
+          <select class="form-control" formControlName="DestUserId" (ngModelChange)="filterData(Operator,$event)">
+              <option *ngIf=" NotifyForm.controls.DestUserId.untouched ||  NotifyForm.controls.DestUserId.invalid" value="0" disabled selected>---请选择用户---</option>
+              <option [value]="item.ID" *ngFor="let item of Operator" >{{item.AccountName}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row" [ngClass]="{ 'has-danger': NotifyForm.controls.NoticeType.invalid && NotifyForm.controls.NoticeType.value ,'has-success': NotifyForm.controls.NoticeType.valid
+&& NotifyForm.controls.NoticeType.value }">
+        <label class="col-4 col-sm-4 form-control-label star">通知方式</label>
+        <div class="col-8 col-sm-8">
+          <label class="custom-control custom-checkbox" *ngFor="let item of notifyWay">
+            <input type="checkbox" [(ngModel)]="item.checked" (ngModelChange)="notifyHandler(notifyWay)" [ngModelOptions]="{standalone: true}" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">{{item.name}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="form-group row" [ngClass]="{ 'has-danger': NotifyForm.controls.Phone.invalid && NotifyForm.controls.Phone.value ,'has-success': NotifyForm.controls.Phone.valid
+&& NotifyForm.controls.Phone.value }" *ngIf="notifyWay[0].checked">
+        <label class="col-4 col-sm-4 form-control-label" [class.star]="notifyWay[0].checked">手机号</label>
+        <div class="col-8 col-sm-8">
+          <input type="text" placeholder="手机号码" formControlName="Phone" [readonly]="!notifyWay[0].checked" class="form-control">
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="notifyWay[1].checked" [ngClass]="{ 'has-danger': NotifyForm.controls.Email.invalid && NotifyForm.controls.Email.value ,'has-success': NotifyForm.controls.Email.valid
+&& NotifyForm.controls.Email.value }">
+        <label class="col-4 col-sm-4 form-control-label" [class.star]="notifyWay[1].checked">邮箱</label>
+        <div class="col-8 col-sm-8">
+          <input type="text" placeholder="邮箱" formControlName="Email" [readonly]="!notifyWay[1].checked" class="form-control">
+        </div>
+      </div>
+      <div class="form-group row" [ngClass]="{ 'has-danger': NotifyForm.controls.Memo.invalid && NotifyForm.controls.Memo.value ,'has-success': NotifyForm.controls.Memo.valid
+&& NotifyForm.controls.Memo.value }">
+        <label class="col-4 col-sm-4 form-control-label star spec-center">内容</label>
+        <div class="col-8 col-sm-8">
+          <textarea maxlength="200" cols="30" rows="3" class="form-control" formControlName="Memo"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+</app-mit-alert>

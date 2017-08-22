@@ -1,0 +1,30 @@
+<div class="search-area">
+  <form>
+    <div class="row">
+      <div class="col-6">
+        <div class="input-group">
+          <input type="text" name="dp" [(ngModel)]="startTime" ngbDatepicker #st="ngbDatepicker" class="form-control" readonly placeholder="开始日期">
+          <span class="input-group-btn">
+                <button class="btn btn-primary" (click)="st.toggle()">
+                  <i class="fpd fpd-rili"></i>
+                </button>
+             </span>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="input-group">
+          <input type="text" name="dp" [(ngModel)]="endTime" [minDate]="startTime" [disabled]="!startTime" ngbDatepicker #et="ngbDatepicker"
+            class="form-control" readonly placeholder="结束日期" (click)="et.toggle()">
+          <span class="input-group-btn">
+                <button class="btn btn-primary" [disabled]="!startTime" (click)="et.toggle()">
+                  <i class="fpd fpd-rili"></i>
+                </button>
+             </span>
+        </div>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-block btn-outline-primary" (click)="search(startTime,endTime)" [disabled]="!startTime || !endTime"><i class="fpd fpd-sousuo"></i> 查询</button>
+      </div>
+    </div>
+  </form>
+</div>

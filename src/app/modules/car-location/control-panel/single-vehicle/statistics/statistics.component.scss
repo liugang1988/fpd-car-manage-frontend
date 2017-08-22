@@ -1,0 +1,42 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.wrapper {
+  padding: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  li {
+    padding: 8px 0;
+    @include flex(flex-start);
+    span {
+      font-size: 15px;
+    }
+    .spec {
+      flex: 0 0 60%;
+    }
+    &:hover {
+      background-color: #333a3d;
+      color: #fff;
+    }
+    .li-title {
+      display: inline-block;
+      width: 32%;
+      text-align: center;
+      text-overflow: ellipsis;
+      border-right: 1px solid #e2e2e2;
+    }
+    .li-content {
+      padding-left: 15px;
+    }
+  }
+}
+
+.more {
+  display: block;
+  text-align: center;
+  @include remove-a-default-behavior;
+  font-size: 15px;
+}

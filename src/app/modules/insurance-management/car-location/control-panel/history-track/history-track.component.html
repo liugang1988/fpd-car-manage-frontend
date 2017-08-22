@@ -1,0 +1,60 @@
+<div class="cpanel">
+  <div class="cpanel-header">
+    <span class="title">行程详细信息</span>
+    <span class="car-license" *ngIf="TrackData">{{TrackData.Plate || '车牌号码'}}</span>
+  </div>
+  <div class="cpanel-body">
+    <div class="content-header">
+      <span class="date">开始时间111</span>
+      <span class="time">里程(km)</span>
+      <span class="time">时长</span>
+      <span class="detail">详情</span>
+    </div>
+    <div class="content-body">
+      <app-mit-loading [option]="'load7'" *ngIf="!TrackData"></app-mit-loading>
+      <div *ngIf="TrackData">
+        <div class="none" *ngIf="!TrackData.TrackList.length">
+          没有找到该车的历史记录
+        </div>
+        <div class="li" *ngFor="let item of TrackData.TrackList" >
+          <div class="mini" [class.active]="item.TrackInfo.ID === selectID">
+            <span class="date" (click)="selected(item.TrackInfo.ID, item.TrackInfo.VID)">{{item.TrackInfo.StartTime}}</span>
+            <span class="time" (click)="selected(item.TrackInfo.ID, item.TrackInfo.VID)">{{item.TrackInfo.TrackMileage || 0}}</span>
+            <span class="time" (click)="selected(item.TrackInfo.ID, item.TrackInfo.VID)">{{item.TrackInfo.TravelTime | timeDifference}} 分</span>
+            <a class="operate" [routerLink]="['/page/intelligent-operating/driving-data/track-detail/', item.TrackInfo.ID]" target="_blank" >更多
+              <!--<span *ngIf="showID !== item.TrackInfo.ID;">展开</span>
+              <span *ngIf="showID === item.TrackInfo.ID;">收缩</span>-->
+            </a>
+          </div>
+          <!--<div class="detail" *ngIf="showID === item.TrackInfo.ID">
+            <div class="null" *ngIf="eventCountInfo && !eventCountInfo.length">
+              无详细信息
+            </div>
+            <div *ngIf="eventCountInfo && eventCountInfo.length">
+              <a class="li-detail" *ngFor="let event of eventCountInfo">
+                <span class="status">{{event.EventName}}</span>
+                <span class="red count">{{event.EventCount}} 次</span>
+              </a>
+            </div>
+          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-play-control *ngIf="isPlayCtrl"></app-play-control>
+  <app-search-area (searchEvt)="search($event)" *ngIf="isSearchArea"></app-search-area>
+  <div class="cpanel-footer">
+    <div class="control-icon">
+      <a (click)="isPlayCtrl = !isPlayCtrl;isSearchArea = false;"> <i class="fpd fpd-bofangqi"></i><span>播放控制</span></a>
+      <a (click)="isSearchArea = !isSearchArea;isPlayCtrl = false;"> <i class="fpd fpd-sousuo"></i><span>筛选</span></a>
+      <!--<a> <i class="fpd fpd-licheng"></i><span>回放速度</span></a>-->
+      <!--<a> <i class="fpd fpd-export"></i><span>导出轨迹</span></a>-->
+    </div>
+  </div>
+
+
+  <!--弹窗提示-->
+  <app-mit-alert [title]="'操作提示'" [closeName]="'取消'" (close)="showAlert = !showAlert" *ngIf="showAlert">
+    {{message}}
+  </app-mit-alert>
+</div>

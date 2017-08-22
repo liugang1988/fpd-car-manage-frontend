@@ -1,0 +1,113 @@
+<div class="loadings" *ngIf="loading">
+  <div>
+    <app-mit-loading [option]="'load7'"></app-mit-loading>
+  </div>
+</div>
+<div class="wrapper" *ngIf="panelInfo">
+  <div class="speed-dial-area">
+    <app-speed-dial [option]="[{name:'speed', radius:'89%', position:[ '20%', '48%' ],data:panelInfo.DeviceStatus === '离线' || panelInfo.DeviceStatus === '停止' ? 0:panelInfo.GPSSpeed},{name:'odo', radius:'89%', position:[ '80%', '48%' ],data:panelInfo.TrackMileage}]"></app-speed-dial>
+    <div class="fuel-count">
+      <div class="fule-million-show">
+        <span class="fuel-count-title">
+           油耗L/100km
+        </span>
+        <span class="fuel-count-num">
+          {{panelInfo.TrackOilForHundred}}
+        </span>
+      </div>
+      <div class="line"></div>
+      <div class="fule-consumption-count">
+        <span class="fuel-count-title">
+           油耗量L
+        </span>
+        <span class="fuel-count-num">
+          {{panelInfo.TrackOil}}
+        </span>
+      </div>
+      <div class="car-license">
+        <span>{{panelInfo.Plate}}</span>
+      </div>
+      <div class="car-model">
+        <span>{{panelInfo.VehicleModelName}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="average-stroke">
+    <div class="average-speed">
+      <div class="title">平均时速:</div>
+      <div class="count">
+        <span class="high">{{panelInfo.AvgTrackSpeed}}</span>Km/h
+      </div>
+    </div>
+    <div class="stroke-time">
+      <div class="title">行程时间:</div>
+      <div class="count">{{panelInfo.TrackTime }}</div>
+    </div>
+  </div>
+  <div class="stroke-all-time">
+    <div class="stroke-start">
+      <div class="title">行程开始:</div>
+      <div class="date">
+        {{panelInfo.StartTime}}
+      </div>
+    </div>
+    <div class="stroke-end">
+      <div class="title">末次上传数据:</div>
+      <div class="date">
+        {{ panelInfo.UpLoadTime || ''}}
+      </div>
+    </div>
+  </div>
+  <div class="car-status-icon">
+    <div class="status-area">
+      <i class="fpd fpd-jijiayou"></i>
+      <span class="title">急加油</span>
+      <div class="count">{{panelInfo.RapidAcceleration}}</div>
+    </div>
+    <div class="status-area">
+      <i class="fpd fpd-jichache"></i>
+      <span class="title">急刹车</span>
+      <div class="count">{{panelInfo.EmergencyBrake}}</div>
+    </div>
+    <div class="status-area">
+      <i class="fpd fpd-jizhuanwan"></i>
+      <span class="title">急转弯</span>
+      <div class="count">{{panelInfo.SharpTurn}}</div>
+    </div>
+    <div class="status-area">
+      <i class="fpd fpd-kuaisubiandao"></i>
+      <span class="title">快速变道</span>
+      <div class="count">{{panelInfo.FastChang}}</div>
+    </div>
+    <div class="status-area">
+      <i class="fpd fpd-zhuanwanjiayou"></i>
+      <span class="title">转弯加油</span>
+      <div class="count">{{panelInfo.CurveAcceleration}}</div>
+    </div>
+  </div>
+  <div class="car-fault-icon">
+    <span class="title">车辆故障</span>
+    <a href="javascript:;" class="car-fault-detail" *ngIf="panelInfo.FaultCode !== ''">{{panelInfo.FaultCode}}</a>
+    <a href="javascript:;" class="car-success-detail" *ngIf="panelInfo.FaultCode === ''">暂无故障</a>
+  </div>
+  <div class="car-text-info">
+    <div class="text-area">
+      <div class="text-wrap">
+        <span class="title">状态:</span>
+        <span class="info">{{panelInfo.DeviceStatusName}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">仪表里程:</span>
+        <span class="info">{{panelInfo.DashboardMileage}}km</span>
+      </div>
+    </div>
+    <div class="text-area">
+      <div class="title">地址:</div>
+      <a href="javascript:;" class="address">{{panelInfo.address}}</a>
+    </div>
+  </div>
+</div>
+<div class="error-status " *ngIf="!panelInfo">
+  <i class="fpd fpd-wunai"></i>
+  <h1 class="error-text">网络故障</h1>
+</div>

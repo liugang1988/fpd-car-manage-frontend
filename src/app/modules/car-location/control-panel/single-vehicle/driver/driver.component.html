@@ -1,0 +1,96 @@
+<!--<h1 class="text-muted text-center" >模块开发中</h1>-->
+
+
+<div class="loadings" *ngIf="!panelDriverInfo">
+  <div>
+    <app-mit-loading [option]="'load7'"></app-mit-loading>
+  </div>
+</div>
+<div class="wrapper">
+  <div class="tips" *ngIf="panelDriverInfo && !panelDriverInfo.SingleDriver.ID">
+    <i class="fpd fpd-yewuyeicon05"></i>
+    <p>该车辆未绑定驾驶员</p>
+  </div>
+  <div *ngIf="panelDriverInfo && panelDriverInfo.SingleDriver.ID">
+    <div class="avatar-header">
+      <div class="img-wrap">
+        <img src="assets/images/default_img/default_avatar.png" alt="" class="avatar">
+      </div>
+      <span class="name">{{panelDriverInfo.SingleDriver.DriverName || ''}}</span>
+    </div>
+    <div class="base-info">
+      <div class="text-wrap">
+        <span class="title">性别:</span>
+        <span class="content">{{panelDriverInfo.SingleDriver.SexDesc || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">工龄:</span>
+        <span class="content">{{panelDriverInfo.SingleDriver.WorkingYears || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">籍贯:</span>
+        <span class="content" *ngIf="panelDriverInfo.SingleDriver.Birthplace">{{panelDriverInfo.SingleDriver.Birthplace.split('/')[0] || ''}} <span *ngIf="panelDriverInfo.SingleDriver.Birthplace.split('/')[1]">-</span>        {{panelDriverInfo.SingleDriver.Birthplace.split('/')[1] || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">驾龄:</span>
+        <span class="content">{{panelDriverInfo.SingleDriver.DrivingYears || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">电话:</span>
+        <span class="content">{{panelDriverInfo.SingleDriver.Phone || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">驾照等级:</span>
+        <span class="content">{{panelDriverInfo.SingleDriver.DriversLicenseTypeDesc || ''}}</span>
+      </div>
+    </div>
+    <div class="car-status-info">
+      <div class="text-wrap">
+        <span class="title">急加油:</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.RapidAcceleration || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">烂路高速行驶</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.RottenSpeed || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">急刹车:</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.EmergencyBrake || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">急转弯:</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.SharpTurn || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">快速变道:</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.FastChang || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">频繁变道:</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.FrequentLaneChang || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">弯道加速:</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.CurveAcceleration || ''}}</span>
+      </div>
+    </div>
+    <div class="car-fuel-info">
+      <div class="text-wrap">
+        <span class="title">平均油耗:</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.AvgOil || ''}}</span>
+      </div>
+      <div class="text-wrap">
+        <span class="title">耗油量(L):</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.TotalOil || ''}}</span>
+      </div>
+      <div class="text-wrap fs12">
+        <span class="title ">行驶里程(km):</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.TrackMileage || ''}}</span>
+      </div>
+      <div class="text-wrap fs12">
+        <span class="title">怠速油耗(L):</span>
+        <span class="content">{{panelDriverInfo.DrivingBehavior.TotalIdleOil || ''}}</span>
+      </div>
+    </div>
+  </div>
+</div>

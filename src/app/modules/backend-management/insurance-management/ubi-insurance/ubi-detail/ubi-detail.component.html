@@ -1,0 +1,106 @@
+<div class="custom-card ubi-detail">
+  <div class="custom-card-header">
+    <div class="row">
+      <div class="col-12 col-md-8"><h4 *ngIf="ubiInsuranceDetail">{{ubiInsuranceDetail.Plate}}</h4></div>
+      <div class="col-12 col-md-4">
+        <button type="button" class="btn btn-return float-right btn-outline-primary" (click)="back()"><i class="fpd fpd-fanhui"></i> 返回</button>
+      </div>
+      <hr>
+    </div>
+  </div>
+
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="!ubiInsuranceDetail"></app-mit-loading>
+    <table class="table table-hover">
+      <tr>
+        <th>项目</th>
+        <th>动态里程</th>
+        <th>动态时长</th>
+        <th>驾驶行为保费</th>
+        <th>保费</th>
+      </tr>
+      <tr *ngIf="ubiInsuranceDetail">
+        <td>保费(元)</td>
+        <td>{{ubiInsuranceDetail.MoveMileagePremium}}</td>
+        <td>{{ubiInsuranceDetail.MoveTimePremium}}</td>
+        <td>{{ubiInsuranceDetail.DrivingBehaviorPremium}}</td>
+        <td>{{ubiInsuranceDetail.Premium}}</td>
+      </tr>
+    </table>
+    <div class="vehicle-basic">
+      <div class="row" *ngIf="ubiInsuranceDetail">
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>车牌号:</label>
+            <span>{{ubiInsuranceDetail.Plate}}</span>
+          </div>
+          <div class="show-item">
+            <label>开始时间:</label>
+            <span>{{ubiInsuranceDetail.StartTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>行驶时长:</label>
+            <span>{{ubiInsuranceDetail.TravelTime}}</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6">
+          <div class="show-item">
+            <label>车型:</label>
+            <span>{{ubiInsuranceDetail.VehicleModel}}</span>
+          </div>
+          <div class="show-item">
+            <label>结束时间:</label>
+            <span>{{ubiInsuranceDetail.EndTime}}</span>
+          </div>
+          <div class="show-item">
+            <label>行驶里程:</label>
+            <span>{{ubiInsuranceDetail.TrackMileage}}km</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-header">
+    <h4>驾驶行为明细</h4>
+  </div>
+  <div class="custom-card-body" *ngIf="ubiInsuranceDetail">
+    <h4>事件</h4>
+    <table class="table table-hover">
+      <tr>
+        <th>项目</th>
+        <th>次数</th>
+      </tr>
+      <tr *ngFor="let item of ubiInsuranceDetail.DrivingBehaviorList">
+        <td>{{item.ItemName}}</td>
+        <td>{{item.ItemValue}}</td>
+      </tr>
+    </table>
+    <h3 *ngIf="ubiInsuranceDetail.DrivingBehaviorList && ubiInsuranceDetail.DrivingBehaviorList.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+    <h4>超速</h4>
+    <table class="table table-hover">
+      <tr>
+        <th>速度(km/h)</th>
+        <th>公里数(km)</th>
+      </tr>
+      <tr *ngFor="let item of ubiInsuranceDetail.SpeedList">
+        <th>{{item.ItemName}}</th>
+        <td>{{item.ItemValue}}</td>
+      </tr>
+    </table>
+    <h3 *ngIf="ubiInsuranceDetail.SpeedList && ubiInsuranceDetail.SpeedList.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+
+  <div class="custom-card-footer" [@fadeIn]="true">
+    <h5 class="table-title"><i class="fpd fpd-dangqianhangchengjilu"></i>历史轨迹</h5>
+    <div class="row">
+      <div class="col-12 map-wrap">
+        <app-mit-baidu-map></app-mit-baidu-map>
+        <!--行车事件筛选-->
+        <app-map-event-filter (result)="changeShowEvent($event)" [checkedList]="TrackLineData.GPSEvents" *ngIf="TrackLineData"></app-map-event-filter>
+        <!--渐变轨迹颜色说明-->
+        <app-gradient-path-intro *ngIf="gradientPath"></app-gradient-path-intro>
+      </div>
+    </div>
+
+  </div>
+</div>

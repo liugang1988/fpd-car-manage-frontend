@@ -1,0 +1,48 @@
+<div class="row data-table-pagination">
+  <div class="col-12 col-sm-5 col-md-5">
+    <div class="pagination-total float-md-left" *ngIf="totalCountSize">
+      <span>显示 {{page * pageSize - pageSize + 1}} 项到</span>
+      <span *ngIf="page * pageSize <= totalCountSize">{{page * pageSize}} </span>
+      <span *ngIf="page * pageSize > totalCountSize">{{totalCountSize}} </span>
+      <span> 项 , 共 {{totalCountSize}} 项</span>
+    </div>
+    <!--<div class="pagination-button" *ngIf="checkedList.length">
+      <button class="btn btn-secondary" (click)="checkAction('delete')">删除</button>
+      <button class="btn btn-secondary" (click)="checkAction('read')">标记已读</button>
+    </div>-->
+  </div>
+  <div class="col-12 col-sm-7 col-md-7" *ngIf="totalCountSize">
+    <nav class="float-md-right">
+      <ul [class]="'pagination' + (size ? ' pagination-' + size : '')">
+        <li *ngIf="boundaryLinks" class="page-item" [class.disabled]="!hasPrevious()">
+          <a aria-label="First" class="page-link" href (click)="!!selectPage(1)">
+            <span aria-hidden="true">首页</span>
+            <span class="sr-only">First</span>
+          </a>
+        </li>
+        <li *ngIf="directionLinks" class="page-item" [class.disabled]="!hasPrevious()">
+          <a aria-label="Previous" class="page-link" href (click)="!!selectPage(page-1)">
+            <span aria-hidden="true">上一页</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li *ngFor="let pageNumber of pages" class="page-item" [class.active]="pageNumber === page" [class.disabled]="isEllipsis(pageNumber)">
+          <a *ngIf="isEllipsis(pageNumber)" class="page-link">...</a>
+          <a *ngIf="!isEllipsis(pageNumber)" class="page-link" href (click)="!!selectPage(pageNumber)">{{pageNumber}}</a>
+        </li>
+        <li *ngIf="directionLinks" class="page-item" [class.disabled]="!hasNext()">
+          <a aria-label="Next" class="page-link" href (click)="!!selectPage(page+1)">
+            <span aria-hidden="true">下一页</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        <li *ngIf="boundaryLinks" class="page-item" [class.disabled]="!hasNext()">
+          <a aria-label="Last" class="page-link" href (click)="!!selectPage(pageCount)">
+            <span aria-hidden="true">尾页</span>
+            <span class="sr-only">Last</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

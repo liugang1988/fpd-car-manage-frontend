@@ -1,0 +1,65 @@
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">角色</label>
+          <app-role-select class="form-control" [showAll]='true' (result)="selectRole($event)"></app-role-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">账号</label>
+          <input type="text" class="form-control" [(ngModel)]="KeyWords" [ngModelOptions]="{standalone: true}" (keyup.enter)="search(KeyWords,RoleID)"
+            placeholder="用户账号或昵称">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyWords,RoleID)">查询</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/page/system-setting/user-manage/add']"><i class="fpd fpd-jiahao"></i>新增用户</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table *ngIf="list">
+      <table>
+        <thead>
+          <tr>
+            <th>账号</th>
+            <th>昵称</th>
+            <th>用户角色</th>
+            <th>手机号</th>
+            <th>是否开启</th>
+            <th>创建时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.AccountName}}</td>
+            <td>{{item.NickName}}</td>
+            <td>{{item.RoleName}}</td>
+            <td>{{item.UserPhone}}</td>
+            <td *ngIf="loginUserInfo.UserId !== item.ID " class="beautify-wrap"><input type="checkbox" class="beautify-checkbox" name="rememberme" [id]="item.ID" [(ngModel)]="item.UserStatus"
+                (ngModelChange)="updataUserStatus(item.ID,item.UserStatus,item.RoleName);"><label [for]="item.ID"></label></td>
+            <td *ngIf="loginUserInfo.UserId === item.ID  " class="beautify-wrap"><input type="checkbox" disabled class="beautify-checkbox" name="rememberme" [(ngModel)]="item.UserStatus" [id]="item.ID">
+              <label class="disabled" [for]="item.ID"></label>
+            </td>
+            <td>{{item.CreateTime}}</td>
+            <td>
+              <span class="operator-span" (click)="modify(item.ID)">修改</span>
+              <span class="operator-span" (click)="allotRole(item)">分配角色</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>
+
+
+<!--分配角色弹窗-->
+<app-allot-role *ngIf="showAllotRoleAlert" [item]="currentItem" (close)="closeAllotRoleAlert($event)"></app-allot-role>

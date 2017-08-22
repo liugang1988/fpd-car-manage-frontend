@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-6 col-sm-6 col-md-4 col-xl-3" *ngFor="let item of list">
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" [(ngModel)]="item.checked" (ngModelChange)="check(list)">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">{{item.DictionaryValue}}</span>
+    </label>
+  </div>
+</div>

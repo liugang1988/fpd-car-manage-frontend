@@ -1,0 +1,70 @@
+@charset 'UTF-8';
+@import '../../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.wrapper {
+    padding: 10px 15px;
+    position: relative;
+}
+
+.avatar-header,
+.base-info,
+.car-status-info,
+.car-fuel-info {
+    padding: 15px 0;
+    border-bottom: 1px solid #CCC;
+    @include flex(flex-start, center, row, flex, wrap);
+    .text-wrap {
+        width: 50%;
+        font-size: 14px;
+        padding: 5px;
+        &.track-mileage {
+            width: 100%;
+        }
+        &.fs12 {
+            font-size: 12px;
+        }
+        .title {
+            display: inline-block;
+        }
+        .content {
+            padding: 0 5px;
+        }
+    }
+}
+
+.avatar-header {
+    padding: 20px 0;
+    @include flex(center, center, column, flex, wrap);
+    .img-wrap {
+        border-radius: 100px;
+        height: 100px;
+        width: 100px;
+        .avatar {
+            height: 100px;
+            width: 100px;
+        }
+    }
+    .name {
+        display: block;
+        padding: 5px 10px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        margin-top: -10px;
+        background-color: #fff;
+    }
+}
+
+h1 {
+    padding: 50px 20px;
+}
+
+.tips {
+    color: #b5b5b5;
+    text-align: center;
+    padding: 0 0 2rem 0;
+    i {
+        font-size: 8.4rem;
+    }
+    p {
+        font-size: 1.4rem;
+    }
+}

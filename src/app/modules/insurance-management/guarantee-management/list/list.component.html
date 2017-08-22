@@ -1,0 +1,73 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-tree-select class="form-control" (result)="selectCompany($event)"></app-organization-tree-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">保单号</label>
+          <input type="text" class="form-control" placeholder="保单号" [(ngModel)]="CINo" (keyup.enter)="search(KeyValue)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌号" [(ngModel)]="KeyValue" (keyup.enter)="search(KeyValue)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyValue)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>UBI保单号<br/>
+                车辆所属
+            </th>
+            <th>车牌<br/>
+                车型
+            </th>
+            <th>生效时间<br/>
+                到期时间
+            </th>
+            <th>UBI保费合计</th>
+            <th>静态时长<br/>保费(元)</th>
+            <th>行驶里程(km)<br/>保费(元)</th>
+            <th>行驶时长<br/>保费(元)</th>
+            <th>驾驶行为数(次)<br/>
+                保费(元)
+            </th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td><a [routerLink]="[ '/page/insurance-management/guarantee-management/detail', item.CID]">{{item.UBIInsuranceNo}}</a><br/>{{item.OrganizationName}}/{{item.DepartmentName}}</td>
+            <td>{{item.Plate || '-'}}<br>{{item.VehicleModel || '-'}}</td>
+            <td>{{(item.StartTime | splitTime) || '-'}}<br>{{(item.EndTime | splitTime) || '-'}}</td>
+            <td>{{item.Prenium}}</td>
+            <td>{{item.StaticTime}}<br>{{item.StaticTimePrenium}}</td>
+            <td>{{item.MoveMileage}}<br>{{item.MoveMileagePrenium}}</td>
+            <td>{{item.MoveTime}}<br>{{item.MoveTimePrenium}}</td>
+            <td>{{item.DriverBehaviorCount}}<br>{{item.DriverBehaviorPrenium}}</td>
+            <td>
+              <span class="operator-span" [routerLink]="[ '/page/insurance-management/guarantee-management/ubiList', item.VID]">明细</span>
+              <span class="operator-span" [routerLink]="[ '/page/insurance-management/car-location/control/'+ item.Did +'/real-time']">实时</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

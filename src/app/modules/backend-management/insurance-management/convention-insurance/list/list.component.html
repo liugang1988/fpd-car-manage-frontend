@@ -1,0 +1,64 @@
+<div class="custom-card separation">
+  <div class="custom-card-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-select class="form-control" [showAll]="true" (result)="selectOrganization($event)"></app-organization-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">部门</label>
+          <app-department-select class="form-control" [defaultVal]="defaultValue" [concatCompany]="true" [showAll]="true" [OID]="OID" (result)="selectDept($event)"></app-department-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">保单号</label>
+          <input type="text" class="form-control" placeholder="保单号" [(ngModel)]="CINo" (keyup.enter)="search(KeyValue)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">关键字</label>
+          <input type="text" class="form-control" placeholder="车牌号" [(ngModel)]="KeyValue" (keyup.enter)="search(KeyValue)"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyValue)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>保单</th>
+            <th>保险公司<br>保险类型</th>
+            <th>生效时间<br>到期时间</th>
+            <th>保费(元)</th>
+            <th>保险状态</th>
+            <th>车牌<br>车架号</th>
+            <th>购车价(元)<br>购车日期</th>
+            <th>车辆所属<br>联系电话</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td><a [routerLink]="['/page/backend-management/insurance-management/convention-insurance/detail',item.CINo]">{{item.CINo}}</a></td>
+            <td>{{item.InsuranceCompanyName}}<br>{{item.InsuranceTypeDesc}}</td>
+            <td>{{item.StartTime | splitTime}}<br>{{item.EndTime | splitTime}}</td>
+            <td>{{item.Premium}}</td>
+            <td>{{item.StatusDesc}}</td>
+            <td>{{item.Plate}}<br>{{item.VIN}}</td>
+            <td>{{item.CarPrice}}<br>{{item.PurchaseDate | splitTime}}</td>
+            <td>{{item.CompanyName}}/{{item.DepartmentName}}<br>{{item.ContactPhone}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

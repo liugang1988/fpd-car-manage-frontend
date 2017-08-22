@@ -1,0 +1,171 @@
+@charset 'UTF-8';
+@mixin center-block {
+  //块居中
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//转为inline-block
+@mixin inline-block() {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+
+@mixin placeholder-color($color) {
+  //设置placeholder颜色
+  &.placeholder {
+    color: $color !important;
+    font-size: 80%;
+  }
+  &:-moz-placeholder {
+    color: $color !important;
+    font-size: 80%;
+  }
+  &::-webkit-input-placeholder {
+    color: $color !important;
+    font-size: 80%;
+  }
+  &:-ms-input-placeholder {
+    color: $color !important;
+    font-size: 80%;
+  }
+}
+
+@mixin background-gradient($startColor: #3C3C3C, $endColor: #999999) {
+  /// Background Gradient --背景渐变
+  /// @param {Color} $startColor [#3C3C3C] - Start Color
+  /// @param {Color} $endColor [#999999] - End Color
+  background-color: $startColor;
+  background-image: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+  background-image: -webkit-linear-gradient(top, $startColor, $endColor);
+  background-image: -moz-linear-gradient(top, $startColor, $endColor);
+  background-image: -ms-linear-gradient(top, $startColor, $endColor);
+  background-image: -o-linear-gradient(top, $startColor, $endColor);
+  background-image: linear-gradient(top, $startColor, $endColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}');
+}
+
+@mixin overlay($mode:fixed, $bgcolor:rgba(0, 0, 0, .15)) {
+  //遮罩层
+  position: $mode;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: $bgcolor;
+}
+
+@mixin remove-a-default-behavior {
+  &:link,
+  &:hover,
+  &:visited,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+@mixin size($width, $height) {
+  //设置宽高
+  width: $width;
+  height: $height;
+}
+
+@mixin flex($flex-horizontal:flex-start, $flex-vertical:center, $flex-direction:row, $flex-modal:flex, $flex-wrap: nowrap) {
+  // flex
+  display: $flex-modal;
+  justify-content: $flex-horizontal;
+  align-items: $flex-vertical;
+  flex-wrap: $flex-wrap;
+  flex-direction: $flex-direction;
+}
+
+@mixin improve-text-rendering {
+  //文本字体渲染美化(最新的主流浏览器才支持)
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin triangle($direction: 'up', $size: 6px, $color: #333) {
+  //画小三角形
+  @if type-of($direction) !="string" {
+    @warn "`#{$direction}` should be a string for `triangle` mixin.";
+  }
+  @else {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    content: '';
+    @if ($direction=='up') {
+      border-bottom: $size solid $color;
+      border-left: 1/2*$size solid transparent;
+      border-right: 1/2*$size solid transparent;
+    }
+    @else if ($direction=='down') {
+      border-top: $size solid $color;
+      border-left: 1/2*$size solid transparent;
+      border-right: 1/2*$size solid transparent;
+    }
+    @else if ($direction=='left') {
+      border-top: 1/2*$size solid transparent;
+      border-bottom: 1/2*$size solid transparent;
+      border-right: $size solid $color;
+    }
+    @else if ($direction=='right') {
+      border-top: 1/2*$size solid transparent;
+      border-bottom: 1/2*$size solid transparent;
+      border-left: $size solid $color;
+    }
+  }
+}
+
+// Gradients
+// Horizontal gradient, from left to right
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+// Color stops are not available in IE9.
+@mixin gradient-x($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
+  background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=1); // IE9
+}
+
+// Vertical gradient, from top to bottom
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+// Color stops are not available in IE9.
+@mixin gradient-y($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9
+}
+
+@mixin gradient-directional($start-color: #555, $end-color: #333, $deg: 45deg) {
+  background-repeat: repeat-x;
+  background-image: linear-gradient($deg, $start-color, $end-color);
+}
+
+@mixin gradient-x-three-colors($start-color: #00b3ee, $mid-color: #7a43b6, $color-stop: 50%, $end-color: #c3325f) {
+  background-image: linear-gradient(to right, $start-color, $mid-color $color-stop, $end-color);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=1); // IE9 gets no color-stop at all for proper fallback
+}
+
+@mixin gradient-y-three-colors($start-color: #00b3ee, $mid-color: #7a43b6, $color-stop: 50%, $end-color: #c3325f) {
+  background-image: linear-gradient($start-color, $mid-color $color-stop, $end-color);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 gets no color-stop at all for proper fallback
+}
+
+@mixin gradient-radial($inner-color: #555, $outer-color: #333) {
+  background-image: radial-gradient(circle, $inner-color, $outer-color);
+  background-repeat: no-repeat;
+}
+
+@mixin gradient-striped($color: rgba(255, 255, 255, .15), $angle: 45deg) {
+  background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+}

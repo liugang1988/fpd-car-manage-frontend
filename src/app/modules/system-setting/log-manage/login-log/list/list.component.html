@@ -1,0 +1,60 @@
+<div class="custom-card separation">
+  <div class="custom-cad-header">
+    <!--搜索区域-->
+    <div class="table-search">
+      <form>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">账户</label>
+          <input type="text" class="form-control" placeholder="请输入账户、名称" [(ngModel)]="KeyValue" (keyup.enter)="search(KeyValue)" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">公司</label>
+          <app-organization-tree-select class="form-control" (result)="selectCompany($event)"></app-organization-tree-select>
+        </div>
+        <div class="form-group condition-wrapper">
+          <label class="form-control-label">类型</label>
+          <app-select class="form-control" [showAll]="true" [placeholder]="placeholder" [optionName]="optionName" [optionList]="optionList" (result)="getStatus($event)"></app-select>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="search(KeyValue)">查询</button>
+      </form>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <app-mit-modal [text]="text" *ngIf="isModal"></app-mit-modal>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>名称</th>
+            <th>登录时间</th>
+            <th>部门</th>
+            <th>IP</th>
+            <th>区域</th>
+            <th>终端类型</th>
+            <th>型号</th>
+            <th>终端OS版本</th>
+            <th>软件版本</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.NickName || '-'}}</td>
+            <td>{{item.LoadingTime || '-'}}</td>
+            <td>{{(item.OrganizeName || '-') + '/' + (item.DepartmentName || '-')}}</td>
+            <td>{{item.LoadingIP || '-'}}</td>
+            <td>{{item.LoadingArea || '-'}}</td>
+            <td>{{item.ClientType || '-'}}</td>
+            <td>{{item.ClientModel || '-'}}</td>
+            <td>{{item.ClientVersion || '-'}}</td>
+            <td>{{item.SoftVersion || '-'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+    <h3 *ngIf="list && list.length === 0" class="text-center text-muted" [@bounceIn]="true">暂无相关数据信息!!!</h3>
+  </div>
+</div>

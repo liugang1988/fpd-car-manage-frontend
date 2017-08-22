@@ -1,0 +1,128 @@
+@charset 'UTF-8';
+@import '../../../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.attent-item {
+  padding: toRem(20px);
+  color: #f9f9f9;
+  h5,
+  ol {
+    color: inherit;
+  }
+  ol {
+    font-size: $fs14;
+    li {
+      padding: 3px 0;
+    }
+  }
+}
+
+.beautify-form {
+  margin-top: -200px;
+  min-width: 25rem;
+  width: 30rem;
+  @include center-block;
+  .page-header {
+    font-weight: 200;
+    font-size: toRem(50px);
+    color: #FFF;
+    padding: 60px 0 0;
+  }
+  .page-header-descrition {
+    font-size: $fs14;
+    color: #88878c;
+    padding: 10px 0;
+  }
+  .form-control {
+    background-color: rgba(0, 0, 0, 0.15);
+    color: #f9f9f9;
+    box-shadow: none;
+    width: 360px;
+    @include placeholder-color(#f3f3f3);
+  }
+  .collect-input {
+    @include flex;
+    span {
+      display: inline-block;
+    }
+    .highlight-star {
+      text-align: center;
+      width: 1.5rem;
+      text-align: center;
+      color: #f00;
+    }
+    .labelname {
+      width: 6rem;
+      color: $text-color-white;
+      text-align: left;
+      &+.highlighst-star {
+        padding-left: 1rem;
+      }
+    }
+  }
+  .haveaccount-notify {
+    color: #fff;
+    &+a {
+      padding: 0 .5rem;
+    }
+  }
+  .has-danger {
+    span {
+      color: #d9534f !important;
+    }
+  }
+  .has-success {
+    .form-control {
+      border-color: #43bcc5;
+    }
+    span {
+      color: #43bcc5 !important;
+    }
+    .form-control-feedback {
+      color: #43bcc5;
+    }
+  }
+  .btn {
+    color: #43bcc5;
+    border-color: #43bcc5;
+    &:active,
+    &:hover {
+      background-color: #43bcc5;
+      color: #fff;
+    }
+  }
+  .has-danger,
+  .has-success {
+    .form-control-feedback {
+      padding-left: 1.5rem;
+    }
+  }
+}
+
+.success-collect {
+  width: 30rem;
+  color: #fff;
+  .cert-text {
+    color: #f38e48;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .callout-desrc {
+    color: #98979c;
+    line-height: 24px;
+  }
+}
+
+.back {
+  background-color: rgba(111, 111, 119, 0.6);
+  padding: toRem(20px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(111, 111, 119, 0.8);
+  }
+  i {
+    font-size: 24px;
+    color: #FFF;
+  }
+}

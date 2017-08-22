@@ -1,0 +1,50 @@
+<div class="custom-card separation">
+  <div class="custom-card-header top" *ngIf="organizationInfo">
+    <div class="content">
+      <div class="form-group condition-wrapper">
+        <label class="form-control-label"><strong>{{organizationInfo.OrganizationName || '公司名称 '}}</strong></label>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/page/backend-management/base-data/customer-manage/user/'+ organizationInfo.ID + '/add']"><i class="fpd fpd-jiahao"></i>新增用户</button>
+      </div>
+    </div>
+  </div>
+  <div class="custom-card-body" [@fadeIn]="true">
+    <app-mit-loading [option]="'load7'" *ngIf="!list"></app-mit-loading>
+    <!--表格区域-->
+    <app-mit-data-table>
+      <table *ngIf="list">
+        <thead>
+          <tr>
+            <th>账号</th>
+            <th>昵称</th>
+            <th>用户角色</th>
+            <th>手机号</th>
+            <th>是否开启</th>
+            <th>创建时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list">
+            <td>{{item.AccountName}}</td>
+            <td>{{item.NickName}}</td>
+            <td>{{item.RoleName}}</td>
+            <td>{{item.UserPhone}}</td>
+            <td class="beautify-wrap">
+              <input type="checkbox" class="beautify-checkbox" name="rememberme" [(ngModel)]="item.UserStatus" (ngModelChange)="updataUserStatus(item.ID,item.UserStatus);"
+                [id]="item.ID"><label [for]="item.ID"></label></td>
+            <td>{{item.CreateTime}}</td>
+            <td>
+              <span class="operator-span" (click)="modify(item.ID)">修改</span>
+              <span class="operator-span" (click)="allotRole(item)">分配角色</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </app-mit-data-table>
+    <!--分页-->
+    <app-mit-data-table-pagination [currentPage]="currentPage" [totalCountSize]="totalCount" (pageChange)="pageChange($event)" [maxSize]="5" [rotate]="true"></app-mit-data-table-pagination>
+  </div>
+</div>
+<!--<app-delete *ngIf="showDeleteAlert" [item]="currentItem" (close)="closeAlert($event)"></app-delete>-->
+<!--分配角色弹窗-->
+<app-allot-role *ngIf="showAllotRoleAlert" [item]="currentItem" [OID]="organizationInfo.ID" (close)="closeAllotRoleAlert($event)"></app-allot-role>

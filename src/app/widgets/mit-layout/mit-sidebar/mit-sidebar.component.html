@@ -1,0 +1,77 @@
+<!--侧边栏-->
+<aside class="mit-sidebar" [class.expand]="isExpand">
+  <div>
+    <ul class="sidebar-menu">
+      <ng-template ngFor let-item [ngForOf]="links">
+        <!--一级导航-->
+        <ng-template [ngIf]="!item.SubLinks">
+          <li (click)="onToggle(item.MenuName)" [class.active]="toggleLink == item.MenuName">
+            <a *ngIf="!item.external" [routerLink]="item.Url">
+              <i class="fpd {{item.IconName}}"></i>
+              <span>{{item.MenuName}}</span>
+            </a>
+          </li>
+        </ng-template>
+        <!--二级导航-->
+        <ng-template [ngIf]="item.SubLinks">
+          <li class="treeview" [class.active]="toggleLink == item.MenuName">
+            <!--一级导航标题-->
+            <a (click)="onToggle(item.MenuName)">
+              <i *ngIf="item.IconName" class="fpd {{item.IconName}}"></i>
+              <span>{{item.MenuName}}</span>
+              <span class="icon pull-right">
+                 <i class="fpd" [class.fpd-enter]="toggleLink != item.MenuName" [class.fpd-xiangxiajiantou]="toggleLink == item.MenuName"></i>
+              </span>
+            </a>
+            <!--二级导航-->
+            <ul class="treeview-menu" [@fadeIn]="true" *ngIf="toggleLink == item.MenuName">
+              <ng-template ngFor let-subitem [ngForOf]="item.SubLinks">
+                <ng-template [ngIf]="!subitem.SubLinks">
+                  <li [class.active]="subitem.Url === current_url">
+                    <a *ngIf="!subitem.external" [routerLink]="[subitem.Url]">
+                      <i *ngIf="subitem.IconName" class="fpd {{subitem.IconName}}"></i>
+                      <span>{{subitem.MenuName}}</span>
+                    </a>
+                    <a *ngIf="subitem.external" [href]="subitem.Url" [target]="subitem.target">
+                      <i *ngIf="subitem.IconName" class="fpd {{subitem.IconName}}"></i>
+                      <span>{{subitem.MenuName}}</span>
+                    </a>
+                  </li>
+                </ng-template>
+                <ng-template [ngIf]="subitem.SubLinks">
+                  <li class="treeview">
+                    <!--三级导航标题-->
+                    <a (click)="onSubToggle(subitem.MenuName)">
+                      <i *ngIf="subitem.IconName" class="fpd {{subitem.IconName}}"></i>
+                      <span>{{subitem.MenuName}}</span>
+                      <span class="icon pull-right">
+                          <i class="fpd" [class.fpd-xiangxiajiantou]="toggleSubLink == subitem.MenuName" [class.fpd-enter]="toggleSubLink !== subitem.MenuName"></i>
+                      </span>
+                    </a>
+                    <!--三级导航-->
+                    <ul class="treeview-menu" [@fadeIn]="true" *ngIf="toggleSubLink == subitem.MenuName">
+                      <ng-template ngFor let-threeitem [ngForOf]="subitem.SubLinks">
+                        <ng-template [ngIf]="!threeitem.SubLinks">
+                          <li [class.active]="threeitem.Url === current_url">
+                            <a *ngIf="!threeitem.threeitem" [routerLink]="[threeitem.Url]">
+                              <i *ngIf="threeitem.IconName" class="fpd {{threeitem.IconName}}"></i>
+                              <span>{{threeitem.MenuName}}</span>
+                            </a>
+                            <a *ngIf="threeitem.threeitem" [href]="threeitem.Url" [target]="threeitem.target">
+                              <i *ngIf="threeitem.IconName" class="fpd {{threeitem.IconName}}"></i>
+                              <span>{{threeitem.MenuName}}</span>
+                            </a>
+                          </li>
+                        </ng-template>
+                      </ng-template>
+                    </ul>
+                  </li>
+                </ng-template>
+              </ng-template>
+            </ul>
+          </li>
+        </ng-template>
+      </ng-template>
+    </ul>
+  </div>
+</aside>

@@ -1,0 +1,58 @@
+<div class="custom-card" *ngIf="softwareversionInfo">
+  <div class="custom-card-header">
+    <h4>软件版本详情</h4>
+  </div>
+  <div class="custom-card-body">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+        <div class="form-group row ">
+          <label class="col-sm-12 col-md-3 form-control-label  col-lg-3">供应商</label>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            {{softwareversionInfo.SuppliersName || '-' }}
+          </div>
+        </div>
+        <div class="form-group row ">
+          <label class="col-sm-12 col-md-3 form-control-label  col-lg-3">产品型号</label>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            {{softwareversionInfo.DeviceModelName || '-' }}
+          </div>
+        </div>
+        <div class="form-group row ">
+          <label class="col-sm-12 col-md-3 form-control-label col-lg-3">软件名称</label>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            {{softwareversionInfo.SoftName || '-' }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-12 col-md-3 form-control-label col-lg-3">软件版本号</label>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            {{softwareversionInfo.VersionNumber || '-' }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-12 col-md-3 form-control-label col-lg-3">软件下载地址</label>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            {{softwareversionInfo.BinFileUrl || '-' }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-12 col-md-3 form-control-label col-lg-3">状态</label>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            {{softwareversionInfo.StatusDesc || '-' }}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-12 col-md-3 form-control-label col-lg-3 ">版本描述</label>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            {{softwareversionInfo.BinDescription || '-' }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row save-area">
+      <div class="col-sm-12 col-md-8 offset-md-3 col-lg-9 offset-lg-2">
+        <button type="button" class="btn btn-secondary" (click)="back()">返回</button>
+      </div>
+    </div>
+  </div>
+</div>

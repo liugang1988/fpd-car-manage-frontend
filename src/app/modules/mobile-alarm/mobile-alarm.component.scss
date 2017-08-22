@@ -1,0 +1,33 @@
+@charset 'UTF-8';
+@import '../../../assets/scss_styles/custom_scss/_custom-export.scss';
+.container-fluid {
+  max-width: 970px;
+  padding: 30px;
+}
+
+.flex {
+  @include flex(center, center);
+}
+
+.label-title {
+  min-width: 70px;
+  max-width: 90px;
+  padding: 5px;
+  margin: 0 10px 0 0;
+  font-weight: normal !important;
+}
+
+.operator {
+  margin: 10px;
+  button {
+    margin: 10px 0;
+  }
+}
+
+p {
+  @include flex(flex-start, center);
+  padding: 5px;
+  span {
+    display: block;
+  }
+}

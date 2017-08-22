@@ -1,0 +1,32 @@
+<div class="custom-card separation car-location" @flyIn>
+  <div class="custom-card-body">
+    <!--车辆状态数量统计-->
+    <app-car-status (changeState)="ChangeState($event)" [vehicleStateObj]="vehicleCarObj" [defaultVal]="lastStateId" *ngIf="showCarStatus"></app-car-status>
+
+    <!--百度地图-->
+    <app-mit-baidu-map></app-mit-baidu-map>
+
+    <!--快速搜索-->
+    <app-fast-search (searchEvt)="SearchEvt($event)" [vehicleArr]="vehicleArr" *ngIf="showFastSearch"></app-fast-search>
+
+    <!--行车事件选择-->
+    <app-map-event-filter (result)="changeShowEvent($event)" [checkedList]="TrackLineData.GPSEvents" *ngIf="eventStatus"></app-map-event-filter>
+
+    <!--渐变轨迹颜色说明-->
+    <app-gradient-path-intro *ngIf="gradientPath"></app-gradient-path-intro>
+
+    <!--ubi 历史保单显示-->
+    <app-ubi-history-insurance *ngIf="ubiHistoryStatus" [historyData]="historyInsuranceData"></app-ubi-history-insurance>
+
+    <!--ubi 实时保单显示-->
+    <app-ubi-real-time-insurance *ngIf="ubiRealTimeStatus" [realTimeData]="realTimeInsuranceData"></app-ubi-real-time-insurance>
+
+    <router-outlet></router-outlet>
+
+    <!--加载状态-->
+    <app-loading [message]="message" *ngIf="showLoading"></app-loading>
+
+    <!--设置-->
+    <!--<app-setting (changeSetting)="ChangeSetting($event)" *ngIf="showSetting"></app-setting>-->
+  </div>
+</div>

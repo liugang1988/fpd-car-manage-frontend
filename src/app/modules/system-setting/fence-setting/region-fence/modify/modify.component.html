@@ -1,0 +1,38 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h4>区域栅栏</h4>
+  </div>
+  <div class="custom-card-body">
+    <app-mit-loading [option]="'load7'" *ngIf="showLoading"></app-mit-loading>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" *ngIf="!showLoading">
+      <div class="row" formGroupName="RuleContent">
+        <div class="col-sm-12 col-md-12 col-lg-8  offset-lg-2">
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.RuleContent.controls.FenceName.invalid && form.controls.RuleContent.controls.FenceName.value ,'has-success': form.controls.RuleContent.controls.FenceName.valid && form.controls.RuleContent.controls.FenceName.value }"><label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">栅栏名称</label>
+            <div class="col-sm-12 col-md-9 col-lg-10"><input type="text" class="form-control" formControlName="FenceName" placeholder="栅栏名称"></div>
+          </div>
+          <div class="form-group row"><label tooltip="" class="col-sm-12 col-md-3 star form-control-label  col-lg-2">选择区域</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+              <app-mit-address-select (result)="selectAddress($event)" [multi]="true" class="form-control"></app-mit-address-select>
+            </div>
+          </div>
+          <div class="form-group row" [ngClass]="{ 'has-danger': form.controls.RuleContent.controls.Areas.invalid && form.controls.RuleContent.controls.Areas.value ,'has-success': form.controls.RuleContent.controls.Areas.valid && form.controls.RuleContent.controls.Areas.value }"><label tooltip="" class="col-sm-12 col-md-3 form-control-label  col-lg-2 star">已选区域</label>
+            <div class="col-sm-12 col-md-9 col-lg-10">
+
+              <div class="areas form-control">
+                <div class="item" *ngFor="let item of areasArr;let index = index;" [@fadeIn]="true"> {{item}}
+                  <span (click)="deleteArea(index)"><i class="fpd fpd-guanbi"></i></span></div>
+                <div class="tips" *ngIf="!areasArr.length">
+                  请在上方选择区域
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row save-area">
+            <div class="col-sm-12 col-md-8 offset-md-3 col-lg-10 offset-lg-2"><button type="submit" class="btn btn-primary" [disabled]="form.invalid || showLoading">保存</button><button type="button"
+                class="btn btn-secondary" (click)="back()">取消</button></div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

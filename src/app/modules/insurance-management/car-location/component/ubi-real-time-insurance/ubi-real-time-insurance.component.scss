@@ -1,0 +1,39 @@
+.ubi-infor {
+  font-size: 14px;
+  background: #fff;
+  position: absolute;
+  top: 40px;
+  left: 210px;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.ubi-data-list {
+  background: #FFF;
+  opacity: 0.9;
+  position: absolute;
+  top: 75px;
+  left: 210px;
+  ul {
+    padding: 10px;
+    list-style: none;
+    margin: 0;
+  }
+  .ubi-real {
+    width: 400px;
+    li {
+      font-size: 14px;
+      line-height: 35px;
+      width: 180px;
+      display: inline-block;
+      span {
+        color: #32aec6;
+      }
+    }
+    .control-time {
+      width: 100%;
+      display: block;
+    }
+  }
+}
