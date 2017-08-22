@@ -4,7 +4,7 @@ Fpd-car-manage-frontend
 脚印数据车辆管理系统
 
 
-Auth by Junchao Zheng \ Qunhe Lin
+Auth by Junchao Zheng \ Qunhe Lin \ Gang Liu
 
 -----------
 
